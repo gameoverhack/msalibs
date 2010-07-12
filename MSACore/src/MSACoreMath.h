@@ -77,10 +77,10 @@ namespace MSA {
 		return x;
 	}
 	
-//	inline void fastNormalize(Vec3f &p) {
-//		float f = fastInvSquareRoot(p.lengthSquared());
-//		p *= f;
-//	}
+	//	inline void fastNormalize(Vec3f &p) {
+	//		float f = fastInvSquareRoot(p.lengthSquared());
+	//		p *= f;
+	//	}
 	
 	
 	template<typename T> void SWAP( T& a, T& b)						{ T tmp = b; b = a; a = tmp; }
@@ -111,45 +111,5 @@ namespace MSA {
 			vel = -fabs(vel) * bounceFactor;
 		}
 	}
-	
-	
-	
-	//------------- from cinder http://libcinder.org
-	template<typename T>	T	min(T x, T y)						{	return ( x < y ) ? x : y; }
-	template<typename T>	T	max(T x, T y)						{	return ( x > y ) ? x : y; }
-	template<typename T>	T	clamp(T x, T min=0, T max=1)		{	return ( x < min ) ? min : ( ( x > max ) ? max : x );}
-	
-	
-	template<typename T, typename L> 
-	T lerp( const T &a, const T &b, L factor )
-	{
-		return a + ( b - a ) * factor;
-	}
-	
-	template<typename T, typename L>
-	T bezierInterp( T a, T b, T c, T d, L t)
-	{
-		L t1 = static_cast<L>(1.0) - t;
-		return a*(t1*t1*t1) + b*(3*t*t1*t1) + c*(3*t*t*t1) + d*(t*t*t);
-	}
-	
-	template<typename T, typename L>
-	T bezierInterpRef( const T &a, const T &b, const T &c, const T &d, L t)
-	{
-		L t1 = static_cast<L>(1.0) - t;
-		return a*(t1*t1*t1) + b*(3*t*t1*t1) + c*(3*t*t*t1) + d*(t*t*t);
-	}
-	
-	template<typename T>
-	T constrain( T val, T minVal, T maxVal )
-	{
-		if( val < minVal ) return minVal;
-		else if( val > maxVal ) return maxVal;
-		else return val;
-	}
-	
-	//	/ cinder
-	
-	
 	
 }

@@ -3,7 +3,7 @@
 	00BAE6590E7ED9C10018A608 /* msaFluidMultiTouchApp.cpp */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1570, 1729}}";
-			sepNavSelRange = "{268, 0}";
+			sepNavSelRange = "{458, 0}";
 			sepNavVisRange = "{0, 1998}";
 		};
 	};
@@ -41,16 +41,16 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 300646084;
-			PBXWorkspaceStateSaveDate = 300646084;
+			PBXPerProjectTemplateStateSaveDate = 300659638;
+			PBXWorkspaceStateSaveDate = 300659638;
 		};
 		perUserProjectItems = {
 			BBB329C811EB7AF700B43B95 /* PBXTextBookmark */ = BBB329C811EB7AF700B43B95 /* PBXTextBookmark */;
 			BBB329C911EB7AF700B43B95 /* PBXTextBookmark */ = BBB329C911EB7AF700B43B95 /* PBXTextBookmark */;
 			BBB329CA11EB7AF700B43B95 /* PBXTextBookmark */ = BBB329CA11EB7AF700B43B95 /* PBXTextBookmark */;
 			BBB329CB11EB7AF700B43B95 /* PBXTextBookmark */ = BBB329CB11EB7AF700B43B95 /* PBXTextBookmark */;
-			BBB32AAF11EB7EA700B43B95 /* PBXTextBookmark */ = BBB32AAF11EB7EA700B43B95 /* PBXTextBookmark */;
 			BBB32ADE11EB7EC700B43B95 /* PBXTextBookmark */ = BBB32ADE11EB7EC700B43B95 /* PBXTextBookmark */;
+			BBB32EE211EBB3C800B43B95 /* PBXTextBookmark */ = BBB32EE211EBB3C800B43B95 /* PBXTextBookmark */;
 		};
 		sourceControlManager = BBF80B9011E91E1600562F1A /* Source Control */;
 		userBuildSettings = {
@@ -134,7 +134,7 @@
 		vrLen = 3138;
 		vrLoc = 0;
 	};
-	BBB32AAF11EB7EA700B43B95 /* PBXTextBookmark */ = {
+	BBB32ADE11EB7EC700B43B95 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 00BAE6590E7ED9C10018A608 /* msaFluidMultiTouchApp.cpp */;
 		name = "msaFluidMultiTouchApp.cpp: 13";
@@ -144,12 +144,12 @@
 		vrLen = 1998;
 		vrLoc = 0;
 	};
-	BBB32ADE11EB7EC700B43B95 /* PBXTextBookmark */ = {
+	BBB32EE211EBB3C800B43B95 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 00BAE6590E7ED9C10018A608 /* msaFluidMultiTouchApp.cpp */;
-		name = "msaFluidMultiTouchApp.cpp: 13";
+		name = "msaFluidMultiTouchApp.cpp: 22";
 		rLen = 0;
-		rLoc = 268;
+		rLoc = 458;
 		rType = 0;
 		vrLen = 1998;
 		vrLoc = 0;

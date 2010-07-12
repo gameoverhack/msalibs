@@ -40,12 +40,12 @@ namespace MSA {
 	
 	namespace Physics {
 		
-		enum ConstraintType {
+		typedef enum ConstraintType {
 			kConstraintTypeCustom,
 			kConstraintTypeSpring,
 			kConstraintTypeAttraction,
 			kConstraintTypeCount,
-		};
+		} ConstraintType;
 		
 		
 		

@@ -33,9 +33,9 @@
 
 namespace MSA {
 	
-	enum SplineInterpolationType {
+	typedef enum {
 		kSplineInterpolationLinear,
 		kSplineInterpolationCubic,
-	};
+	} SplineInterpolationType;
 	
 }

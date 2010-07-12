@@ -28,8 +28,9 @@
 #include "ofxSimpleGuiToo.h"
 #endif
 
+using namespace MSA;
 
-class testApp : public ofSimpleApp{
+class msaFluidParticlesApp : public ofSimpleApp{
 public:
 	void setup();
 	void update();
@@ -41,32 +42,20 @@ public:
 
 	void windowResized(int w, int h);
 
-	void addToFluid(ofxVec2f pos, ofxVec2f vel, bool addColor, bool addForce);
+	void fadeToColor(float r, float g, float b, float speed);
+	void addToFluid(Vec2f pos, Vec2f vel, bool addColor, bool addForce);
 
 	int					fluidCellsX;
 	bool				resizeFluid;
 	bool				drawFluid;
 	bool				drawParticles;
-	bool				renderUsingVA;
-	bool				testPerformance;
 	
 	MSA::FluidSolver	fluidSolver;
 	MSA::FluidDrawerGl	fluidDrawer;	
 	
 	ParticleSystem		particleSystem;
 	
-	int					pmouseX, pmouseY;
-	
-	// cache these for slightly better performance
-	struct {
-		int				width;
-		int				height;
-		float			invWidth;
-		float			invHeight;
-		float			aspectRatio;
-		float			aspectRatio2;
-	} window;
-	
+	MSA::Vec2f				pMouse;
 	
 #ifdef USE_TUIO
 	myTuioClient tuioClient;
@@ -79,7 +68,7 @@ public:
 	
 };
 
-extern testApp *myApp;
+extern msaFluidParticlesApp *myApp;
 
 
 

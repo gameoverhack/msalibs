@@ -1,5 +1,6 @@
 /*
  *  ParticleSystem.cpp
+ *  ofxMSAFluid Demo
  *
  *  Created by Mehmet Akten on 02/05/2009.
  *  Copyright 2009 MSA Visuals Ltd.. All rights reserved.
@@ -7,19 +8,16 @@
  */
 
 #include "ParticleSystem.h"
-#include "cinder/gl/gl.h"
-#include "cinder/Rand.h"
-#include "cinder/app/App.h"
 
-using namespace ci;
+using namespace MSA;
 
 ParticleSystem::ParticleSystem() 
 {
 	curIndex = 0;
-	setWindowSize( Vec2i( 1, 1 ) );
+	setWindowSize( Vec2f( 1, 1 ) );
 }
 
-void ParticleSystem::setWindowSize( Vec2i winSize )
+void ParticleSystem::setWindowSize( Vec2f winSize )
 {
 	windowSize = winSize;
 	invWindowSize = Vec2f( 1.0f / winSize.x, 1.0f / winSize.y );

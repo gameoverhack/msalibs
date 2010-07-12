@@ -40,25 +40,29 @@
 
 namespace MSA {
 	
-#define FLUID_DRAW_COLOR		0
-#define FLUID_DRAW_MOTION		1
-#define FLUID_DRAW_SPEED		2
-#define FLUID_DRAW_VECTORS		3
-#define FLUID_DRAW_MODE_COUNT	4
+	typedef enum {
+		kFluidDrawColor,
+		kFluidDrawMotion,
+		kFluidDrawSpeed,
+		kFluidDrawVectors,
+		kFluidDrawCount
+	} FluidDrawMode;
+	
 	
 	class FluidDrawerBase 
-//#ifdef MSA_HOST_OPENFRAMEWORKS
-//	: public ofBaseDraws
-//#endif
+#ifdef MSA_HOST_OPENFRAMEWORKS
+	: public ofBaseDraws
+#endif
 	{
 	public:
 		bool	enabled;
 		bool	doInvert;
 		bool	useAdditiveBlending;
 		float	brightness;
-		int		drawMode;
 		float	velThreshold;
 		
+		FluidDrawMode		drawMode;
+
 		FluidDrawerBase();
 		virtual ~FluidDrawerBase();
 		
@@ -70,7 +74,7 @@ namespace MSA {
 		
 		void update();
 		
-//		void draw(float x = 0, float y = 0);
+		void draw(float x = 0, float y = 0);
 		void draw(float x, float y, float renderWidth, float renderHeight);				// this one does chooses one of the below based on drawmode
 		void drawColor(float x, float y, float renderWidth, float renderHeight, bool withAlpha = false);
 		void drawMotion(float x, float y, float renderWidth, float renderHeight, bool withAlpha = false);
@@ -81,11 +85,13 @@ namespace MSA {
 		virtual float getWidth() = 0;	
 		virtual float getHeight() = 0;
 		
-		void setDrawMode(int newDrawMode);
+		void setDrawMode(FluidDrawMode newDrawMode);
 		void incDrawMode();
 		void decDrawMode();
-		int getDrawMode();
-		const char* getDrawModeName();
+		FluidDrawMode getDrawMode();
+		string getDrawModeName();
+		
+		const static string	drawOptionTitles[];
 		
 	protected:	
 		unsigned char		*_pixels;						// pixels array to be drawn

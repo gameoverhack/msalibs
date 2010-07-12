@@ -1,9 +1,9 @@
 
-#include "testApp.h"
+#include "msaFluidParticlesApp.h"
 
-testApp *myApp;
+msaFluidParticlesApp *myApp;
 int main( ){
 	ofSetupOpenGL(1024, 768, OF_WINDOW);			// <-------- setup the GL context
-	myApp = new testApp;
+	myApp = new msaFluidParticlesApp;
 	ofRunApp(myApp);
 }

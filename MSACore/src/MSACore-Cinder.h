@@ -31,11 +31,15 @@
 
 #pragma once
 
+#define MSA	cinder // so cinder namespaces are also accessible within MSA
+
+
 #include "cinder/Cinder.h"
 #include "cinder/gl/gl.h"
 #include "cinder/Rand.h"
 #include "cinder/Vector.h"
 #include "cinder/Color.h"
+#include "cinder/app/AppBasic.h"
 
 #include <string>
 #include <vector>
@@ -46,7 +50,7 @@ using namespace std;
 namespace MSA {
 	
 #define MSA_HOST_SUFFIX		"-Cinder"
-
+	
 	//todo:
 #if defined (CINDER_MAC)
 #define MSA_TARGET_OSX
@@ -65,18 +69,16 @@ namespace MSA {
 #define MSA_TARGET_OPENGLES
 #endif
 	
-	typedef ci::Vec2f	Vec2f;
-	typedef ci::Vec3f	Vec3f;
-	typedef ci::Vec4f	Vec4f;
-	typedef ci::ColorAf	Color;
-	
 	inline string dataPath(string path, bool absolute = false)		{	return "todo";	}
 	
-	inline double getElapsedSeconds()								{	return 0; }	// TODO
+	inline double getElapsedSeconds()								{	return ci::app::getElapsedSeconds(); }
+	inline long int getElapsedFrames()								{	return ci::app::getElapsedFrames(); }
 	
-	inline float rand(float f)										{	return ci::Rand::randFloat(f);		}
-	inline float rand(float a, float b)								{	return ci::Rand::randFloat(a, b);	}
-	inline float randFloat()										{	return ci::Rand::randFloat(); }
+	inline int getWindowWidth()										{	return ci::app::getWindowWidth(); }
+	inline int getWindowHeight()									{	return ci::app::getWindowHeight(); }
+	inline float getWindowAspectRatio()								{	return ci::app::getWindowAspectRatio(); }
+	inline Vec2f getWindowSize()									{	return ci::app::getWindowSize(); }
+	inline Vec2f getWindowCenter()									{	return ci::app::getWindowCenter(); }
 	
-	inline void drawBitmapString(string s, float x, float y)		{	return;  /* todo */ }
+	inline void drawBitmapString(string s, float x, float y)		{	return;  /* todo */ }	
 }

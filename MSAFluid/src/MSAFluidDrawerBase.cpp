@@ -38,6 +38,14 @@
 
 namespace MSA {
 	
+	const string FluidDrawerBase::drawOptionTitles[] = {
+		"kFluidDrawColor",
+		"kFluidDrawMotion",
+		"kFluidDrawSpeed",
+		"kFluidDrawVectors"
+	};
+		
+	
 	FluidDrawerBase::FluidDrawerBase() {
 		_pixels				= NULL;
 		_fluidSolver		= NULL;
@@ -50,7 +58,7 @@ namespace MSA {
 		
 		enableAlpha(false);
 		
-		setDrawMode(FLUID_DRAW_COLOR);
+		setDrawMode(kFluidDrawColor);
 	}
 	
 	FluidDrawerBase::~FluidDrawerBase() {
@@ -124,65 +132,54 @@ namespace MSA {
 	}
 	
 	
-	void FluidDrawerBase::setDrawMode(int newDrawMode) {
+	void FluidDrawerBase::setDrawMode(FluidDrawMode newDrawMode) {
 		drawMode = newDrawMode;
-		if(drawMode < 0) drawMode = FLUID_DRAW_MODE_COUNT-1;
-		else if(drawMode >= FLUID_DRAW_MODE_COUNT) drawMode = 0;
+		if(drawMode < 0) drawMode = (FluidDrawMode)(kFluidDrawCount-1);
+		else if(drawMode >= kFluidDrawCount) drawMode = (FluidDrawMode)0;
 	}
 	
 	void FluidDrawerBase::incDrawMode() {
-		setDrawMode(drawMode + 1);
+		setDrawMode((FluidDrawMode)((int)drawMode + 1));
 	}
 	
 	void FluidDrawerBase::decDrawMode() {
-		setDrawMode(drawMode - 1);
+		setDrawMode((FluidDrawMode)(drawMode - 1));
 	}
 	
-	int FluidDrawerBase::getDrawMode() {
+	FluidDrawMode FluidDrawerBase::getDrawMode() {
 		return drawMode;
 	}
 	
-	const char* FluidDrawerBase::getDrawModeName() {
-		switch(drawMode) {
-			case 0:
-				return "FLUID_DRAW_COLOR";
-			case 1:
-				return "FLUID_DRAW_MOTION";
-			case 2:
-				return "FLUID_DRAW_SPEED";
-			case 3:
-				return "FLUID_DRAW_VECTORS";
-			default:
-				return "FLUID DRAW MODE NOT FOUND";
-		}
+	string FluidDrawerBase::getDrawModeName() {
+		return drawOptionTitles[drawMode];
 	}
 	
 	
 	
-//	void FluidDrawerBase::draw(float x, float y) {
-//		if(enabled == false) return;
-//		
-//		draw(x, y, ofGetWidth(), ofGetHeight());
-//	}
+	void FluidDrawerBase::draw(float x, float y) {
+		if(enabled == false) return;
+		
+		draw(x, y, getWindowWidth(), getWindowHeight());
+	}
 	
 	
 	void FluidDrawerBase::draw(float x, float y, float renderWidth, float renderHeight) {
 		if(enabled == false) return;
 		
 		switch(drawMode) {
-			case FLUID_DRAW_COLOR:
+			case kFluidDrawColor:
 				drawColor(x, y, renderWidth, renderHeight);
 				break;
 				
-			case FLUID_DRAW_MOTION:
+			case kFluidDrawMotion:
 				drawMotion(x, y, renderWidth, renderHeight);
 				break;
 				
-			case FLUID_DRAW_SPEED:
+			case kFluidDrawSpeed:
 				drawSpeed(x, y, renderWidth, renderHeight);
 				break;
 				
-			case FLUID_DRAW_VECTORS:
+			case kFluidDrawVectors:
 				drawVectors(x, y, renderWidth, renderHeight);
 				break;
 				
@@ -251,13 +248,9 @@ namespace MSA {
 				_fluidSolver->getInfoAtCell(i, j, &vel, NULL);
 				float speed2 = fabs(vel.x) * fw + fabs(vel.y) * fh;
 				int speed = (int)min(speed2 * 255 * brightness, 255.0f);
-				int r = _pixels[index++] = (unsigned char)min(fabs(vel.x) * fw * 255 * brightness, 255.0f);
-				int g = _pixels[index++] = (unsigned char)min(fabs(vel.y) * fh * 255 * brightness, 255.0f);
-				int b = _pixels[index++] = (unsigned char)0;
-				
-				_pixels[index++] = r;
-				_pixels[index++] = g;
-				_pixels[index++] = b;
+				_pixels[index++] = (unsigned char)min(fabs(vel.x) * fw * 255 * brightness, 255.0f);
+				_pixels[index++] = (unsigned char)min(fabs(vel.y) * fh * 255 * brightness, 255.0f);
+				_pixels[index++] = (unsigned char)0;
 				
 				if(_alphaEnabled) _pixels[index++] = withAlpha ? speed : 255;
 				
@@ -289,13 +282,9 @@ namespace MSA {
 				_fluidSolver->getInfoAtCell(i, j, &vel, NULL);
 				float speed2 = fabs(vel.x) * fw + fabs(vel.y) * fh;
 				int speed = (int)min(speed2 * 255 * brightness, 255.0f);
-				int r = _pixels[index++] = (unsigned char)speed;
-				int g = _pixels[index++] = (unsigned char)speed;
-				int b = _pixels[index++] = (unsigned char)speed;
-				
-				_pixels[index++] = r;
-				_pixels[index++] = g;
-				_pixels[index++] = b;
+				_pixels[index++] = (unsigned char)speed;
+				_pixels[index++] = (unsigned char)speed;
+				_pixels[index++] = (unsigned char)speed;
 				
 				if(_alphaEnabled) _pixels[index++] = withAlpha ? speed : 255;
 			}

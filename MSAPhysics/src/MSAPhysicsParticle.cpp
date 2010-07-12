@@ -101,7 +101,7 @@ namespace MSA {
 				Vec3f curPos = _pos;
 				Vec3f vel = _pos - _oldPos;
 				//		_pos += vel * _params->drag * _drag + _params->timeStep2;
-				_pos += (_pos - _oldPos) + _params->timeStep2;
+				_pos += (_pos - _oldPos);// + _params->timeStep2;	// TODO
 				_oldPos = curPos;
 			}
 		}

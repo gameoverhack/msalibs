@@ -1,31 +1,24 @@
 // !$*UTF8*$!
 {
+	0026CD1A1197C25E007D86C6 /* Particle.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1859, 1313}}";
+			sepNavSelRange = "{2203, 0}";
+			sepNavVisRange = "{852, 1527}";
+		};
+	};
 	0026CD1B1197C25E007D86C6 /* ParticleSystem.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1573, 925}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 1547}";
-		};
-	};
-	0026CD201197C267007D86C6 /* Particle.h */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1573, 792}}";
-			sepNavSelRange = "{198, 0}";
-			sepNavVisRange = "{0, 578}";
-		};
-	};
-	0026CD211197C267007D86C6 /* ParticleSystem.h */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1573, 973}}";
-			sepNavSelRange = "{227, 0}";
-			sepNavVisRange = "{0, 786}";
+			sepNavIntBoundsRect = "{{0, 0}, {691, 925}}";
+			sepNavSelRange = "{314, 0}";
+			sepNavVisRange = "{0, 1490}";
 		};
 	};
 	00BAE6590E7ED9C10018A608 /* msaFluidParticlesApp.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1573, 2119}}";
-			sepNavSelRange = "{867, 0}";
-			sepNavVisRange = "{33, 1849}";
+			sepNavIntBoundsRect = "{{0, 0}, {1548, 2496}}";
+			sepNavSelRange = "{3735, 0}";
+			sepNavVisRange = "{2892, 1632}";
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
@@ -46,7 +39,7 @@
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
 					147,
-					1244,
+					1219,
 					20,
 					48,
 					43,
@@ -64,22 +57,49 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 300644028;
-			PBXWorkspaceStateSaveDate = 300644028;
+			PBXPerProjectTemplateStateSaveDate = 300659664;
+			PBXWorkspaceStateSaveDate = 300659664;
 		};
 		perUserProjectItems = {
-			BBB328A011EB779A00B43B95 /* PBXTextBookmark */ = BBB328A011EB779A00B43B95 /* PBXTextBookmark */;
-			BBB328A311EB779A00B43B95 /* PBXTextBookmark */ = BBB328A311EB779A00B43B95 /* PBXTextBookmark */;
-			BBB32B0211EB818A00B43B95 /* PBXTextBookmark */ = BBB32B0211EB818A00B43B95 /* PBXTextBookmark */;
-			BBF80B6811E91C8400562F1A /* PBXTextBookmark */ = BBF80B6811E91C8400562F1A /* PBXTextBookmark */;
+			BBB32B6811EB904000B43B95 /* PBXTextBookmark */ = BBB32B6811EB904000B43B95 /* PBXTextBookmark */;
+			BBB32B6E11EB904000B43B95 /* PBXTextBookmark */ = BBB32B6E11EB904000B43B95 /* PBXTextBookmark */;
+			BBB32B7011EB904000B43B95 /* PBXTextBookmark */ = BBB32B7011EB904000B43B95 /* PBXTextBookmark */;
+			BBB32BF011EB961900B43B95 /* PBXTextBookmark */ = BBB32BF011EB961900B43B95 /* PBXTextBookmark */;
+			BBB32C2011EB98D600B43B95 /* PBXTextBookmark */ = BBB32C2011EB98D600B43B95 /* PBXTextBookmark */;
+			BBB32C2111EB98D600B43B95 /* PBXTextBookmark */ = BBB32C2111EB98D600B43B95 /* PBXTextBookmark */;
+			BBB32C2511EB98D600B43B95 /* PBXTextBookmark */ = BBB32C2511EB98D600B43B95 /* PBXTextBookmark */;
+			BBB32C2611EB98D600B43B95 /* PBXTextBookmark */ = BBB32C2611EB98D600B43B95 /* PBXTextBookmark */;
+			BBB32C4011EB9A9400B43B95 /* PBXTextBookmark */ = BBB32C4011EB9A9400B43B95 /* PBXTextBookmark */;
+			BBB32C8211EB9EDE00B43B95 /* PBXTextBookmark */ = BBB32C8211EB9EDE00B43B95 /* PBXTextBookmark */;
+			BBB32CFF11EBA65400B43B95 /* PBXTextBookmark */ = BBB32CFF11EBA65400B43B95 /* PBXTextBookmark */;
+			BBB32D0211EBA65400B43B95 /* PBXTextBookmark */ = BBB32D0211EBA65400B43B95 /* PBXTextBookmark */;
+			BBB32D0511EBA65400B43B95 /* PBXTextBookmark */ = BBB32D0511EBA65400B43B95 /* PBXTextBookmark */;
+			BBB32DBF11EBABA200B43B95 /* PBXTextBookmark */ = BBB32DBF11EBABA200B43B95 /* PBXTextBookmark */;
+			BBB32DC011EBABA200B43B95 /* PBXTextBookmark */ = BBB32DC011EBABA200B43B95 /* PBXTextBookmark */;
+			BBB32DC211EBABA200B43B95 /* PBXTextBookmark */ = BBB32DC211EBABA200B43B95 /* PBXTextBookmark */;
+			BBB32DC311EBABA200B43B95 /* PBXTextBookmark */ = BBB32DC311EBABA200B43B95 /* PBXTextBookmark */;
+			BBB32E6811EBB10500B43B95 /* PBXTextBookmark */ = BBB32E6811EBB10500B43B95 /* PBXTextBookmark */;
+			BBB32E7D11EBB1D300B43B95 /* PBXTextBookmark */ = BBB32E7D11EBB1D300B43B95 /* PBXTextBookmark */;
+			BBB32E7F11EBB1D300B43B95 /* PBXTextBookmark */ = BBB32E7F11EBB1D300B43B95 /* PBXTextBookmark */;
+			BBB32E9A11EBB30B00B43B95 /* PBXTextBookmark */ = BBB32E9A11EBB30B00B43B95 /* PBXTextBookmark */;
+			BBB32E9B11EBB30B00B43B95 /* PBXTextBookmark */ = BBB32E9B11EBB30B00B43B95 /* PBXTextBookmark */;
+			BBB32E9C11EBB30B00B43B95 /* PBXTextBookmark */ = BBB32E9C11EBB30B00B43B95 /* PBXTextBookmark */;
+			BBB32E9D11EBB30B00B43B95 /* PBXTextBookmark */ = BBB32E9D11EBB30B00B43B95 /* PBXTextBookmark */;
+			BBB32EA311EBB37300B43B95 /* PBXTextBookmark */ = BBB32EA311EBB37300B43B95 /* PBXTextBookmark */;
+			BBB32EFA11EBB3F100B43B95 /* PBXTextBookmark */ = BBB32EFA11EBB3F100B43B95 /* PBXTextBookmark */;
 			BBF80C8711E92E6600562F1A /* PBXTextBookmark */ = BBF80C8711E92E6600562F1A /* PBXTextBookmark */;
 			BBF80CB411E9334400562F1A /* PBXTextBookmark */ = BBF80CB411E9334400562F1A /* PBXTextBookmark */;
-			BBF80ED111E9E7C700562F1A /* PBXTextBookmark */ = BBF80ED111E9E7C700562F1A /* PBXTextBookmark */;
-			BBF80ED411E9E7C700562F1A /* PBXTextBookmark */ = BBF80ED411E9E7C700562F1A /* PBXTextBookmark */;
 			BBF80EF511E9E8E500562F1A /* PBXTextBookmark */ = BBF80EF511E9E8E500562F1A /* PBXTextBookmark */;
 		};
 		sourceControlManager = BBF80B4E11E91BF400562F1A /* Source Control */;
 		userBuildSettings = {
+		};
+	};
+	32CA4F630368D1EE00C91783 /* msaFluidParticles_Prefix.pch */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {628, 925}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 147}";
 		};
 	};
 	8D1107260486CEB800E47090 /* msaFluidParticles */ = {
@@ -88,35 +108,412 @@
 			BBF80B4A11E91BED00562F1A /* msaFluidParticles */,
 		);
 	};
-	BBB328A011EB779A00B43B95 /* PBXTextBookmark */ = {
+	BBB32A5C11EB7E5A00B43B95 /* MSAFluid.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {992, 925}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 3138}";
+		};
+	};
+	BBB32A5D11EB7E5A00B43B95 /* MSAFluidDrawerBase.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {899, 5096}}";
+			sepNavSelRange = "{9940, 0}";
+			sepNavVisRange = "{6500, 1976}";
+		};
+	};
+	BBB32A5E11EB7E5A00B43B95 /* MSAFluidDrawerBase.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1041, 1534}}";
+			sepNavSelRange = "{2177, 0}";
+			sepNavVisRange = "{1965, 1810}";
+		};
+	};
+	BBB32A5F11EB7E5A00B43B95 /* MSAFluidDrawerGl-Cinder.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {899, 1092}}";
+			sepNavSelRange = "{1978, 0}";
+			sepNavVisRange = "{284, 2635}";
+		};
+	};
+	BBB32A6011EB7E5A00B43B95 /* MSAFluidDrawerGl-OF.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {621, 1040}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 2614}";
+		};
+	};
+	BBB32A6211EB7E5A00B43B95 /* MSAFluidSolver.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {992, 11310}}";
+			sepNavSelRange = "{23924, 0}";
+			sepNavVisRange = "{22916, 1816}";
+		};
+	};
+	BBB32A6311EB7E5A00B43B95 /* MSAFluidSolver.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1859, 4056}}";
+			sepNavSelRange = "{8337, 0}";
+			sepNavVisRange = "{7524, 1657}";
+		};
+	};
+	BBB32A6611EB7E5A00B43B95 /* MSACore-Cinder.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {803, 1092}}";
+			sepNavSelRange = "{2112, 0}";
+			sepNavVisRange = "{501, 2722}";
+		};
+	};
+	BBB32A6711EB7E5A00B43B95 /* MSACore-OF.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {992, 1495}}";
+			sepNavSelRange = "{3258, 0}";
+			sepNavVisRange = "{2045, 2061}";
+		};
+	};
+	BBB32A6811EB7E5A00B43B95 /* MSACore.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {761, 925}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 2393}";
+		};
+	};
+	BBB32A6911EB7E5A00B43B95 /* MSACoreCommon.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {621, 925}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1993}";
+		};
+	};
+	BBB32A6A11EB7E5A00B43B95 /* MSACoreGL.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {621, 975}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 2745}";
+		};
+	};
+	BBB32A6B11EB7E5A00B43B95 /* MSACoreGL.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {621, 925}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1988}";
+		};
+	};
+	BBB32A6C11EB7E5A00B43B95 /* MSACoreMath.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1859, 1495}}";
+			sepNavSelRange = "{3568, 0}";
+			sepNavVisRange = "{2216, 1355}";
+		};
+	};
+	BBB32B6811EB904000B43B95 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 0026CD211197C267007D86C6 /* ParticleSystem.h */;
-		name = "ParticleSystem.h: 13";
+		fRef = BBB32B6911EB904000B43B95 /* Rand.h */;
+		name = "Rand.h: 179";
+		rLen = 553;
+		rLoc = 4914;
+		rType = 0;
+		vrLen = 1912;
+		vrLoc = 3978;
+	};
+	BBB32B6911EB904000B43B95 /* Rand.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = Rand.h;
+		path = "/Users/memo/___LAB___/Cinder/git/include/cinder/Rand.h";
+		sourceTree = "<absolute>";
+	};
+	BBB32B6E11EB904000B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32B6F11EB904000B43B95 /* stdint.h */;
+		name = "stdint.h: 50";
+		rLen = 39;
+		rLoc = 890;
+		rType = 0;
+		vrLen = 1569;
+		vrLoc = 0;
+	};
+	BBB32B6F11EB904000B43B95 /* stdint.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = stdint.h;
+		path = "/Developer/SDKs/MacOSX10.5.sdk/usr/lib/gcc/i686-apple-darwin10/4.2.1/include/stdint.h";
+		sourceTree = "<absolute>";
+	};
+	BBB32B7011EB904000B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32B7111EB904000B43B95 /* App.h */;
+		name = "App.h: 352";
+		rLen = 78;
+		rLoc = 18107;
+		rType = 0;
+		vrLen = 6006;
+		vrLoc = 16191;
+	};
+	BBB32B7111EB904000B43B95 /* App.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = App.h;
+		path = "/Users/memo/___LAB___/Cinder/git/include/cinder/app/App.h";
+		sourceTree = "<absolute>";
+	};
+	BBB32BDE11EB945600B43B95 /* Particle.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {845, 925}}";
+			sepNavSelRange = "{193, 0}";
+			sepNavVisRange = "{0, 591}";
+		};
+	};
+	BBB32BDF11EB945600B43B95 /* ParticleSystem.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {584, 925}}";
+			sepNavSelRange = "{171, 0}";
+			sepNavVisRange = "{0, 786}";
+		};
+	};
+	BBB32BF011EB961900B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32BDF11EB945600B43B95 /* ParticleSystem.h */;
+		name = "ParticleSystem.h: 11";
 		rLen = 0;
-		rLoc = 227;
+		rLoc = 171;
 		rType = 0;
 		vrLen = 786;
 		vrLoc = 0;
 	};
-	BBB328A311EB779A00B43B95 /* PBXTextBookmark */ = {
+	BBB32C2011EB98D600B43B95 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
-		fRef = 00BAE6590E7ED9C10018A608 /* msaFluidParticlesApp.cpp */;
-		name = "msaFluidParticlesApp.cpp: 137";
-		rLen = 5;
-		rLoc = 3267;
-		rType = 0;
-		vrLen = 1711;
-		vrLoc = 2343;
-	};
-	BBB32B0211EB818A00B43B95 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 00BAE6590E7ED9C10018A608 /* msaFluidParticlesApp.cpp */;
-		name = "msaFluidParticlesApp.cpp: 40";
+		fRef = BBB32A6A11EB7E5A00B43B95 /* MSACoreGL.cpp */;
+		name = "MSACoreGL.cpp: 1";
 		rLen = 0;
-		rLoc = 867;
+		rLoc = 0;
 		rType = 0;
-		vrLen = 1849;
-		vrLoc = 33;
+		vrLen = 2745;
+		vrLoc = 0;
+	};
+	BBB32C2111EB98D600B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A6B11EB7E5A00B43B95 /* MSACoreGL.h */;
+		name = "MSACoreGL.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1988;
+		vrLoc = 0;
+	};
+	BBB32C2511EB98D600B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0026CD1B1197C25E007D86C6 /* ParticleSystem.cpp */;
+		name = "ParticleSystem.cpp: 20";
+		rLen = 0;
+		rLoc = 314;
+		rType = 0;
+		vrLen = 1490;
+		vrLoc = 0;
+	};
+	BBB32C2611EB98D600B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32BDE11EB945600B43B95 /* Particle.h */;
+		name = "Particle.h: 13";
+		rLen = 0;
+		rLoc = 193;
+		rType = 0;
+		vrLen = 591;
+		vrLoc = 0;
+	};
+	BBB32C4011EB9A9400B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBF80ED211E9E7C700562F1A /* AppBasic.h */;
+		name = "AppBasic.h: 193";
+		rLen = 52;
+		rLoc = 7778;
+		rType = 0;
+		vrLen = 2627;
+		vrLoc = 5805;
+	};
+	BBB32C8211EB9EDE00B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0026CD1A1197C25E007D86C6 /* Particle.cpp */;
+		name = "Particle.cpp: 67";
+		rLen = 0;
+		rLoc = 1430;
+		rType = 0;
+		vrLen = 1848;
+		vrLoc = 623;
+	};
+	BBB32CFF11EBA65400B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A6011EB7E5A00B43B95 /* MSAFluidDrawerGl-OF.h */;
+		name = "MSAFluidDrawerGl-OF.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 2614;
+		vrLoc = 0;
+	};
+	BBB32D0211EBA65400B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32D0311EBA65400B43B95 /* Vector.h */;
+		name = "Vector.h: 25";
+		rLen = 0;
+		rLoc = 1354;
+		rType = 0;
+		vrLen = 2275;
+		vrLoc = 0;
+	};
+	BBB32D0311EBA65400B43B95 /* Vector.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = Vector.h;
+		path = "/Users/memo/___LAB___/Cinder/git/include/cinder/Vector.h";
+		sourceTree = "<absolute>";
+	};
+	BBB32D0511EBA65400B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A5C11EB7E5A00B43B95 /* MSAFluid.h */;
+		name = "MSAFluid.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 3138;
+		vrLoc = 0;
+	};
+	BBB32DBF11EBABA200B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A5E11EB7E5A00B43B95 /* MSAFluidDrawerBase.h */;
+		name = "MSAFluidDrawerBase.h: 49";
+		rLen = 0;
+		rLoc = 2177;
+		rType = 0;
+		vrLen = 1810;
+		vrLoc = 1965;
+	};
+	BBB32DC011EBABA200B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A5D11EB7E5A00B43B95 /* MSAFluidDrawerBase.cpp */;
+		name = "MSAFluidDrawerBase.cpp: 156";
+		rLen = 0;
+		rLoc = 4352;
+		rType = 0;
+		vrLen = 1661;
+		vrLoc = 3335;
+	};
+	BBB32DC211EBABA200B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A6811EB7E5A00B43B95 /* MSACore.h */;
+		name = "MSACore.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 2393;
+		vrLoc = 0;
+	};
+	BBB32DC311EBABA200B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A6911EB7E5A00B43B95 /* MSACoreCommon.h */;
+		name = "MSACoreCommon.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1993;
+		vrLoc = 0;
+	};
+	BBB32E6211EBB0E900B43B95 /* Color.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1125, 4420}}";
+			sepNavSelRange = "{8847, 0}";
+			sepNavVisRange = "{6687, 2037}";
+		};
+	};
+	BBB32E6811EBB10500B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A6311EB7E5A00B43B95 /* MSAFluidSolver.h */;
+		name = "MSAFluidSolver.h: 175";
+		rLen = 0;
+		rLoc = 6955;
+		rType = 0;
+		vrLen = 2080;
+		vrLoc = 6986;
+	};
+	BBB32E7D11EBB1D300B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32E6211EBB0E900B43B95 /* Color.cpp */;
+		name = "Color.cpp: 309";
+		rLen = 0;
+		rLoc = 8847;
+		rType = 0;
+		vrLen = 2037;
+		vrLoc = 6687;
+	};
+	BBB32E7F11EBB1D300B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A6C11EB7E5A00B43B95 /* MSACoreMath.h */;
+		name = "MSACoreMath.h: 114";
+		rLen = 0;
+		rLoc = 3568;
+		rType = 0;
+		vrLen = 1594;
+		vrLoc = 1977;
+	};
+	BBB32E9A11EBB30B00B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 32CA4F630368D1EE00C91783 /* msaFluidParticles_Prefix.pch */;
+		name = "msaFluidParticles_Prefix.pch: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 147;
+		vrLoc = 0;
+	};
+	BBB32E9B11EBB30B00B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A6711EB7E5A00B43B95 /* MSACore-OF.h */;
+		name = "MSACore-OF.h: 84";
+		rLen = 0;
+		rLoc = 3258;
+		rType = 0;
+		vrLen = 2061;
+		vrLoc = 2045;
+	};
+	BBB32E9C11EBB30B00B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A6611EB7E5A00B43B95 /* MSACore-Cinder.h */;
+		name = "MSACore-Cinder.h: 47";
+		rLen = 0;
+		rLoc = 2112;
+		rType = 0;
+		vrLen = 2722;
+		vrLoc = 501;
+	};
+	BBB32E9D11EBB30B00B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A6211EB7E5A00B43B95 /* MSAFluidSolver.cpp */;
+		name = "MSAFluidSolver.cpp: 888";
+		rLen = 0;
+		rLoc = 23924;
+		rType = 0;
+		vrLen = 1816;
+		vrLoc = 22916;
+	};
+	BBB32EA311EBB37300B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 00BAE6590E7ED9C10018A608 /* msaFluidParticlesApp.cpp */;
+		name = "msaFluidParticlesApp.cpp: 165";
+		rLen = 0;
+		rLoc = 3718;
+		rType = 0;
+		vrLen = 1530;
+		vrLoc = 2994;
+	};
+	BBB32EFA11EBB3F100B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 00BAE6590E7ED9C10018A608 /* msaFluidParticlesApp.cpp */;
+		name = "msaFluidParticlesApp.cpp: 165";
+		rLen = 0;
+		rLoc = 3735;
+		rType = 0;
+		vrLen = 1632;
+		vrLoc = 2892;
 	};
 	BBF80B4A11E91BED00562F1A /* msaFluidParticles */ = {
 		isa = PBXExecutable;
@@ -147,6 +544,8 @@
 		showTypeColumn = 0;
 		sourceDirectories = (
 		);
+		variableFormatDictionary = {
+		};
 	};
 	BBF80B4E11E91BF400562F1A /* Source Control */ = {
 		isa = PBXSourceControlManager;
@@ -161,16 +560,6 @@
 	BBF80B4F11E91BF400562F1A /* Code sense */ = {
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
-	};
-	BBF80B6811E91C8400562F1A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 0026CD201197C267007D86C6 /* Particle.h */;
-		name = "Particle.h: 12";
-		rLen = 0;
-		rLoc = 198;
-		rType = 0;
-		vrLen = 578;
-		vrLoc = 0;
 	};
 	BBF80C6411E92B0400562F1A /* Color.h */ = {
 		isa = PBXFileReference;
@@ -212,21 +601,6 @@
 		name = Surface.h;
 		path = "/Users/memo/___LAB___/Cinder/git/include/cinder/Surface.h";
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1859, 5278}}";
-			sepNavSelRange = "{1532, 28}";
-			sepNavVisRange = "{0, 2512}";
-		};
-	};
-	BBF80ED111E9E7C700562F1A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = BBF80ED211E9E7C700562F1A /* AppBasic.h */;
-		name = "AppBasic.h: 41";
-		rLen = 30;
-		rLoc = 1618;
-		rType = 0;
-		vrLen = 3247;
-		vrLoc = 0;
 	};
 	BBF80ED211E9E7C700562F1A /* AppBasic.h */ = {
 		isa = PBXFileReference;
@@ -234,16 +608,6 @@
 		name = AppBasic.h;
 		path = "/Users/memo/___LAB___/Cinder/git/include/cinder/app/AppBasic.h";
 		sourceTree = "<absolute>";
-	};
-	BBF80ED411E9E7C700562F1A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 0026CD1B1197C25E007D86C6 /* ParticleSystem.cpp */;
-		name = "ParticleSystem.cpp: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 1547;
-		vrLoc = 0;
 	};
 	BBF80EF511E9E8E500562F1A /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;

@@ -223,8 +223,8 @@ namespace MSA {
 	
 	//-------- get index
 	inline int FluidSolver::getIndexForCell(int i, int j) const {
-		i = clamp(i, 1, _NX);
-		j = clamp(j, 1, _NY);
+		i = constrain(i, 1, _NX);
+		j = constrain(j, 1, _NY);
 		return FLUID_IX(i, j);
 	}
 	

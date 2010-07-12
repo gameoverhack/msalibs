@@ -5,13 +5,14 @@
 #include "Particle.h"
 #include "ParticleSystem.h"
 
+using namespace MSA;
 using namespace ci;
 using namespace ci::app;
 
 class msaFluidParticlesApp : public AppBasic {
- public:
+public:
 	void	setup();
- 
+	
 	void	fadeToColor( float r, float g, float b, float speed );
 	void	addToFluid( Vec2f pos, Vec2f vel, bool addColor, bool addForce );
 	void	keyDown( KeyEvent event );
@@ -26,7 +27,6 @@ class msaFluidParticlesApp : public AppBasic {
 	bool				resizeFluid;
 	bool				drawFluid;
 	bool				drawParticles;
-	bool				renderUsingVA;
 	
 	MSA::FluidSolver	fluidSolver;
 	MSA::FluidDrawerGl	fluidDrawer;	
@@ -49,7 +49,6 @@ void msaFluidParticlesApp::setup()
 	
 	drawFluid			= true;
 	drawParticles		= true;
-	renderUsingVA		= true;
 	
 	setFrameRate( 60.0f );
 	
@@ -59,42 +58,42 @@ void msaFluidParticlesApp::setup()
 	gl::enableAlphaBlending();
 }
 
-void msaFluidParticlesApp::fadeToColor( float r, float g, float b, float speed )
-{
+
+void msaFluidParticlesApp::fadeToColor(float r, float g, float b, float speed) {
 	glColor4f( r, g, b, speed );
 	gl::drawSolidRect( getWindowBounds() );
 }
 
+
 // add force and dye to fluid, and create particles
-void msaFluidParticlesApp::addToFluid( Vec2f pos, Vec2f vel, bool addColor, bool addForce )
-{
+void msaFluidParticlesApp::addToFluid( Vec2f pos, Vec2f vel, bool addColor, bool addForce ) {
     float speed = vel.x * vel.x  + vel.y * vel.y * getWindowAspectRatio() * getWindowAspectRatio();    // balance the x and y components of speed with the screen aspect ratio
     if( speed > 0 ) {
-		pos.x = constrain( pos.x, 0.0f, 1.0f );
-		pos.y = constrain( pos.y, 0.0f, 1.0f );
+		pos.x = constrain(pos.x, 0.0f, 1.0f);
+		pos.y = constrain(pos.y, 0.0f, 1.0f);
 		
         const float colorMult = 100;
         const float velocityMult = 30;
 		
+        int index = fluidSolver.getIndexForPos(pos);
+		
 		if( addColor ) {
-			Color drawColor( CM_HSV, ( getElapsedFrames() % 360 ) / 360.0f, 1, 1 );
+			ci::Color drawColor( CM_HSV, ( getElapsedFrames() % 360 ) / 360.0f, 1, 1 );
 			
-			fluidSolver.addColorAtPos( pos, drawColor * colorMult );
-
+			fluidSolver.addColorAtIndex(index, drawColor * colorMult);
+			
 			if( drawParticles )
 				particleSystem.addParticles( pos * Vec2f( getWindowSize() ), 10 );
 		}
 		
 		if( addForce )
-			fluidSolver.addForceAtPos( pos, vel * velocityMult );
+			fluidSolver.addForceAtIndex(index, vel * velocityMult);
 		
-		if( ! drawFluid && getElapsedFrames()%5==0 )
-			fadeToColor( 0, 0, 0, 0.1f );
     }
 }
 
-void msaFluidParticlesApp::update()
-{
+
+void msaFluidParticlesApp::update(){
 	if( resizeFluid ) {
 		fluidSolver.setSize(fluidCellsX, fluidCellsX / getWindowAspectRatio() );
 		fluidDrawer.setup(&fluidSolver);
@@ -104,44 +103,72 @@ void msaFluidParticlesApp::update()
 	fluidSolver.update();
 }
 
-void msaFluidParticlesApp::draw()
-{
+void msaFluidParticlesApp::draw(){
 	if( drawFluid ) {
 		glColor3f(1, 1, 1);
 		fluidDrawer.draw(0, 0, getWindowWidth(), getWindowHeight());
+	} else {
+		if(getElapsedFrames()%5==0) fadeToColor( 0, 0, 0, 0.1f );
 	}
 	if( drawParticles )
 		particleSystem.updateAndDraw( drawFluid );
 }
 
 
-void msaFluidParticlesApp::resize( int w, int h )
-{
-	particleSystem.setWindowSize( Vec2i( w, h ) );
-	resizeFluid = true;
+void msaFluidParticlesApp::resize( int w, int h ) {
+	particleSystem.setWindowSize( Vec2f( w, h ) );
 }
 
 void msaFluidParticlesApp::keyDown( KeyEvent event )
 { 
     switch( event.getChar() ) {
+		case '1':
+			fluidDrawer.setDrawMode(MSA::kFluidDrawColor);
+			break;
+
+		case '2':
+			fluidDrawer.setDrawMode(MSA::kFluidDrawMotion);
+			break;
+
+		case '3':
+			fluidDrawer.setDrawMode(MSA::kFluidDrawSpeed);
+			break;
+			
+		case '4':
+			fluidDrawer.setDrawMode(MSA::kFluidDrawVectors);
+			break;
+			
+		case 'd':
+			drawFluid ^= true;
+			break;
+			
+		case 'p':
+			drawParticles ^= true;
+			break;
+			
 		case 'f':
 			setFullScreen( ! isFullScreen() );
-		break;
+			break;
+
+			
+		case 'r':
+			fluidSolver.reset();
+			break;
+						
 		case ' ':
 			fluidSolver.randomizeColor();
-		break;
-		case 'p':
-			drawParticles = ! drawParticles;
-		break;
+			break;
+			
 		case 'b': {
 			Timer timer;
-			const int ITERS = 1000;
+			const int ITERS = 3000;
 			timer.start();
 			for( int i = 0; i < ITERS; ++i ) fluidSolver.update();
 			timer.stop();
 			console() << ITERS << " iterations took " << timer.getSeconds() << " seconds." << std::endl;
 		}
-		break;
+			break;
+			
     }
 }
 

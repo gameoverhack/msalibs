@@ -923,8 +923,8 @@ namespace MSA {
 			for (int j = getHeight()-1; j > 0; --j)
 			{
 				int index = FLUID_IX(i, j);
-				color[index] = Vec3f(randFloat(), randFloat(), randFloat());
-				density[index] = randFloat();
+				color[index] = Vec3f(Rand::randFloat(), Rand::randFloat(), Rand::randFloat());
+				density[index] = Rand::randFloat();
 			}
 		}
 	}

@@ -2,9 +2,9 @@
 {
 	00BAE6590E7ED9C10018A608 /* msaFluidBasicApp.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1321, 1755}}";
-			sepNavSelRange = "{171, 0}";
-			sepNavVisRange = "{0, 662}";
+			sepNavIntBoundsRect = "{{0, 0}, {1503, 1703}}";
+			sepNavSelRange = "{1119, 0}";
+			sepNavVisRange = "{0, 1815}";
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
@@ -41,16 +41,14 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 300646065;
-			PBXWorkspaceStateSaveDate = 300646065;
+			PBXPerProjectTemplateStateSaveDate = 300659601;
+			PBXWorkspaceStateSaveDate = 300659601;
 		};
 		perUserProjectItems = {
-			BBB32A7011EB7E5C00B43B95 /* PBXTextBookmark */ = BBB32A7011EB7E5C00B43B95 /* PBXTextBookmark */;
-			BBB32A7311EB7E5C00B43B95 /* PBXTextBookmark */ = BBB32A7311EB7E5C00B43B95 /* PBXTextBookmark */;
-			BBB32ACB11EB7EB700B43B95 /* PBXTextBookmark */ = BBB32ACB11EB7EB700B43B95 /* PBXTextBookmark */;
-			BBF80A0111E9161600562F1A /* PBXTextBookmark */ = BBF80A0111E9161600562F1A /* PBXTextBookmark */;
-			BBF80A2411E9172F00562F1A /* PBXTextBookmark */ = BBF80A2411E9172F00562F1A /* PBXTextBookmark */;
-			BBF80D4B11E93F8800562F1A /* PBXTextBookmark */ = BBF80D4B11E93F8800562F1A /* PBXTextBookmark */;
+			BBB32EB711EBB39D00B43B95 /* PBXTextBookmark */ = BBB32EB711EBB39D00B43B95 /* PBXTextBookmark */;
+			BBB32EB811EBB39D00B43B95 /* PBXTextBookmark */ = BBB32EB811EBB39D00B43B95 /* PBXTextBookmark */;
+			BBB32EB911EBB39D00B43B95 /* PBXBookmark */ = BBB32EB911EBB39D00B43B95 /* PBXBookmark */;
+			BBB32EC811EBB3AE00B43B95 /* PBXTextBookmark */ = BBB32EC811EBB3AE00B43B95 /* PBXTextBookmark */;
 		};
 		sourceControlManager = BBF809AF11E90FAC00562F1A /* Source Control */;
 		userBuildSettings = {
@@ -71,7 +69,7 @@
 	};
 	BBB32A1911EB7BA100B43B95 /* MSAFluid.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1503, 926}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1503, 973}}";
 			sepNavSelRange = "{1151, 0}";
 			sepNavVisRange = "{0, 3138}";
 		};
@@ -97,6 +95,13 @@
 			sepNavVisRange = "{332, 2381}";
 		};
 	};
+	BBB32A1F11EB7BA100B43B95 /* MSAFluidSolver.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1503, 11310}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 3349}";
+		};
+	};
 	BBB32A2011EB7BA100B43B95 /* MSAFluidSolver.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1503, 3783}}";
@@ -104,53 +109,39 @@
 			sepNavVisRange = "{0, 3619}";
 		};
 	};
-	BBB32A7011EB7E5C00B43B95 /* PBXTextBookmark */ = {
+	BBB32EB711EBB39D00B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A1911EB7BA100B43B95 /* MSAFluid.h */;
+		name = "MSAFluid.h: 20";
+		rLen = 0;
+		rLoc = 1151;
+		rType = 0;
+		vrLen = 3138;
+		vrLoc = 0;
+	};
+	BBB32EB811EBB39D00B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A1F11EB7BA100B43B95 /* MSAFluidSolver.cpp */;
+		name = "MSAFluidSolver.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 3349;
+		vrLoc = 0;
+	};
+	BBB32EB911EBB39D00B43B95 /* PBXBookmark */ = {
+		isa = PBXBookmark;
+		fRef = 00BAE6590E7ED9C10018A608 /* msaFluidBasicApp.cpp */;
+	};
+	BBB32EC811EBB3AE00B43B95 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 00BAE6590E7ED9C10018A608 /* msaFluidBasicApp.cpp */;
-		name = "msaFluidBasicApp.cpp: 18";
+		name = "msaFluidBasicApp.cpp: 50";
 		rLen = 0;
-		rLoc = 443;
+		rLoc = 1119;
 		rType = 0;
-		vrLen = 1708;
-		vrLoc = 627;
-	};
-	BBB32A7311EB7E5C00B43B95 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = BBB32A7411EB7E5C00B43B95 /* ofxMSAFluidDrawer.h */;
-		name = "ofxMSAFluidDrawer.h: 18";
-		rLen = 0;
-		rLoc = 828;
-		rType = 0;
-		vrLen = 2656;
+		vrLen = 1815;
 		vrLoc = 0;
-	};
-	BBB32A7411EB7E5C00B43B95 /* ofxMSAFluidDrawer.h */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.c.h;
-		name = ofxMSAFluidDrawer.h;
-		path = "/Users/memo/___LAB___/openFrameworks/addons-msa copy/ofxMSAFluid/src/ofxMSAFluidDrawer.h";
-		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1503, 1430}}";
-			sepNavSelRange = "{828, 0}";
-			sepNavVisRange = "{0, 2704}";
-		};
-	};
-	BBB32ACB11EB7EB700B43B95 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = BBB32ACC11EB7EB700B43B95 /* ofxMSAFluidDrawer.h */;
-		name = "ofxMSAFluidDrawer.h: 18";
-		rLen = 0;
-		rLoc = 828;
-		rType = 0;
-		vrLen = 2844;
-		vrLoc = 0;
-	};
-	BBB32ACC11EB7EB700B43B95 /* ofxMSAFluidDrawer.h */ = {
-		isa = PBXFileReference;
-		name = ofxMSAFluidDrawer.h;
-		path = "/Users/memo/___LAB___/openFrameworks/addons-msa copy/ofxMSAFluid/src/ofxMSAFluidDrawer.h";
-		sourceTree = "<absolute>";
 	};
 	BBF8099511E90FA400562F1A /* msaFluidBasic */ = {
 		isa = PBXExecutable;
@@ -195,49 +186,5 @@
 	BBF809B011E90FAC00562F1A /* Code sense */ = {
 		isa = PBXCodeSenseManager;
 		indexTemplatePath = "";
-	};
-	BBF80A0111E9161600562F1A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 32CA4F630368D1EE00C91783 /* msaFluidBasic_Prefix.pch */;
-		name = "msaFluidBasic_Prefix.pch: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 147;
-		vrLoc = 0;
-	};
-	BBF80A0411E9161600562F1A /* Rand.h */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.c.h;
-		name = Rand.h;
-		path = "/Users/memo/___LAB___/Cinder/git/include/cinder/Rand.h";
-		sourceTree = "<absolute>";
-	};
-	BBF80A2411E9172F00562F1A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = BBF80A0411E9161600562F1A /* Rand.h */;
-		name = "Rand.h: 34";
-		rLen = 13;
-		rLoc = 1543;
-		rType = 0;
-		vrLen = 2454;
-		vrLoc = 0;
-	};
-	BBF80D4B11E93F8800562F1A /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = BBF80D4C11E93F8800562F1A /* msaFluidBasicApp.cpp */;
-		name = "msaFluidBasicApp.cpp: 21";
-		rLen = 0;
-		rLoc = 509;
-		rType = 0;
-		vrLen = 1819;
-		vrLoc = 0;
-	};
-	BBF80D4C11E93F8800562F1A /* msaFluidBasicApp.cpp */ = {
-		isa = PBXFileReference;
-		lastKnownFileType = sourcecode.cpp.cpp;
-		name = msaFluidBasicApp.cpp;
-		path = "/Users/memo/___LAB___/Cinder/git/blocks/msaFluid/samples/msaFluidBasic/src/msaFluidBasicApp.cpp";
-		sourceTree = "<absolute>";
 	};
 }

@@ -229,8 +229,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -307,6 +305,8 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -324,14 +324,14 @@
 										<key>_historyCapacity</key>
 										<integer>40</integer>
 										<key>bookmark</key>
-										<string>BBB32ADE11EB7EC700B43B95</string>
+										<string>BBB32EE211EBB3C800B43B95</string>
 										<key>history</key>
 										<array>
 											<string>BBB329C811EB7AF700B43B95</string>
 											<string>BBB329C911EB7AF700B43B95</string>
 											<string>BBB329CA11EB7AF700B43B95</string>
 											<string>BBB329CB11EB7AF700B43B95</string>
-											<string>BBB32AAF11EB7EA700B43B95</string>
+											<string>BBB32ADE11EB7EC700B43B95</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -389,9 +389,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>BBB32ADF11EB7EC700B43B95</string>
+				<string>BBB32ED411EBB3C100B43B95</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>BBB32AE011EB7EC700B43B95</string>
+				<string>BBB32ED511EBB3C100B43B95</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -529,6 +529,10 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+		<string>BBB32EDF11EBB3C100B43B95</string>
+		<string>BBB32EE011EBB3C100B43B95</string>
+		<string>1C78EAAD065D492600B07095</string>
+		<string>1CD10A99069EF8BA00B06720</string>
 		<string>BBF80BC511E9235800562F1A</string>
 		<string>/Users/memo/___LAB___/Cinder/git/blocks/MSAFluid/samples/msaFluidMultiTouch/xcode/msaFluidMultiTouch.xcodeproj</string>
 	</array>
@@ -610,7 +614,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>BBF80BC511E9235800562F1A</string>
-				<string>BBB32AE111EB7EC700B43B95</string>
+				<string>BBB32ED611EBB3C100B43B95</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -732,13 +736,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>BBB32AA811EB7E9B00B43B95</string>
+				<string>BBB32ED711EBB3C100B43B95</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>BBB32AA911EB7E9B00B43B95</string>
-				<string>BBB32AAA11EB7E9B00B43B95</string>
-				<string>BBB32AAB11EB7E9B00B43B95</string>
-				<string>BBB32AAC11EB7E9B00B43B95</string>
-				<string>BBB32AAD11EB7E9B00B43B95</string>
+				<string>BBB32ED811EBB3C100B43B95</string>
+				<string>BBB32ED911EBB3C100B43B95</string>
+				<string>BBB32EDA11EBB3C100B43B95</string>
+				<string>BBB32EDB11EBB3C100B43B95</string>
+				<string>BBB32EDC11EBB3C100B43B95</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -902,7 +906,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>BBB32AAE11EB7E9B00B43B95</string>
+				<string>BBB32EDD11EBB3C100B43B95</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>

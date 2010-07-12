@@ -1,5 +1,6 @@
 /*
  *  Particle.cpp
+ *  ofxMSAFluid Demo
  *
  *  Created by Mehmet Akten on 02/05/2009.
  *  Copyright 2009 MSA Visuals Ltd.. All rights reserved.
@@ -7,23 +8,21 @@
  */
 
 #include "Particle.h"
-#include "cinder/Rand.h"
-#include "cinder/gl/gl.h"
+
+using namespace MSA;
 
 static const float MOMENTUM = 0.5f;
 static const float FLUID_FORCE = 0.6f;
 
-using namespace ci;
-
 void Particle::init( float x, float y ) {
 	pos = Vec2f( x, y );
-	vel.x = vel.y = 0;
+	vel = Vec2f(0, 0);
 	radius = 5;
 	alpha  = Rand::randFloat( 0.3f, 1 );
 	mass = Rand::randFloat( 0.1f, 1 );
 }
 
-void Particle::update( const MSA::FluidSolver &solver, const Vec2f &windowSize, const Vec2f &invWindowSize ) {
+void Particle::update( const FluidSolver &solver, const Vec2f &windowSize, const Vec2f &invWindowSize ) {
 	// only update if particle is visible
 	if( alpha == 0 )
 		return;
@@ -62,6 +61,7 @@ void Particle::update( const MSA::FluidSolver &solver, const Vec2f &windowSize, 
 }
 
 
+
 void Particle::updateVertexArrays( bool drawingFluid, const Vec2f &invWindowSize, int i, float* posBuffer, float* colBuffer) {
 	int vi = i * 4;
 	posBuffer[vi++] = pos.x - vel.x;
@@ -87,8 +87,8 @@ void Particle::updateVertexArrays( bool drawingFluid, const Vec2f &invWindowSize
 		if(v2>VMAX*VMAX) v2 = VMAX*VMAX;
 		float satInc = mass > 0.5 ? mass * mass * mass : 0;
 		satInc *= satInc * satInc * satInc;
-		//color.setHSV(0, ofMap(v2, 0, VMAX*VMAX, 0, 1) + satInc, ofLerp(0.5, 1, mass) * alpha);
-		Color color( CM_HSV, 0, v2 / ( VMAX * VMAX ), lerp( 0.5f, 1.0f, mass ) * alpha );
+		//color.setHSV(0, mapRange(v2, 0.0f, VMAX*VMAX, 0.0f, 1.0f) + satInc, ofLerp(0.5, 1, mass) * alpha);
+		Color color( ci::CM_HSV, 0, v2 / ( VMAX * VMAX ), lerp( 0.5f, 1.0f, mass ) * alpha );
 
 		colBuffer[ci++] = color.r;
 		colBuffer[ci++] = color.g;

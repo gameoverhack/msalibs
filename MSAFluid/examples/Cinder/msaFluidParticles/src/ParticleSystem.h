@@ -17,15 +17,15 @@ using namespace MSA;
 class ParticleSystem {
 public:	
 	
-    float posArray[MAX_PARTICLES * 2 * 2];
-    float colArray[MAX_PARTICLES * 3 * 2];
+    float				posArray[MAX_PARTICLES * 2 * 2];
+    float				colArray[MAX_PARTICLES * 3 * 2];
 	Vec2f				windowSize;
 	Vec2f				invWindowSize;
 	const FluidSolver	*solver;
 	
-    int curIndex;
+    int					curIndex;
 	
-    Particle particles[MAX_PARTICLES];
+    Particle			particles[MAX_PARTICLES];
 	
 	ParticleSystem();
 	void setFluidSolver( const FluidSolver *aSolver ) { solver = aSolver; }

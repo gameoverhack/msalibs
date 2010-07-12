@@ -23,13 +23,12 @@
 		BBB32A6D11EB7E5A00B43B95 /* MSAFluidDrawerBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBB32A5D11EB7E5A00B43B95 /* MSAFluidDrawerBase.cpp */; };
 		BBB32A6E11EB7E5A00B43B95 /* MSAFluidSolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBB32A6211EB7E5A00B43B95 /* MSAFluidSolver.cpp */; };
 		BBB32A6F11EB7E5A00B43B95 /* MSACoreGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBB32A6A11EB7E5A00B43B95 /* MSACoreGL.cpp */; };
+		BBB32E6511EBB0E900B43B95 /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBB32E6211EBB0E900B43B95 /* Color.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0026CD1A1197C25E007D86C6 /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Particle.cpp; path = ../src/Particle.cpp; sourceTree = SOURCE_ROOT; };
 		0026CD1B1197C25E007D86C6 /* ParticleSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ParticleSystem.cpp; path = ../src/ParticleSystem.cpp; sourceTree = SOURCE_ROOT; };
-		0026CD201197C267007D86C6 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Particle.h; path = ../include/Particle.h; sourceTree = SOURCE_ROOT; };
-		0026CD211197C267007D86C6 /* ParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleSystem.h; path = ../include/ParticleSystem.h; sourceTree = SOURCE_ROOT; };
 		0091D8F80E81B9330029341E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		0097E3E40F3E9819005A4392 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
 		00B784AF0FF439BC000DE1D7 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -62,6 +61,13 @@
 		BBB32A6A11EB7E5A00B43B95 /* MSACoreGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MSACoreGL.cpp; sourceTree = "<group>"; };
 		BBB32A6B11EB7E5A00B43B95 /* MSACoreGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSACoreGL.h; sourceTree = "<group>"; };
 		BBB32A6C11EB7E5A00B43B95 /* MSACoreMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MSACoreMath.h; sourceTree = "<group>"; };
+		BBB32BDE11EB945600B43B95 /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Particle.h; path = ../src/Particle.h; sourceTree = SOURCE_ROOT; };
+		BBB32BDF11EB945600B43B95 /* ParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleSystem.h; path = ../src/ParticleSystem.h; sourceTree = SOURCE_ROOT; };
+		BBB32E6011EBB0E900B43B95 /* ChanTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanTraits.h; sourceTree = "<group>"; };
+		BBB32E6111EBB0E900B43B95 /* CinderMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CinderMath.h; sourceTree = "<group>"; };
+		BBB32E6211EBB0E900B43B95 /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
+		BBB32E6311EBB0E900B43B95 /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
+		BBB32E6411EBB0E900B43B95 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
 		D19D8949114599C400682836 /* lena.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lena.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,7 +95,9 @@
 		080E96DDFE201D6D7F000001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BBB32BDE11EB945600B43B95 /* Particle.h */,
 				0026CD1A1197C25E007D86C6 /* Particle.cpp */,
+				BBB32BDF11EB945600B43B95 /* ParticleSystem.h */,
 				0026CD1B1197C25E007D86C6 /* ParticleSystem.cpp */,
 				00BAE6590E7ED9C10018A608 /* msaFluidParticlesApp.cpp */,
 			);
@@ -147,8 +155,6 @@
 		29B97315FDCFA39411CA2CEA /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				0026CD201197C267007D86C6 /* Particle.h */,
-				0026CD211197C267007D86C6 /* ParticleSystem.h */,
 				32CA4F630368D1EE00C91783 /* msaFluidParticles_Prefix.pch */,
 			);
 			name = Headers;
@@ -217,6 +223,7 @@
 		BBB32A6511EB7E5A00B43B95 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				BBB32E5F11EBB0E900B43B95 /* cinder-lite */,
 				BBB32A6611EB7E5A00B43B95 /* MSACore-Cinder.h */,
 				BBB32A6711EB7E5A00B43B95 /* MSACore-OF.h */,
 				BBB32A6811EB7E5A00B43B95 /* MSACore.h */,
@@ -226,6 +233,18 @@
 				BBB32A6C11EB7E5A00B43B95 /* MSACoreMath.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		BBB32E5F11EBB0E900B43B95 /* cinder-lite */ = {
+			isa = PBXGroup;
+			children = (
+				BBB32E6011EBB0E900B43B95 /* ChanTraits.h */,
+				BBB32E6111EBB0E900B43B95 /* CinderMath.h */,
+				BBB32E6211EBB0E900B43B95 /* Color.cpp */,
+				BBB32E6311EBB0E900B43B95 /* Color.h */,
+				BBB32E6411EBB0E900B43B95 /* Vector.h */,
+			);
+			path = "cinder-lite";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,6 +306,7 @@
 				BBB32A6D11EB7E5A00B43B95 /* MSAFluidDrawerBase.cpp in Sources */,
 				BBB32A6E11EB7E5A00B43B95 /* MSAFluidSolver.cpp in Sources */,
 				BBB32A6F11EB7E5A00B43B95 /* MSACoreGL.cpp in Sources */,
+				BBB32E6511EBB0E900B43B95 /* Color.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

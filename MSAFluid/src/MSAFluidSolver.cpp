@@ -168,10 +168,10 @@ namespace MSA {
 		for ( int i = _numCells-1; i>=0; --i ) {
 			density[i] = 0;
 			densityOld[i] = 0;
-			color[i] = Vec3f(0.0f, 0.0f, 0.0f);
-			colorOld[i] = Vec3f(0.0f, 0.0f, 0.0f);
-			uv[i].set(0.0f, 0.0f);
-			uvOld[i].set(0.0f, 0.0f);
+			color[i] = Vec3f::zero();
+			colorOld[i] = Vec3f::zero();
+			uv[i] = Vec2f::zero();
+			uvOld[i] = Vec2f::zero();
 			curl[i] = 0.0f;
 		}
 	}
@@ -353,7 +353,7 @@ namespace MSA {
 		for (int i = _numCells-1; i >=0; --i) {
 
 			// clear old values
-			uvOld[i].set(0.0f, 0.0f);
+			uvOld[i] = Vec2f::zero();
 			densityOld[i] = 0;
 			
 			// calc avg speed
@@ -400,8 +400,8 @@ namespace MSA {
 		for (int i = _numCells-1; i >=0; --i)
 		{
 			// clear old values
-			uvOld[i].set(0.0f, 0.0f);
-			colorOld[i] = Vec3f(0.0f, 0.0f, 0.0f);
+			uvOld[i] = Vec2f::zero();
+			colorOld[i] = Vec3f::zero();
 			
 			// calc avg speed
 			_avgSpeed += uv[i].x * uv[i].x + uv[i].y * uv[i].y;

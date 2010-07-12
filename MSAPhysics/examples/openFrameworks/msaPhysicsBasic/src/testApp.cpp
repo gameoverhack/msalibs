@@ -33,6 +33,7 @@
 #include "MSAPhysics.h"
 #include "testApp.h"
 
+using namespace MSA;
 
 #define	SPRING_MIN_STRENGTH		0.005
 #define SPRING_MAX_STRENGTH		0.1
@@ -60,8 +61,7 @@
 #define MAX_ATTRACTION			10
 #define MIN_ATTRACTION			3
 
-#define SECTOR_COUNT			10
-
+#define SECTOR_COUNT			1		// currently there is a bug at sector borders
 
 bool				mouseAttract	= false;
 bool				doMouseXY		= false;		// pressing left mmouse button moves mouse in XY plane
@@ -77,8 +77,8 @@ static int			width;
 static int			height;
 
 
-MSA::Physics::World			physics;
-MSA::Physics::Particle		mouseNode;
+Physics::World			physics;
+Physics::Particle		mouseNode;
 
 ofImage				ballImage;
 
@@ -91,14 +91,14 @@ void initScene() {
 	physics.addParticle(&mouseNode);
 	mouseNode.makeFixed();
 	mouseNode.setMass(MIN_MASS);
-	mouseNode.moveTo(ofxVec3f(0, 0, 0));
+	mouseNode.moveTo(Vec3f(0, 0, 0));
 	mouseNode.setRadius(NODE_MAX_RADIUS);
 	
 	// or tell the system to create and add particles
-	physics.makeParticle(ofxVec3f(-width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top left back and fix
-	physics.makeParticle(ofxVec3f( width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top right back and fix
-	physics.makeParticle(ofxVec3f(-width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top left front and fix
-	physics.makeParticle(ofxVec3f( width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top right front and fix
+	physics.makeParticle(Vec3f(-width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top left back and fix
+	physics.makeParticle(Vec3f( width/4, 0, -width/4), MIN_MASS)->makeFixed();		// create a node in top right back and fix
+	physics.makeParticle(Vec3f(-width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top left front and fix
+	physics.makeParticle(Vec3f( width/4, 0,  width/4), MIN_MASS)->makeFixed();		// create a node in top right front and fix
 }
 
 
@@ -114,10 +114,10 @@ void testApp::setup(){
 	height = ofGetHeight();
 	
 	//	physics.verbose = true;			// dump activity to log
-	physics.setGravity(ofxVec3f(0, GRAVITY, 0));
+	physics.setGravity(Vec3f(0, GRAVITY, 0));
 	
 	// set world dimensions, not essential, but speeds up collision
-	physics.setWorldSize(ofxVec3f(-width/2, -height, -width/2), ofxVec3f(width/2, height, width/2));
+	physics.setWorldSize(Vec3f(-width/2, -height, -width/2), Vec3f(width/2, height, width/2));
 	physics.setSectorCount(SECTOR_COUNT);
     physics.setDrag(0.97f);
 	physics.setDrag(1);		// FIXTHIS
@@ -153,7 +153,7 @@ void addRandomParticle() {
 	float radius	= ofMap(mass, MIN_MASS, MAX_MASS, NODE_MIN_RADIUS, NODE_MAX_RADIUS);
 	
 	// physics.makeParticle returns a particle pointer so you can customize it
-	MSA::Physics::Particle* p = physics.makeParticle(ofxVec3f(posX, posY, posZ));
+	Physics::Particle* p = physics.makeParticle(Vec3f(posX, posY, posZ));
 	
 	// and set a bunch of properties (you don't have to set all of them, there are defaults)
 	p->setMass(mass)->setBounce(bounce)->setRadius(radius)->enableCollision()->makeFree();
@@ -163,24 +163,24 @@ void addRandomParticle() {
 }
 
 void addRandomSpring() {
-	MSA::Physics::Particle *a = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
-	MSA::Physics::Particle *b = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
+	Physics::Particle *a = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
+	Physics::Particle *b = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
 	physics.makeSpring(a, b, ofRandom(SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH), ofRandom(10, width/2));
 }
 
 
 void killRandomParticle() {
-	MSA::Physics::Particle *p = physics.getParticle(floor(ofRandom(0, physics.numberOfParticles())));
+	Physics::Particle *p = physics.getParticle(floor(ofRandom(0, physics.numberOfParticles())));
 	if(p && p != &mouseNode) p->kill();
 }
 
 void killRandomSpring() {
-	MSA::Physics::Spring *s = physics.getSpring( floor(ofRandom(0, physics.numberOfSprings())));
+	Physics::Spring *s = physics.getSpring( floor(ofRandom(0, physics.numberOfSprings())));
 	if(s) s->kill();
 }
 
 void killRandomConstraint() {
-	MSA::Physics::Constraint *c = physics.getConstraint(floor(ofRandom(0, physics.numberOfConstraints())));
+	Physics::Constraint *c = physics.getConstraint(floor(ofRandom(0, physics.numberOfConstraints())));
 	if(c) c->kill();
 }
 
@@ -200,14 +200,14 @@ void toggleMouseAttract() {
 void addRandomForce(float f) {
 	forceTimer = f;
 	for(int i=0; i<physics.numberOfParticles(); i++) {
-		MSA::Physics::Particle *p = physics.getParticle(i);
-		if(p->isFree()) p->addVelocity(ofxVec3f(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
+		Physics::Particle *p = physics.getParticle(i);
+		if(p->isFree()) p->addVelocity(Vec3f(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 	}
 }
 
 void lockRandomParticles() {
 	for(int i=0; i<physics.numberOfParticles(); i++) {
-		MSA::Physics::Particle *p = physics.getParticle(i);
+		Physics::Particle *p = physics.getParticle(i);
 		if(ofRandom(0, 100) < FIX_PROBABILITY) p->makeFixed();
 		else p->makeFree();
 	}
@@ -216,7 +216,7 @@ void lockRandomParticles() {
 
 void unlockRandomParticles() {
 	for(int i=0; i<physics.numberOfParticles(); i++) {
-		MSA::Physics::Particle *p = physics.getParticle(i);
+		Physics::Particle *p = physics.getParticle(i);
 		p->makeFree();
 	}
 	mouseNode.makeFixed();
@@ -293,10 +293,10 @@ void testApp::draw() {
 		// draw springs
 		glColor4f(0.5, 0.5, 0.5, 0.5);
 		for(int i=0; i<physics.numberOfSprings(); i++) {
-			MSA::Physics::Spring *spring = (MSA::Physics::Spring *) physics.getSpring(i);
-			MSA::Physics::Particle *a = spring->getOneEnd();
-			MSA::Physics::Particle *b = spring->getTheOtherEnd();
-			ofxVec3f vec = b->getPosition() - a->getPosition();
+			Physics::Spring *spring = (Physics::Spring *) physics.getSpring(i);
+			Physics::Particle *a = spring->getOneEnd();
+			Physics::Particle *b = spring->getTheOtherEnd();
+			Vec3f vec = b->getPosition() - a->getPosition();
 			float dist = vec.length();
 			float angle = acos( vec.z / dist ) * RAD_TO_DEG;
 			if(vec.z <= 0 ) angle = -angle;
@@ -314,7 +314,6 @@ void testApp::draw() {
 			glPopMatrix();
 		}
 		
-
 		
 		// draw particles
 		glAlphaFunc(GL_GREATER, 0.5);
@@ -322,7 +321,7 @@ void testApp::draw() {
 		ofEnableNormalizedTexCoords();
 		ballImage.getTextureReference().bind();
 		for(int i=0; i<physics.numberOfParticles(); i++) {
-			MSA::Physics::Particle *p = physics.getParticle(i);
+			Physics::Particle *p = physics.getParticle(i);
 			if(p->isFixed()) glColor4f(1, 0, 0, 1);
 			else glColor4f(1, 1, 1, 1);
 
@@ -332,9 +331,7 @@ void testApp::draw() {
 			glPushMatrix();
 			glTranslatef(p->getX(), p->getY(), p->getZ());
 			glRotatef(180-rot, 0, 1, 0);
-//			glutSolidSphere(p->getRadius(), 2, 2);
-//			ofCircle(0, 0, p->getRadius());
-//			ballImage.draw(0, 0, p->getRadius()*2, p->getRadius()*2);
+
 			glBegin(GL_QUADS);
 			glTexCoord2f(0, 0); glVertex2f(-p->getRadius(), -p->getRadius());
 			glTexCoord2f(1, 0); glVertex2f(p->getRadius(), -p->getRadius());
@@ -374,11 +371,11 @@ void testApp::draw() {
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_LIGHTING);
 	glColor4f(0, 0, 0, 1);
-	ofDrawBitmapString( " FPS: " + ofToString(ofGetFrameRate(), 2)
-					   + " | Number of particles: " + ofToString(physics.numberOfParticles(), 2)
-					   + " | Number of springs: " + ofToString(physics.numberOfSprings(), 2)
-					   + " | Mouse Mass: " + ofToString(mouseNode.getMass(), 2)
-					   , 20, 15);
+	drawString( " FPS: " + ofToString(ofGetFrameRate(), 2)
+			   + " | Number of particles: " + ofToString(physics.numberOfParticles(), 2)
+			   + " | Number of springs: " + ofToString(physics.numberOfSprings(), 2)
+			   + " | Mouse Mass: " + ofToString(mouseNode.getMass(), 2)
+			   , 20, 15);
 	
 	
 	
@@ -427,8 +424,8 @@ void testApp::mouseMoved(int x, int y ) {
 	static int oldMouseY = -10000;
 	int velX = x - oldMouseX;
 	int velY = y - oldMouseY;
-	if(doMouseXY) mouseNode.moveBy(ofxVec3f(velX, velY, 0));
-	if(doMouseYZ) mouseNode.moveBy(ofxVec3f(velX, 0, velY));
+	if(doMouseXY) mouseNode.moveBy(Vec3f(velX, velY, 0));
+	if(doMouseYZ) mouseNode.moveBy(Vec3f(velX, 0, velY));
 	oldMouseX = x;
 	oldMouseY = y;
 }

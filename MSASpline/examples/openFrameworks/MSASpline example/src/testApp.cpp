@@ -52,14 +52,14 @@ void testApp::setup(){
 	rotateView = true;
 	currentRot = 0;
 	
-	// create a 2D spline with ofxVec2f's
+	// create a 2D spline with MSA::Vec2f's
 	int numItems = 10;
 	int padding = 30;
 	float len = (ofGetWidth() - padding*2.0f) / numItems;
 	
 	spline2D.reserve(numItems);		// not essential, but good habit if you know how big its gonna be
 	for(int i=0; i<numItems; i++) {
-		ofxVec2f v = ofxVec2f(i * len + padding - ofGetWidth()/2, ofGetHeight()/2 + ofGetHeight()*0.2f * cos(i*0.9));
+		MSA::Vec2f v = MSA::Vec2f(i * len + padding - ofGetWidth()/2, ofGetHeight()/2 + ofGetHeight()*0.2f * cos(i*0.9));
 		spline2D.push_back(v);
 	}	
 	
@@ -106,7 +106,7 @@ void testApp::draw() {
 	
 	
 	// draw sphere moving along 3D path
-	ofxVec3f spherePos = spline3D.sampleAt(spherePosPerc);
+	MSA::Vec3f spherePos = spline3D.sampleAt(spherePosPerc);
 	glPushMatrix();
 	glColor3f(1, 1, 0);
 	glTranslatef(spherePos.x, spherePos.y, spherePos.z);
@@ -186,9 +186,9 @@ void testApp::mousePressed(int x, int y, int button) {
 	spherePosPerc = spherePosPerc * numPoints / (numPoints + 1);
 	
 	
-	ofxVec3f pt;
+	MSA::Vec3f pt;
 	pt.set(x-ofGetWidth()/2, y, 0);
-	pt.rotate(-currentRot, ofxVec3f(0, 1, 0));
+	pt.rotate(-currentRot, MSA::Vec3f(0, 1, 0));
 	spline3D.push_back(pt);
 }
 

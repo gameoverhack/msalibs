@@ -80,5 +80,5 @@ namespace MSA {
 	inline Vec2f getWindowSize()									{	return ci::app::getWindowSize(); }
 	inline Vec2f getWindowCenter()									{	return ci::app::getWindowCenter(); }
 	
-	inline void drawBitmapString(string s, float x, float y)		{	return;  /* todo */ }	
+	inline void drawString(string s, float x, float y)				{	return;  /* todo */ }	
 }

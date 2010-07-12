@@ -4,7 +4,7 @@
 #include "MSATimer.h"
 
 #define SIZE	(2048*2048)
-#define REPS	100
+#define REPS	500
 
 MSA::OpenCL			openCL;
 float				buf[2][SIZE];

@@ -245,7 +245,7 @@ namespace MSA {
 						for(int iterations = 0; iterations < 100; iterations ++) {	// limit iterations
 							distAt1 = _dist.at(i1);
 							if(distAt1 <= tDist) {							// if Length at i1 is less than desired Length (this is good)
-								distAt2 = _dist.at(clamp(i1+1, 0, (int)_dist.size()-1));
+								distAt2 = _dist.at(constrain(i1+1, 0, (int)_dist.size()-1));
 								if(distAt2 > tDist) {
 									leftIndex = i1;
 									mu = (tDist - distAt1) / (distAt2-distAt1);

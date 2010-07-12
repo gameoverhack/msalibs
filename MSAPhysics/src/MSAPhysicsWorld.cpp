@@ -87,7 +87,7 @@ namespace MSA {
 		Particle* World::addParticle(Particle *p) {
 			p->verbose = verbose;
 			_particles.push_back(p);
-			p->setInstanceName(string("particle ") + ofToString(_particles.size(), 0));
+			p->setInstanceName(string("particle "));// + ofToString(_particles.size(), 0));
 			p->_params = &params;
 			p->_world = this;
 			
@@ -110,15 +110,15 @@ namespace MSA {
 			
 			switch(c->type()) {
 				case kConstraintTypeCustom:
-					c->setInstanceName(string("constraint ") + ofToString(_constraints[kConstraintTypeCustom].size(), 0));
+					c->setInstanceName(string("constraint "));// + ofToString(_constraints[kConstraintTypeCustom].size(), 0));
 					break;
 					
 				case kConstraintTypeSpring:
-					c->setInstanceName(string("spring ") + ofToString(_constraints[kConstraintTypeSpring].size(), 0));
+					c->setInstanceName(string("spring "));// + ofToString(_constraints[kConstraintTypeSpring].size(), 0));
 					break;
 					
 				case kConstraintTypeAttraction:
-					c->setInstanceName(string("attraction ") + ofToString(_constraints[kConstraintTypeAttraction].size(), 0));
+					c->setInstanceName(string("attraction "));// + ofToString(_constraints[kConstraintTypeAttraction].size(), 0));
 					break;
 			}
 			
@@ -392,9 +392,9 @@ namespace MSA {
 					}
 					
 					// find which sector particle is in
-					int i = ofMap(particle->getX(), params.worldMin.x, params.worldMax.x, 0, params.sectorCount.x, true);
-					int j = ofMap(particle->getY(), params.worldMin.y, params.worldMax.y, 0, params.sectorCount.y, true);
-					int k = ofMap(particle->getZ(), params.worldMin.z, params.worldMax.z, 0, params.sectorCount.z, true);
+					int i = mapRange(particle->getX(), params.worldMin.x, params.worldMax.x, 0.0f, params.sectorCount.x, true);
+					int j = mapRange(particle->getY(), params.worldMin.y, params.worldMax.y, 0.0f, params.sectorCount.y, true);
+					int k = mapRange(particle->getZ(), params.worldMin.z, params.worldMax.z, 0.0f, params.sectorCount.z, true);
 					
 					_sectors[i * params.sectorCount.y * params.sectorCount.x + j * params.sectorCount.x + k].addParticle(particle);
 					

@@ -34,7 +34,7 @@
  None
  
  OPENFRAMEWORKS DEPENDENCIES:
- ofxVectorMath
+ None
  ***************/ 
 
 #pragma once

@@ -34,7 +34,6 @@
 #define cinder	MSA			// so cinder namespaces are also accessible within MSA
 
 #include "ofMain.h"
-#include "ofxVectorMath.h"
 
 #include "cinder-lite/CinderMath.h"
 #include "cinder-lite/Color.h"
@@ -78,7 +77,7 @@ namespace MSA {
 	inline Vec2f getWindowSize()									{	return Vec2f(getWindowWidth(), getWindowHeight()); }
 	inline Vec2f getWindowCenter()									{	return Vec2f(getWindowWidth() * 0.5f, getWindowHeight() * 0.5f ); } 
 	
-	inline void drawBitmapString(string s, float x, float y)		{	ofDrawBitmapString(s, x, y); }
+	inline void drawString(string s, float x, float y)				{	ofDrawBitmapString(s, x, y); }
 	
 	
 	class Rand {

@@ -89,7 +89,6 @@ namespace MSA {
 		
 	protected:	
 		unsigned char		*_pixels;						// pixels array to be drawn
-		int					_byteCount;						// number of byes in the pixel array (size * 3)
 		
 		int					_glType;						// GL_RGB or GL_RGBA
 		bool				_alphaEnabled;

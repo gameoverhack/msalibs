@@ -1,0 +1,201 @@
+// !$*UTF8*$!
+{
+	00BAE6590E7ED9C10018A608 /* msaFluidMultiTouchApp.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1570, 1729}}";
+			sepNavSelRange = "{268, 0}";
+			sepNavVisRange = "{0, 1998}";
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Release;
+		activeExecutable = BBF80B8C11E91E0C00562F1A /* msaFluidMultiTouch */;
+		activeTarget = 8D1107260486CEB800E47090 /* msaFluidMultiTouch */;
+		addToTargets = (
+			8D1107260486CEB800E47090 /* msaFluidMultiTouch */,
+		);
+		codeSenseManager = BBF80B9111E91E1600562F1A /* Code sense */;
+		executables = (
+			BBF80B8C11E91E0C00562F1A /* msaFluidMultiTouch */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					1392,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 300646084;
+			PBXWorkspaceStateSaveDate = 300646084;
+		};
+		perUserProjectItems = {
+			BBB329C811EB7AF700B43B95 /* PBXTextBookmark */ = BBB329C811EB7AF700B43B95 /* PBXTextBookmark */;
+			BBB329C911EB7AF700B43B95 /* PBXTextBookmark */ = BBB329C911EB7AF700B43B95 /* PBXTextBookmark */;
+			BBB329CA11EB7AF700B43B95 /* PBXTextBookmark */ = BBB329CA11EB7AF700B43B95 /* PBXTextBookmark */;
+			BBB329CB11EB7AF700B43B95 /* PBXTextBookmark */ = BBB329CB11EB7AF700B43B95 /* PBXTextBookmark */;
+			BBB32AAF11EB7EA700B43B95 /* PBXTextBookmark */ = BBB32AAF11EB7EA700B43B95 /* PBXTextBookmark */;
+			BBB32ADE11EB7EC700B43B95 /* PBXTextBookmark */ = BBB32ADE11EB7EC700B43B95 /* PBXTextBookmark */;
+		};
+		sourceControlManager = BBF80B9011E91E1600562F1A /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	8D1107260486CEB800E47090 /* msaFluidMultiTouch */ = {
+		activeExec = 0;
+		executables = (
+			BBF80B8C11E91E0C00562F1A /* msaFluidMultiTouch */,
+		);
+	};
+	BBB329A711EB7AB900B43B95 /* MSAFluid.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = MSAFluid.h;
+		path = "/Users/memo/___LAB___/Cinder/git/blocks/MSAFluid/src/MSAFluid.h";
+		sourceTree = "<absolute>";
+	};
+	BBB329A811EB7AB900B43B95 /* MSAFluidDrawerBase.cpp */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.cpp.cpp;
+		name = MSAFluidDrawerBase.cpp;
+		path = "/Users/memo/___LAB___/Cinder/git/blocks/MSAFluid/src/MSAFluidDrawerBase.cpp";
+		sourceTree = "<absolute>";
+	};
+	BBB329A911EB7AB900B43B95 /* MSAFluidDrawerBase.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = MSAFluidDrawerBase.h;
+		path = "/Users/memo/___LAB___/Cinder/git/blocks/MSAFluid/src/MSAFluidDrawerBase.h";
+		sourceTree = "<absolute>";
+	};
+	BBB329AA11EB7AB900B43B95 /* MSAFluidDrawerGl-Cinder.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = "MSAFluidDrawerGl-Cinder.h";
+		path = "/Users/memo/___LAB___/Cinder/git/blocks/MSAFluid/src/MSAFluidDrawerGl-Cinder.h";
+		sourceTree = "<absolute>";
+	};
+	BBB329C811EB7AF700B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB329AA11EB7AB900B43B95 /* MSAFluidDrawerGl-Cinder.h */;
+		name = "MSAFluidDrawerGl-Cinder.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 2772;
+		vrLoc = 0;
+	};
+	BBB329C911EB7AF700B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB329A911EB7AB900B43B95 /* MSAFluidDrawerBase.h */;
+		name = "MSAFluidDrawerBase.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 2950;
+		vrLoc = 0;
+	};
+	BBB329CA11EB7AF700B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB329A811EB7AB900B43B95 /* MSAFluidDrawerBase.cpp */;
+		name = "MSAFluidDrawerBase.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 2690;
+		vrLoc = 0;
+	};
+	BBB329CB11EB7AF700B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB329A711EB7AB900B43B95 /* MSAFluid.h */;
+		name = "MSAFluid.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 3138;
+		vrLoc = 0;
+	};
+	BBB32AAF11EB7EA700B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 00BAE6590E7ED9C10018A608 /* msaFluidMultiTouchApp.cpp */;
+		name = "msaFluidMultiTouchApp.cpp: 13";
+		rLen = 0;
+		rLoc = 268;
+		rType = 0;
+		vrLen = 1998;
+		vrLoc = 0;
+	};
+	BBB32ADE11EB7EC700B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 00BAE6590E7ED9C10018A608 /* msaFluidMultiTouchApp.cpp */;
+		name = "msaFluidMultiTouchApp.cpp: 13";
+		rLen = 0;
+		rLoc = 268;
+		rType = 0;
+		vrLen = 1998;
+		vrLoc = 0;
+	};
+	BBF80B8C11E91E0C00562F1A /* msaFluidMultiTouch */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = msaFluidMultiTouch;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	BBF80B9011E91E1600562F1A /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	BBF80B9111E91E1600562F1A /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+}

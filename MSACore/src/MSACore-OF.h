@@ -35,6 +35,12 @@
 #include "ofxVectorMath.h"
 #include "MSAColor.h"
 
+#include <string>
+#include <vector>
+#include <map>
+
+using namespace std;
+
 namespace MSA {
 	
 #define MSA_HOST_SUFFIX		"-OF"

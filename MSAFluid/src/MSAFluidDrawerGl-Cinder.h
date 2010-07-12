@@ -60,11 +60,11 @@ namespace MSA {
 			int texWidth = _fluidSolver->getWidth()-2;
 			int texHeight =_fluidSolver->getHeight()-2;
 			
-			surface = Surface8u( _pixels, texWidth, texHeight, false, SurfaceChannelOrder::RGB );
+			surface = ci::Surface8u( _pixels, texWidth, texHeight, false, ci::SurfaceChannelOrder::RGB );
 			
-			gl::Texture::Format format;
+			ci::gl::Texture::Format format;
 			format.setInternalFormat( _glType );
-			tex = gl::Texture( texWidth, texHeight, format );
+			tex = ci::gl::Texture( texWidth, texHeight, format );
 		}
 		
 		
@@ -77,7 +77,7 @@ namespace MSA {
 		}
 		
 		void drawTexture(float x, float y, float w, float h) {
-			gl::draw( tex, Rectf( x, y, x + w, y + h ) );
+			ci::gl::draw( tex, ci::Rectf( x, y, x + w, y + h ) );
 		}
 	};
 }

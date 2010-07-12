@@ -1,0 +1,183 @@
+// !$*UTF8*$!
+{
+	00CFDFDF11384CC60091E310 /* msaFluidMultiTouchApp.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1651, 1742}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1469}";
+		};
+	};
+	1D6058900D05DD3D006BFB54 /* msaFluid_iPad */ = {
+		activeExec = 0;
+		executables = (
+			BBB329D611EB7AFA00B43B95 /* msaFluid_iPad */,
+		);
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Release;
+		activeExecutable = BBB329D611EB7AFA00B43B95 /* msaFluid_iPad */;
+		activeSDKPreference = iphonesimulator3.2;
+		activeTarget = 1D6058900D05DD3D006BFB54 /* msaFluid_iPad */;
+		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* msaFluid_iPad */,
+		);
+		codeSenseManager = BBB329E011EB7AFF00B43B95 /* Code sense */;
+		executables = (
+			BBB329D611EB7AFA00B43B95 /* msaFluid_iPad */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					1380,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 300646080;
+			PBXWorkspaceStateSaveDate = 300646080;
+		};
+		perUserProjectItems = {
+			BBB32A0611EB7B8100B43B95 /* PBXTextBookmark */ = BBB32A0611EB7B8100B43B95 /* PBXTextBookmark */;
+			BBB32A0711EB7B8100B43B95 /* PBXTextBookmark */ = BBB32A0711EB7B8100B43B95 /* PBXTextBookmark */;
+			BBB32A0811EB7B8100B43B95 /* PBXTextBookmark */ = BBB32A0811EB7B8100B43B95 /* PBXTextBookmark */;
+			BBB32A8011EB7E7C00B43B95 /* PBXTextBookmark */ = BBB32A8011EB7E7C00B43B95 /* PBXTextBookmark */;
+			BBB32AD311EB7EC100B43B95 /* PBXTextBookmark */ = BBB32AD311EB7EC100B43B95 /* PBXTextBookmark */;
+		};
+		sourceControlManager = BBB329DF11EB7AFF00B43B95 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	BBB329D611EB7AFA00B43B95 /* msaFluid_iPad */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = msaFluid_iPad;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	BBB329DF11EB7AFF00B43B95 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	BBB329E011EB7AFF00B43B95 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	BBB329E411EB7B1000B43B95 /* MSAFluidDrawerBase.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1096, 5213}}";
+			sepNavSelRange = "{1073, 0}";
+			sepNavVisRange = "{0, 2070}";
+		};
+	};
+	BBB329ED11EB7B1000B43B95 /* MSACore-Cinder.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1096, 1079}}";
+			sepNavSelRange = "{2136, 0}";
+			sepNavVisRange = "{1873, 838}";
+		};
+	};
+	BBB32A0611EB7B8100B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 00CFDFDF11384CC60091E310 /* msaFluidMultiTouchApp.cpp */;
+		name = "msaFluidMultiTouchApp.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1469;
+		vrLoc = 0;
+	};
+	BBB32A0711EB7B8100B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB329E411EB7B1000B43B95 /* MSAFluidDrawerBase.cpp */;
+		name = "MSAFluidDrawerBase.cpp: 339";
+		rLen = 0;
+		rLoc = 9270;
+		rType = 0;
+		vrLen = 1379;
+		vrLoc = 8503;
+	};
+	BBB32A0811EB7B8100B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB329ED11EB7B1000B43B95 /* MSACore-Cinder.h */;
+		name = "MSACore-Cinder.h: 64";
+		rLen = 11;
+		rLoc = 2332;
+		rType = 0;
+		vrLen = 1925;
+		vrLoc = 940;
+	};
+	BBB32A8011EB7E7C00B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32A8111EB7E7C00B43B95 /* gl.h */;
+		name = "gl.h: 40";
+		rLen = 0;
+		rLoc = 1662;
+		rType = 0;
+		vrLen = 2510;
+		vrLoc = 1366;
+	};
+	BBB32A8111EB7E7C00B43B95 /* gl.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = gl.h;
+		path = "/Users/memo/___LAB___/Cinder/git/include/cinder/gl/gl.h";
+		sourceTree = "<absolute>";
+	};
+	BBB32AD311EB7EC100B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBB32AD411EB7EC100B43B95 /* gl.h */;
+		name = "gl.h: 40";
+		rLen = 0;
+		rLoc = 1662;
+		rType = 0;
+		vrLen = 2510;
+		vrLoc = 1366;
+	};
+	BBB32AD411EB7EC100B43B95 /* gl.h */ = {
+		isa = PBXFileReference;
+		name = gl.h;
+		path = "/Users/memo/___LAB___/Cinder/git/include/cinder/gl/gl.h";
+		sourceTree = "<absolute>";
+	};
+}

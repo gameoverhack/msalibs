@@ -32,29 +32,36 @@
 #pragma once
 
 #include "cinder/Cinder.h"
+#include "cinder/gl/gl.h"
 #include "cinder/Rand.h"
 #include "cinder/Vector.h"
 #include "cinder/Color.h"
+
+#include <string>
+#include <vector>
+#include <map>
+
+using namespace std;
 
 namespace MSA {
 	
 #define MSA_HOST_SUFFIX		"-Cinder"
 
 	//todo:
-#if defined (TARGET_OSX)
+#if defined (CINDER_MAC)
 #define MSA_TARGET_OSX
 	
-#elif defined (TARGET_LINUX)
+#elif defined (CINDER_LINUX)
 #define MSA_TARGET_LINUX
 	
-#elif defined (TARGET_WIN32)
+#elif defined (CINDER_MSW)
 #define MSA_TARGET_WIN32
 	
-#elif defined (TARGET_IPHONE)
-#define MSA_TARGET_IPHONE)
+#elif defined (CINDER_COCOA_TOUCH)
+#define MSA_TARGET_IPHONE
 #endif
 	
-#if defined (TARGET_OPENGLES)
+#if defined (CINDER_GLES)
 #define MSA_TARGET_OPENGLES
 #endif
 	
@@ -65,7 +72,7 @@ namespace MSA {
 	
 	inline string dataPath(string path, bool absolute = false)		{	return "todo";	}
 	
-	inline double getElapsedSeconds()								{	return 0;// TODO }
+	inline double getElapsedSeconds()								{	return 0; }	// TODO
 	
 	inline float rand(float f)										{	return ci::Rand::randFloat(f);		}
 	inline float rand(float a, float b)								{	return ci::Rand::randFloat(a, b);	}

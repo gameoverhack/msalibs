@@ -40,7 +40,6 @@ namespace MSA {
 	
 	FluidDrawerBase::FluidDrawerBase() {
 		_pixels				= NULL;
-		_byteCount			= 0;
 		_fluidSolver		= NULL;
 		_didICreateTheFluid	= false;
 		
@@ -91,6 +90,11 @@ namespace MSA {
 		} else {
 			_glType = GL_RGB;
 			_bpp = 3;
+		}
+		
+		if(isFluidReady()) {
+			allocatePixels();
+			createTexture();
 		}
 	}
 	
@@ -205,8 +209,6 @@ namespace MSA {
 		for(int j=1; j < fh-1; j++) {
 			for(int i=1; i < fw-1; i++) {
 				_fluidSolver->getInfoAtCell(i, j, &vel, &color);
-				float speed2 = fabs(vel.x) * fw + fabs(vel.y) * fh;
-				int speed = (int)min(speed2 * 255 * brightness, 255.0f);
 				int r = (unsigned char)min(color.r * 255 * brightness, 255.0f);
 				int g = (unsigned char)min(color.g * 255 * brightness, 255.0f);
 				int b = (unsigned char)min(color.b * 255 * brightness, 255.0f);
@@ -218,7 +220,8 @@ namespace MSA {
 				_pixels[index++] = r;
 				_pixels[index++] = g;
 				_pixels[index++] = b;
-				if(_alphaEnabled) int a = _pixels[index++] = withAlpha ? max(b, max(r, g)) : 255;
+				
+				if(_alphaEnabled) _pixels[index++] = withAlpha ? max(b, max(r, g)) : 255;
 			}
 		}
 		
@@ -251,7 +254,12 @@ namespace MSA {
 				int r = _pixels[index++] = (unsigned char)min(fabs(vel.x) * fw * 255 * brightness, 255.0f);
 				int g = _pixels[index++] = (unsigned char)min(fabs(vel.y) * fh * 255 * brightness, 255.0f);
 				int b = _pixels[index++] = (unsigned char)0;
-				if(_alphaEnabled) int a = _pixels[index++] = withAlpha ? speed : 255;
+				
+				_pixels[index++] = r;
+				_pixels[index++] = g;
+				_pixels[index++] = b;
+				
+				if(_alphaEnabled) _pixels[index++] = withAlpha ? speed : 255;
 				
 			}
 		}
@@ -284,7 +292,12 @@ namespace MSA {
 				int r = _pixels[index++] = (unsigned char)speed;
 				int g = _pixels[index++] = (unsigned char)speed;
 				int b = _pixels[index++] = (unsigned char)speed;
-				if(_alphaEnabled) int a = _pixels[index++] = withAlpha ? speed : 255;
+				
+				_pixels[index++] = r;
+				_pixels[index++] = g;
+				_pixels[index++] = b;
+				
+				if(_alphaEnabled) _pixels[index++] = withAlpha ? speed : 255;
 			}
 		}
 		

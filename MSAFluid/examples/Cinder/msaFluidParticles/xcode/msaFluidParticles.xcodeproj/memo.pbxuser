@@ -1,0 +1,258 @@
+// !$*UTF8*$!
+{
+	0026CD1B1197C25E007D86C6 /* ParticleSystem.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1573, 925}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1547}";
+		};
+	};
+	0026CD201197C267007D86C6 /* Particle.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1573, 792}}";
+			sepNavSelRange = "{198, 0}";
+			sepNavVisRange = "{0, 578}";
+		};
+	};
+	0026CD211197C267007D86C6 /* ParticleSystem.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1573, 973}}";
+			sepNavSelRange = "{227, 0}";
+			sepNavVisRange = "{0, 786}";
+		};
+	};
+	00BAE6590E7ED9C10018A608 /* msaFluidParticlesApp.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1573, 2119}}";
+			sepNavSelRange = "{867, 0}";
+			sepNavVisRange = "{33, 1849}";
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Release;
+		activeExecutable = BBF80B4A11E91BED00562F1A /* msaFluidParticles */;
+		activeTarget = 8D1107260486CEB800E47090 /* msaFluidParticles */;
+		addToTargets = (
+			8D1107260486CEB800E47090 /* msaFluidParticles */,
+		);
+		codeSenseManager = BBF80B4F11E91BF400562F1A /* Code sense */;
+		executables = (
+			BBF80B4A11E91BED00562F1A /* msaFluidParticles */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					147,
+					1244,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Path_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 300644028;
+			PBXWorkspaceStateSaveDate = 300644028;
+		};
+		perUserProjectItems = {
+			BBB328A011EB779A00B43B95 /* PBXTextBookmark */ = BBB328A011EB779A00B43B95 /* PBXTextBookmark */;
+			BBB328A311EB779A00B43B95 /* PBXTextBookmark */ = BBB328A311EB779A00B43B95 /* PBXTextBookmark */;
+			BBB32B0211EB818A00B43B95 /* PBXTextBookmark */ = BBB32B0211EB818A00B43B95 /* PBXTextBookmark */;
+			BBF80B6811E91C8400562F1A /* PBXTextBookmark */ = BBF80B6811E91C8400562F1A /* PBXTextBookmark */;
+			BBF80C8711E92E6600562F1A /* PBXTextBookmark */ = BBF80C8711E92E6600562F1A /* PBXTextBookmark */;
+			BBF80CB411E9334400562F1A /* PBXTextBookmark */ = BBF80CB411E9334400562F1A /* PBXTextBookmark */;
+			BBF80ED111E9E7C700562F1A /* PBXTextBookmark */ = BBF80ED111E9E7C700562F1A /* PBXTextBookmark */;
+			BBF80ED411E9E7C700562F1A /* PBXTextBookmark */ = BBF80ED411E9E7C700562F1A /* PBXTextBookmark */;
+			BBF80EF511E9E8E500562F1A /* PBXTextBookmark */ = BBF80EF511E9E8E500562F1A /* PBXTextBookmark */;
+		};
+		sourceControlManager = BBF80B4E11E91BF400562F1A /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	8D1107260486CEB800E47090 /* msaFluidParticles */ = {
+		activeExec = 0;
+		executables = (
+			BBF80B4A11E91BED00562F1A /* msaFluidParticles */,
+		);
+	};
+	BBB328A011EB779A00B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0026CD211197C267007D86C6 /* ParticleSystem.h */;
+		name = "ParticleSystem.h: 13";
+		rLen = 0;
+		rLoc = 227;
+		rType = 0;
+		vrLen = 786;
+		vrLoc = 0;
+	};
+	BBB328A311EB779A00B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 00BAE6590E7ED9C10018A608 /* msaFluidParticlesApp.cpp */;
+		name = "msaFluidParticlesApp.cpp: 137";
+		rLen = 5;
+		rLoc = 3267;
+		rType = 0;
+		vrLen = 1711;
+		vrLoc = 2343;
+	};
+	BBB32B0211EB818A00B43B95 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 00BAE6590E7ED9C10018A608 /* msaFluidParticlesApp.cpp */;
+		name = "msaFluidParticlesApp.cpp: 40";
+		rLen = 0;
+		rLoc = 867;
+		rType = 0;
+		vrLen = 1849;
+		vrLoc = 33;
+	};
+	BBF80B4A11E91BED00562F1A /* msaFluidParticles */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = msaFluidParticles;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+	};
+	BBF80B4E11E91BF400562F1A /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	BBF80B4F11E91BF400562F1A /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	BBF80B6811E91C8400562F1A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0026CD201197C267007D86C6 /* Particle.h */;
+		name = "Particle.h: 12";
+		rLen = 0;
+		rLoc = 198;
+		rType = 0;
+		vrLen = 578;
+		vrLoc = 0;
+	};
+	BBF80C6411E92B0400562F1A /* Color.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = Color.h;
+		path = "/Users/memo/___LAB___/Cinder/git/include/cinder/Color.h";
+		sourceTree = "<absolute>";
+	};
+	BBF80C8711E92E6600562F1A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBF80C8811E92E6600562F1A /* gl.h */;
+		name = "gl.h: 141";
+		rLen = 6;
+		rLoc = 7975;
+		rType = 0;
+		vrLen = 4180;
+		vrLoc = 5394;
+	};
+	BBF80C8811E92E6600562F1A /* gl.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = gl.h;
+		path = "/Users/memo/___LAB___/Cinder/git/include/cinder/gl/gl.h";
+		sourceTree = "<absolute>";
+	};
+	BBF80CB411E9334400562F1A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBF80C6411E92B0400562F1A /* Color.h */;
+		name = "Color.h: 259";
+		rLen = 0;
+		rLoc = 8997;
+		rType = 0;
+		vrLen = 2203;
+		vrLoc = 8002;
+	};
+	BBF80EC311E9E75500562F1A /* Surface.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = Surface.h;
+		path = "/Users/memo/___LAB___/Cinder/git/include/cinder/Surface.h";
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1859, 5278}}";
+			sepNavSelRange = "{1532, 28}";
+			sepNavVisRange = "{0, 2512}";
+		};
+	};
+	BBF80ED111E9E7C700562F1A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBF80ED211E9E7C700562F1A /* AppBasic.h */;
+		name = "AppBasic.h: 41";
+		rLen = 30;
+		rLoc = 1618;
+		rType = 0;
+		vrLen = 3247;
+		vrLoc = 0;
+	};
+	BBF80ED211E9E7C700562F1A /* AppBasic.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = AppBasic.h;
+		path = "/Users/memo/___LAB___/Cinder/git/include/cinder/app/AppBasic.h";
+		sourceTree = "<absolute>";
+	};
+	BBF80ED411E9E7C700562F1A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 0026CD1B1197C25E007D86C6 /* ParticleSystem.cpp */;
+		name = "ParticleSystem.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1547;
+		vrLoc = 0;
+	};
+	BBF80EF511E9E8E500562F1A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = BBF80EC311E9E75500562F1A /* Surface.h */;
+		name = "Surface.h: 35";
+		rLen = 0;
+		rLoc = 1559;
+		rType = 0;
+		vrLen = 2919;
+		vrLoc = 0;
+	};
+}

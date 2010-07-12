@@ -72,7 +72,7 @@ void testApp::setup() {
 	
 	// setup fluid stuff
 	fluidSolver.setup(100, 100);
-    fluidSolver.enableRGB(false).setFadeSpeed(0.002).setDeltaT(0.5).setVisc(0.00015).setColorDiffusion(0);
+    fluidSolver.enableRGB(true).setFadeSpeed(0.002).setDeltaT(0.5).setVisc(0.00015).setColorDiffusion(0);
 	fluidDrawer.setup(&fluidSolver);
 	
 	fluidCellsX			= 150;
@@ -131,9 +131,7 @@ void testApp::update(){
 		testPerformance = false;
 		MSA::Timer timer;
 		timer.start();
-		const int ITERS = 1000;
-		for( int i = 0; i < ITERS; ++i )
-			fluidSolver.update();
+		for( int i = 0; i < 1000; ++i) fluidSolver.update();
 		timer.stop();
 		cout << " iterations took " << timer.getSeconds() << " seconds." << std::endl;
 	}

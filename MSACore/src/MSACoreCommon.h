@@ -34,12 +34,6 @@
 #include "MSACoreMath.h"
 #include "MSACoreGL.h"
 
-#include <string>
-#include <vector>
-#include <map>
-
-using namespace std;
-
 namespace MSA {
 	#define DelPointer(p)	if(p) { delete p; p = NULL; }
 	#define DelArray(p)		if(p) { delete []p; p = NULL; }

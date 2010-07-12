@@ -1,0 +1,26 @@
+<install>
+
+	<version>1.0</version>
+	<author>Mehmet Akten</author>
+	<url>http://www.msalibs.org</url>
+	
+    <requires>
+	</requires>
+    
+	<add>	
+		<src>
+			<folder name="addons/MSATimer/src">			
+				<file>../../../addons/MSATimer/src/MSATimer.h</file>
+			</folder>
+		</src>
+
+		<include>
+			<path>../../../addons/MSATimer/src</path>
+		</include>
+		
+		<link>
+		</link>
+
+	</add>
+	
+</install>

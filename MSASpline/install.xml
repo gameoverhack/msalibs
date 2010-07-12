@@ -1,0 +1,31 @@
+<install>
+
+	<version>1.1</version>
+	<author>Mehmet Akten</author>
+	<url>http://www.msalibs.org</url>
+	
+    <requires>
+	</requires>
+    
+	<add>	
+		<src>
+			<folder name="addons/MSASpline/src">			
+				<file>../../../addons/MSASpline/src/MSASpline.h</file>
+				<file>../../../addons/MSASpline/src/MSASpline1D.h</file>
+				<file>../../../addons/MSASpline/src/MSASpline2D.h</file>
+				<file>../../../addons/MSASpline/src/MSASpline3D.h</file>
+				<file>../../../addons/MSASpline/src/MSASplineInterpolationTypes.h</file>
+				<file>../../../addons/MSASpline/src/MSASplineT.h</file>
+			</folder>
+		</src>
+
+		<include>
+			<path>../../../addons/MSASpline/src</path>
+		</include>
+		
+		<link>
+		</link>
+
+	</add>
+	
+</install>

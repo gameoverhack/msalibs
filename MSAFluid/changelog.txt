@@ -1,0 +1,42 @@
+Fluid changelog
+
+
+v2.0
+--------------------
+- move to centralized MSALibs (requires MSACore)
+- everything is MSA:: namespace
+- u[] and v[] condensed to (Vec2f uv[])
+- r[], g[], b[] condensed to (Vec3f color[])
+- unified API for getting and setting info:
+   - all vel & colors set and get with the structs
+   - all getters and setters have 3 functions, index, (i, j), Vec2f pos
+
+--------------------------- move to centralized MSALibs for cross openFrameworks / Cinder compatibility ---------------------------
+
+
+v1.2	02/05/2009
+--------------------
+- unified API with processing.org version
+- solver u, v, r, g, b arrays now public
+- drawer can incDrawMode and decDrawMode
+- loads of optimizations by Maa (http://www.lagraine.com/ - new content coming soon)
+
+
+v1.1	07/04/2009
+--------------------
+- changed license to revised BSD (a lot more more permissive than GPL)
+
+
+v1.0
+--------------------
+- added RGB or monochrome functionality (enableRGB())
+- vector drawing implemented
+- get and set info much improved
+- added draw mode system
+- setup() now only takes dimensions, other parameters have their own setters
+
+
+
+v0.9	04/12/08
+--------------------
+- initial version

@@ -1,0 +1,31 @@
+<install>
+
+	<version>2</version>
+	<author>Mehmet Akten</author>
+	<url>www.msalibs.org</url>
+	
+    <requires>
+	</requires>
+    
+	<add>	
+		<src>
+			<folder name="addons/Fluid/src">			
+				<file>../../../addons/Fluid/src/Fluid.h</file>
+				<file>../../../addons/Fluid/src/FluidDrawer.h</file>
+				<file>../../../addons/Fluid/src/FluidDrawer.cpp</file>
+				<file>../../../addons/Fluid/src/FluidSolver.h</file>
+				<file>../../../addons/Fluid/src/FluidSolver.cpp</file>
+				<file>../../../addons/Fluid/src/FluidParticleUpdater.h</file>
+			</folder>
+		</src>
+
+		<include>
+			<path>../../../addons/Fluid/src</path>
+		</include>
+		
+		<link>
+		</link>
+
+	</add>
+	
+</install>

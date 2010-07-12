@@ -1,0 +1,61 @@
+<install>
+
+	<version>2.1</version>
+	<author>Mehmet Akten</author>
+	<url>http://www.msalibs.org</url>
+    
+	<requires>
+		<addon>ObjCPointer</addon>
+	</requires>
+
+	<add>	
+		<src>
+			<folder name="addons/ofxMSAPhysics/src">			
+				<file>../../../addons/ofxMSAPhysics/src/ofxMSAPhysics.h</file>
+			</folder>
+            
+			<folder name="addons/ofxMSAPhysics/src/Callbacks">			
+				<file>../../../addons/ofxMSAPhysics/src/Callbacks/ofxMSAParticleDrawer.h</file>
+				<file>../../../addons/ofxMSAPhysics/src/Callbacks/ofxMSAParticleUpdater.h</file>
+				<file>../../../addons/ofxMSAPhysics/src/Callbacks/ofxMSAPhysicsCallbacks.h</file>
+			</folder>
+
+			<folder name="addons/ofxMSAPhysics/src/Constraints">			
+				<file>../../../addons/ofxMSAPhysics/src/Constraints/ofxMSAAttraction.h</file>
+				<file>../../../addons/ofxMSAPhysics/src/Constraints/ofxMSACollision.h</file>
+				<file>../../../addons/ofxMSAPhysics/src/Constraints/ofxMSAConstraint.h</file>
+				<file>../../../addons/ofxMSAPhysics/src/Constraints/ofxMSAConstraintTypes.h</file>
+				<file>../../../addons/ofxMSAPhysics/src/Constraints/ofxMSASpring.h</file>
+			</folder>
+            
+			<folder name="addons/ofxMSAPhysics/src/Core">			
+				<file>../../../addons/ofxMSAPhysics/src/Core/binner.h</file>
+				<file>../../../addons/ofxMSAPhysics/src/Core/binner.cpp</file>
+				<file>../../../addons/ofxMSAPhysics/src/Core/ofxMSAParticle.h</file>
+				<file>../../../addons/ofxMSAPhysics/src/Core/ofxMSAParticle.cpp</file>
+				<file>../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysics.cpp</file>
+				<file>../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsParams.h</file>
+				<file>../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsUtils.h</file>
+				<file>../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsUtils.cpp</file>
+			</folder>      
+            
+			<folder name="addons/ofxMSAPhysics/src/serialization">			
+				<file>../../../addons/ofxMSAPhysics/src/serialization/ofxMSADataRecorder.h</file>
+			</folder>                        
+
+		</src>
+
+		<include>
+			<path>../../../addons/ofxMSAPhysics/src</path>
+			<path>../../../addons/ofxMSAPhysics/src/Callbacks</path>
+			<path>../../../addons/ofxMSAPhysics/src/Constraints</path>
+			<path>../../../addons/ofxMSAPhysics/src/Core</path>
+			<path>../../../addons/ofxMSAPhysics/src/serialization</path>
+		</include>
+		
+		<link>
+		</link>
+
+	</add>
+	
+</install>

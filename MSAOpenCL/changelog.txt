@@ -1,0 +1,33 @@
+ofxOpenCL changelog
+
+v2.0
+--------------------
+- move to centralized MSALibs (requires MSACore)
+- everything is MSA:: namespace
+
+
+--------------------------- move to centralized MSALibs for cross openFrameworks / Cinder compatibility ---------------------------
+
+
+v0.3
+--------------------
+- added image support
+- restructured buffer/memory management
+- minor break in backwards compatability: createBuffer returns ofxOpenCLBuffer instead of cl_mem. so
+   - writeBuffer and readBuffer are methods of ofxOpenCLBuffer, not ofxOpenCL
+   - when passing buffer (or image) as parameter to ofxOpenCLKernel::setArg, use ofxOpenCLBuffer::getMemoryObject() (which returns the cl_mem)
+   
+
+
+v0.2
+--------------------
+- added support for multiple devices
+- sharing context with opengl (only on mac osx at the moment)
+- better handling of multi-dimensional data (minor backwards compatability break with kernel::run)
+- support for opengl/opencl buffer+texture sharing 
+- can load programs from binary (support for creating binary coming soon)
+
+
+v0.1
+--------------------
+- initial version

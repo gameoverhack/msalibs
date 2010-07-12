@@ -1,0 +1,28 @@
+<install>
+
+	<version>1.0</version>
+	<author>Mehmet Akten</author>
+	<url>code.google.com/p/ofxmsaof/</url>
+
+	<requires>
+        <addon>ofxThread</addon>
+	</requires>
+    
+	<add>	
+		<src>
+			<folder name="addons/ofxThreadedImageSaver/src">			
+				<file>../../../addons/ofxThreadedImageSaver/src/ofxThreadedImageSaver.h</file>
+				<file>../../../addons/ofxThreadedImageSaver/src/ofxThreadedImageSaver.cpp</file>
+			</folder>
+		</src>
+
+		<include>
+			<path>../../../addons/ofxThreadedImageSaver/src</path>
+		</include>
+		
+		<link>
+		</link>
+
+	</add>
+	
+</install>

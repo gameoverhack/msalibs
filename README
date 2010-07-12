@@ -69,7 +69,7 @@ Demo at http://www.msavisuals.com/msaspline
 
 MSATimer
 -------------------------
-A class to keep track of ultra high resolution time on posix systems using mach_absolute_time
+A class to keep track of ultra high resolution time on posix systems using mach_absolute_time (using host timing on windows and linux)
 
 
 MSAUtils

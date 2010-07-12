@@ -1,0 +1,57 @@
+<install>
+
+	<version>1.0</version>
+	<author>Mehmet Akten</author>
+	<url>code.google.com/p/ofxmsaof/</url>
+
+    <requires>
+	</requires>
+    
+	<add>	
+		<src>
+			<folder name="addons/ofxMSAUtils/src">			
+				<file>../../../addons/ofxMSAUtils/src/ofxMSAUtils.h</file>
+				<file>../../../addons/ofxMSAUtils/src/ofxMSAUtils.cpp</file>
+				<file>../../../addons/ofxMSAUtils/src/ofxMSAPerlin.h</file>
+				<file>../../../addons/ofxMSAUtils/src/ofxMSAPerlin.cpp</file>
+				<file>../../../addons/ofxMSAUtils/src/ofxMSADataProtector.h</file>
+				<file>../../../addons/ofxMSAUtils/src/ofxMSADataProtector.cpp</file>
+			</folder>
+			<folder name="addons/ofxMSAUtils/libs/hashlib/src/">			
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hashlibpp.h</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_exception.h</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_hashwrapper.h</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_md5.h</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_md5.cpp</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_md5wrapper.h</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_md5wrapper.cpp</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha1.h</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha1.cpp</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha1wrapper.h</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha1wrapper.cpp</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha2ext.h</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha2ext.cpp</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha256.h</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha256.cpp</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha256wrapper.h</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha256wrapper.cpp</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha384wrapper.h</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha384wrapper.cpp</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha512wrapper.h</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha512wrapper.cpp</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_types.h</file>
+				<file>../../../addons/ofxMSAUtils/libs/hashlib/src/hl_sha2mac.h</file>
+			</folder>
+		</src>
+
+		<include>
+			<path>../../../addons/ofxMSAUtils/src</path>
+			<path>../../../addons/ofxMSAUtils/libs/hashlib/src/</path>
+		</include>
+		
+		<link>
+		</link>
+
+	</add>
+	
+</install>

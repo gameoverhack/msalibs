@@ -1,0 +1,27 @@
+<install>
+
+	<version>1.2</version>
+	<author>Mehmet Akten</author>
+	<url>code.google.com/p/ofxmsaof/</url>
+
+    <requires>
+	</requires>
+    
+	<add>	
+		<src>
+			<folder name="addons/ofxObjCPointer/src">			
+				<file>../../../addons/ofxObjCPointer/src/ofxObjCPointer.h</file>
+				<file>../../../addons/ofxObjCPointer/src/ofxObjCPointer.cpp</file>
+			</folder>
+		</src>
+
+		<include>
+			<path>../../../addons/ofxObjCPointer/src</path>
+		</include>
+		
+		<link>
+		</link>
+
+	</add>
+	
+</install>

@@ -1,0 +1,31 @@
+<install>
+
+	<version>0.1</version>
+	<author>Mehmet Akten</author>
+	<url>www.msavisuals.com</url>
+	
+    <requires>
+	</requires>
+    
+	<add>	
+		<src>
+			<folder name="addons/ofxOpenCL/src">			
+				<file>../../../addons/ofxOpenCL/src/ofxOpenCL.h</file>
+				<file>../../../addons/ofxOpenCL/src/ofxOpenCL.cpp</file>
+				<file>../../../addons/ofxOpenCL/src/ofxOpenCLKernel.h</file>
+				<file>../../../addons/ofxOpenCL/src/ofxOpenCLKernel.cpp</file>
+				<file>../../../addons/ofxOpenCL/src/ofxOpenCLProgram.h</file>
+				<file>../../../addons/ofxOpenCL/src/ofxOpenCLProgram.cpp</file>
+			</folder>
+		</src>
+
+		<include>
+			<path>../../../addons/ofxOpenCL/src</path>
+		</include>
+		
+		<link>
+		</link>
+
+	</add>
+	
+</install>

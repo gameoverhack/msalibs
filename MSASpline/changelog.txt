@@ -1,0 +1,22 @@
+MSASpline changelog
+
+
+v2.0
+--------------------
+- move to centralized MSALibs (requires MSACore)
+- everything is MSA:: namespace
+- renamed useDistance to useLength (and all relevant functions)
+- using length now uses length of interpolated spline, not linear
+- fixed rare crash bug
+
+
+--------------------------- move to centralized MSALibs for cross openFrameworks / Cinder compatibility ---------------------------
+
+v1.1	07/04/2009
+--------------------
+- changed license to revised BSD (a lot more more permissive than GPL)
+
+
+v1.0	03/10/08
+--------------------
+- initial version

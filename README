@@ -1,5 +1,5 @@
 A collection of C++ libraries / utilities. 
-A very lightweight wrapper maps basic types to allow tight integration with openFrameworks (www.openframeworks.cc) or Cinder (www.libcinder.org).
+A very lightweight wrapper maps basic types to allow tight integration with openFrameworks (www.openframeworks.cc) and Cinder (www.libcinder.org).
 See www.msalibs.org for demos.
 
 MSABulletPhysics

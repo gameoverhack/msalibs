@@ -30,13 +30,13 @@
  * ***********************************************************************/ 
 
 #include "testApp.h"
-#include "MSASpline.h"
+#include "MSAInterpolator.h"
 
 
-MSA::Spline2D					spline2D;
-MSA::Spline3D					spline3D;
+MSA::Interpolator2D				spline2D;
+MSA::Interpolator3D				spline3D;
 
-MSA::SplineInterpolationType	interpolationType	= MSA::kSplineInterpolationCubic;
+MSA::InterpolationType			interpolationType	= MSA::kInterpolationCubic;
 bool							useLength			= false;
 
 float							currentRot;
@@ -89,19 +89,19 @@ void testApp::draw() {
 	
 	// draw spline2D
 	glColor3f(1, 1, 1);
-	drawSplineRaw(spline2D);
+	drawInterpolatorRaw(spline2D);
 	
 	// draw interpolated spline2D
 	glColor3f(0, 0, 1);
-	drawSplineSmooth(spline2D, numSteps);
+	drawInterpolatorSmooth(spline2D, numSteps);
 	
 	// draw raw spline3D
 	glColor3f(1, 1, 1);
-	drawSplineRaw(spline3D);
+	drawInterpolatorRaw(spline3D);
 	
 	// draw interpolated spline3D
 	glColor3f(0.2f, 0.2f, 0.2f);
-	drawSplineSmooth(spline3D, numSteps);
+	drawInterpolatorSmooth(spline3D, numSteps);
 	
 	
 	
@@ -128,8 +128,8 @@ void testApp::draw() {
 	glPopMatrix();
 
 	ofSetColor(0);
-	string uiLin = interpolationType == MSA::kSplineInterpolationLinear ? "* " : "  ";
-	string uiCub = interpolationType == MSA::kSplineInterpolationCubic ? "* " : "  ";
+	string uiLin = interpolationType == MSA::kInterpolationLinear ? "* " : "  ";
+	string uiCub = interpolationType == MSA::kInterpolationCubic ? "* " : "  ";
 	string uiDist = spline3D.getUseLength() ? "* " : "  ";
 	ofDrawBitmapString( ofToString(ofGetFrameRate(), 2) + "\n"
 					   + "numSteps (resampling resolution - mouseX to change): " + ofToString(numSteps) + "\n"
@@ -148,12 +148,12 @@ void testApp::draw() {
 void testApp::keyPressed(int key) {
 	switch(key) {
 		case '1':
-			interpolationType = MSA::kSplineInterpolationLinear;
+			interpolationType = MSA::kInterpolationLinear;
 			spline3D.setInterpolation(interpolationType);
 			spline2D.setInterpolation(interpolationType);
 			break;
 		case '2':
-			interpolationType = MSA::kSplineInterpolationCubic;
+			interpolationType = MSA::kInterpolationCubic;
 			spline3D.setInterpolation(interpolationType);
 			spline2D.setInterpolation(interpolationType);
 			break;

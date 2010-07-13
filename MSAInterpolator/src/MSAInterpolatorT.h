@@ -29,25 +29,25 @@
  *
  * ***********************************************************************/ 
 
-/**************************** Spline Template Class ****************************/
+/**************************** Interpolator Template Class ****************************/
 #pragma once
 
 
 #include "MSACore.h"
-#include "MSASplineInterpolationTypes.h"
+#include "MSAInterpolationTypes.h"
 
 namespace MSA {
 	
 #define kLengthCalcSegments		100
 	
 	template <typename Type>
-	class Spline {
+	class Interpolator {
 	public:
 		
 		bool verbose;
 		
-		Spline() {
-			setInterpolation(kSplineInterpolationCubic);
+		Interpolator() {
+			setInterpolation(kInterpolationCubic);
 			setUseLength(false);
 			verbose = false;
 		}
@@ -58,7 +58,7 @@ namespace MSA {
 		Type sampleAt(float t) {
 			int numItems = size();
 			if(numItems == 0) {
-//				if(verbose) printf("Spline: not enough samples", t);
+//				if(verbose) printf("Interpolator: not enough samples", t);
 				return Type();
 			}
 			
@@ -70,11 +70,11 @@ namespace MSA {
 			findPosition(t, i1, mu);
 			
 			// if less than 4 data points, force linear interpolation
-			SplineInterpolationType it = _interpolationMethod;
-			if(numItems<4) it = kSplineInterpolationLinear;
+			InterpolationType it = _interpolationMethod;
+			if(numItems<4) it = kInterpolationLinear;
 			
 			switch(it) {
-				case kSplineInterpolationCubic:
+				case kInterpolationCubic:
 					i0 = i1 - 1;
 					i2 = i1 + 1;
 					i3 = i2 + 1;
@@ -85,7 +85,7 @@ namespace MSA {
 					return cubicInterpolate(at(i0), at(i1), at(i2), at(i3), mu);
 					break;
 					
-				case kSplineInterpolationLinear:
+				case kInterpolationLinear:
 					i2 = i1 + 1;
 					if(i2 >= numItems) i2 = numItems-1;
 					return linearInterpolate(at(i1), at(i2), mu);
@@ -93,7 +93,7 @@ namespace MSA {
 			}
 		}
 		
-		void setInterpolation(SplineInterpolationType i) {
+		void setInterpolation(InterpolationType i) {
 			_interpolationMethod = i;
 			updateAllLengths();
 		}
@@ -162,7 +162,7 @@ namespace MSA {
 		
 		
 	protected:
-		SplineInterpolationType _interpolationMethod;
+		InterpolationType _interpolationMethod;
 		bool _useLength;
 		vector<Type> _data;				// vector of all data
 		vector<float> _dist;			// vector of cumulative Lengths from i'th data point to beginning of spline
@@ -233,8 +233,8 @@ namespace MSA {
 					
 				default:
 					if(_useLength) {									// need to use 
-						float totalLengthOfSpline = _dist.at(numItems-1);
-						float tDist = totalLengthOfSpline * t;			// the Length we want to be from the start
+						float totalLengthOfInterpolator = _dist.at(numItems-1);
+						float tDist = totalLengthOfInterpolator * t;			// the Length we want to be from the start
 						int startIndex = floor(t * (numItems - 1));			// start approximation here
 						int i1 = startIndex;
 						int limitLeft = 0;

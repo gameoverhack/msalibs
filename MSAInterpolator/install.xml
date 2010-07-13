@@ -1,0 +1,31 @@
+<install>
+
+	<version>1.1</version>
+	<author>Mehmet Akten</author>
+	<url>http://www.msalibs.org</url>
+	
+    <requires>
+	</requires>
+    
+	<add>	
+		<src>
+			<folder name="addons/MSAInterpolator/src">			
+				<file>../../../addons/MSAInterpolator/src/MSAInterpolator.h</file>
+				<file>../../../addons/MSAInterpolator/src/MSAInterpolator1D.h</file>
+				<file>../../../addons/MSAInterpolator/src/MSAInterpolator2D.h</file>
+				<file>../../../addons/MSAInterpolator/src/MSAInterpolator3D.h</file>
+				<file>../../../addons/MSAInterpolator/src/MSAInterpolatorInterpolationTypes.h</file>
+				<file>../../../addons/MSAInterpolator/src/MSAInterpolatorT.h</file>
+			</folder>
+		</src>
+
+		<include>
+			<path>../../../addons/MSAInterpolator/src</path>
+		</include>
+		
+		<link>
+		</link>
+
+	</add>
+	
+</install>

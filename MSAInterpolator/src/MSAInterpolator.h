@@ -29,29 +29,29 @@
  *
  * ***********************************************************************/ 
 
-/**************************** Spline Classes ****************************
+/**************************** Interpolator Classes ****************************
 Usage:
-	MSA::Spline<float>			mySpline1;		// create spline of floats
-	MSA::Spline<myDataType>	mySpline2;			// create spline of custom data types (more info below)
+	MSA::Interpolator<float>		myInterpolator1;		// create spline of floats
+	MSA::Interpolator<myDataType>	myInterpolator2;		// create spline of custom data types (more info below)
  
 // OR use preset classes:
  
-	MSA::Spline1D				mySpline1D;		// create spline of floats (1D)
-	MSA::Spline2D				mySpline2D;		// create spline of Vec2f (2D)
-	MSA::Spline3D				mySpline3D;		// create spline of Vec3f (3D)
+	MSA::Interpolator1D				myInterpolator1D;		// create spline of floats (1D)
+	MSA::Interpolator2D				myInterpolator2D;		// create spline of Vec2f (2D)
+	MSA::Interpolator3D				myInterpolator3D;		// create spline of Vec3f (3D)
  
 
 // splines wrap basic functionality of stl::vector:
-	mySpline.size();				// return number of data elements
-	mySpline.reserve(int count);	// if you know how many elements up front it will improved performance when adding (you can still add more than this number of elements)
-	mySpline.at(int i);				// return data at i'th index
-	mySpline.clear();				// remove all elements
-	mySpline.push_back(data1);		// add some data to the spline
-	mySpline.push_back(data2);
+	myInterpolator.size();				// return number of data elements
+	myInterpolator.reserve(int count);	// if you know how many elements up front it will improved performance when adding (you can still add more than this number of elements)
+	myInterpolator.at(int i);				// return data at i'th index
+	myInterpolator.clear();				// remove all elements
+	myInterpolator.push_back(data1);		// add some data to the spline
+	myInterpolator.push_back(data2);
 
-	mySpline.sampleAt(float t);		// (e.g. t:0.34 =>) samples along 34% of the whole spline using the current interpolation method and options
+	myInterpolator.sampleAt(float t);		// (e.g. t:0.34 =>) samples along 34% of the whole spline using the current interpolation method and options
 
-	setInterpolation(i);			// set interpolation type, see MSASplineInterpolationTypes.h (currently cubic catmull rom and linear)
+	setInterpolation(i);			// set interpolation type, see MSAInterpolationTypes.h (currently cubic catmull rom and linear)
 	int getInterpolation();			// get interpolation type
  
 	setUseLength(bool b);			// whether to use Length or not. using Length is slightly slower than not using (depending on number of data points)
@@ -59,11 +59,11 @@ Usage:
 									// if useLength is false, the %t refers to % along the data points. If data points are evenly spaced its no problem, but if they are randomly spaced, the interpolation will not be uniform
  
  
-	mySpline.drawRaw(int dotSize, int lineWidth);					// draws raw data with dotSize and lineWidth (make either zero to not draw dots or lines)
-	mySpline.drawSmooth(int numSteps, int dotSize, int lineWidth);	// draws smoothed data in  (make either zero to not draw dots or lines)
+	myInterpolator.drawRaw(int dotSize, int lineWidth);					// draws raw data with dotSize and lineWidth (make either zero to not draw dots or lines)
+	myInterpolator.drawSmooth(int numSteps, int dotSize, int lineWidth);	// draws smoothed data in  (make either zero to not draw dots or lines)
  
 Using custom data type:
-	MSA::Spline<myDataType>	mySpline2;		// create spline of custom data types (more info below)
+	MSA::Interpolator<myDataType>	myInterpolator2;		// create spline of custom data types (more info below)
 	myDataType has to be a scalar or class with the overloaded operators:
 		+  (myDataType&)
 		-  (myDataType&)
@@ -83,10 +83,10 @@ Using custom data type:
 
 #pragma once
 
-#include "MSASplineInterpolationTypes.h"
-#include "MSASplineT.h"
-#include "MSASpline1D.h"
-#include "MSASpline2D.h"
-#include "MSASpline3D.h"
+#include "MSAInterpolationTypes.h"
+#include "MSAInterpolatorT.h"
+#include "MSAInterpolator1D.h"
+#include "MSAInterpolator2D.h"
+#include "MSAInterpolator3D.h"
 
 

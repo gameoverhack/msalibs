@@ -30,85 +30,91 @@
  * ***********************************************************************/ 
 
 
-/**************************** 2D Spline (of Vec2) ****************************/
+/**************************** 3D Interpolator (of Vec3) ****************************/
 
 #pragma once
 
-#include "MSASplineT.h"
+#include "MSAInterpolatorT.h"
 
 namespace MSA {
 	
-	typedef Spline<Vec2f> Spline2D;
-
+	typedef Interpolator<Vec3f> Interpolator3D;
 	
-	inline float lengthOf(const Vec2f& v) {
+	
+	inline float lengthOf(const Vec3f& v) {
 		return v.length();
 	}
-
+	
 	
 	// OpenGL ES compatibility added by Rob Seward
 	// http://www.openframeworks.cc/forum/viewtopic.php?f=25&t=3767&p=19865
 	
-	inline void drawSplineRaw(Spline2D spline, int dotSize = 20, int lineWidth = 4){
+	
+	inline void drawInterpolatorRaw(Interpolator3D spline, int dotSize = 20, int lineWidth = 4){
 		int numItems = spline.size();
 		
 		if(lineWidth) {
 			glLineWidth(lineWidth);
-			GLfloat vertex[numItems * 2];
+			GLfloat vertex[numItems * 3];
 			for(int i=0; i<numItems; i++) {
-				vertex[i*2]		= spline.at(i).x;
-				vertex[(i*2)+1] = spline.at(i).y;
+				vertex[i*3]		= spline.at(i).x;
+				vertex[(i*3)+1] = spline.at(i).y;
+				vertex[(i*3)+2] = spline.at(i).z;
 			}
 			glEnableClientState(GL_VERTEX_ARRAY);
-			glVertexPointer(2, GL_FLOAT, 0, vertex);
+			glVertexPointer(3, GL_FLOAT, 0, vertex);
 			glDrawArrays(GL_LINE_STRIP, 0, numItems);
 		}
 		
 		if(dotSize) {
 			glPointSize(dotSize);
-			GLfloat vertex[numItems * 2];
+			GLfloat vertex[numItems * 3];
 			for(int i=0; i<numItems; i++) {
-				vertex[i*2]		= spline.at(i).x;
-				vertex[(i*2)+1] = spline.at(i).y;
+				vertex[i*3]		= spline.at(i).x;
+				vertex[(i*3)+1] = spline.at(i).y;
+				vertex[(i*3)+2] = spline.at(i).z;
 			}
 			glEnableClientState(GL_VERTEX_ARRAY);
-			glVertexPointer(2, GL_FLOAT, 0, vertex);
+			glVertexPointer(3, GL_FLOAT, 0, vertex);
 			glDrawArrays(GL_POINTS, 0, numItems);
 		}		
 	}
 	
 	
-	inline void drawSplineSmooth(Spline2D spline, int numSteps, int dotSize = 8, int lineWidth = 2) {
+	inline void drawInterpolatorSmooth(Interpolator3D spline, int numSteps, int dotSize = 8, int lineWidth = 2) {
 		float spacing = 1.0/numSteps;
 		if(lineWidth) {
 			glLineWidth(lineWidth);
 			
-			GLfloat vertex[numSteps * 2];
+			GLfloat vertex[numSteps * 3];
 			int i=0;
 			for(float f=0; f<1; f+= spacing) {
-				Vec2f v			= spline.sampleAt(f);
-				vertex[i*2]		= v.x;
-				vertex[(i*2)+1] = v.y;
+				Vec3f v			= spline.sampleAt(f);
+				vertex[i*3]		= v.x;
+				vertex[(i*3)+1] = v.y;
+				vertex[(i*3)+2] = v.z;
 				i++;
 			}
 			glEnableClientState(GL_VERTEX_ARRAY);
-			glVertexPointer(2, GL_FLOAT, 0, vertex);
+			glVertexPointer(3, GL_FLOAT, 0, vertex);
 			glDrawArrays(GL_LINE_STRIP, 0, numSteps);
 		}
 		
 		if(dotSize) {
 			glPointSize(dotSize);
-			GLfloat vertex[numSteps * 2];
+			GLfloat vertex[numSteps * 3];
 			int i=0;
 			for(float f=0; f<1; f+= spacing) {
-				Vec2f v			= spline.sampleAt(f);
-				vertex[i*2]		= v.x;
-				vertex[(i*2)+1] = v.y;
+				Vec3f v			= spline.sampleAt(f);
+				vertex[i*3]		= v.x;
+				vertex[(i*3)+1] = v.y;
+				vertex[(i*3)+2] = v.z;
 				i++;
 			}
 			glEnableClientState(GL_VERTEX_ARRAY);
-			glVertexPointer(2, GL_FLOAT, 0, vertex);
+			glVertexPointer(3, GL_FLOAT, 0, vertex);
 			glDrawArrays(GL_POINTS, 0, numSteps);
 		}
 	}
+	
 }

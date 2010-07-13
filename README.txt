@@ -23,6 +23,12 @@ Classes for solving and drawing 2D fluid systems based on Jos Stam's methods and
 Demo at http://www.msavisuals.com/msafluid
 
 
+MSAInterpolator (used to be called MSASpline)
+-------------------------
+A set of template classes for doing various types of interpolations on data with any number of dimensions. You can feed the system an arbitrary number of data, then resample at any resolution, or ask for the value at any percentage along the data. Input data can be floats (for 1D splines, Vec2f (for 2D splines), Vec3f (for 3D splines), or even matrices, or custom data types (e.g. biped pose).
+Demo at http://www.msavisuals.com/msainterpolator
+
+
 MSAObjCPointer
 -------------------------
 A simple ObjectiveC style Smart Pointer for C++ which keeps reference count and frees memory when reference count is zero. This is accomplished by providing retain/release methods similar to Objective C.
@@ -54,12 +60,6 @@ MSAShape3D
 -------------------------
 A C++ wrapper for Vertex Arrays & Vertex Buffer Objects (coming soon) to allow Immediate mode style syntax on embedded systems / iPhone etc.
 Demo at http://www.msavisuals.com/msashape3d
-
-
-MSASpline
--------------------------
-A set of template classes for doing various types of interpolations on data with any number of dimensions. You can feed the system an arbitrary number of data, then resample at any resolution, or ask for the value at any percentage along the data. Input data can be floats (for 1D splines, Vec2f (for 2D splines), Vec3f (for 3D splines), or even matrices, or custom data types (e.g. biped pose).
-Demo at http://www.msavisuals.com/msaspline
 
 
 MSATimer

@@ -29,19 +29,13 @@
  *
  * ***********************************************************************/ 
 
-
-/**************************** 1D Spline (of floats) ****************************/
-
 #pragma once
-
-#include "MSASplineT.h"
 
 namespace MSA {
 	
-	inline float lengthOf(float f) {
-		return f;
-	}
+	typedef enum {
+		kInterpolationLinear,
+		kInterpolationCubic,
+	} InterpolationType;
 	
-	
-	typedef Spline<float> Spline1D;
 }

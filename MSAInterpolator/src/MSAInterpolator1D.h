@@ -29,13 +29,19 @@
  *
  * ***********************************************************************/ 
 
+
+/**************************** 1D Interpolator (of floats) ****************************/
+
 #pragma once
+
+#include "MSAInterpolatorT.h"
 
 namespace MSA {
 	
-	typedef enum {
-		kSplineInterpolationLinear,
-		kSplineInterpolationCubic,
-	} SplineInterpolationType;
+	inline float lengthOf(float f) {
+		return f;
+	}
 	
+	
+	typedef Interpolator<float> Interpolator1D;
 }

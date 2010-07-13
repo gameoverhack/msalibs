@@ -1,4 +1,4 @@
-MSASpline changelog
+MSAInterpolator changelog
 
 
 v2.0

@@ -87,7 +87,8 @@ void Particle::updateVertexArrays( bool drawingFluid, const Vec2f &invWindowSize
 		if(v2>VMAX*VMAX) v2 = VMAX*VMAX;
 		float satInc = mass > 0.5 ? mass * mass * mass : 0;
 		satInc *= satInc * satInc * satInc;
-		//color.setHSV(0, mapRange(v2, 0.0f, VMAX*VMAX, 0.0f, 1.0f) + satInc, ofLerp(0.5, 1, mass) * alpha);
+//		Color color;
+//		color.setHSV(0, mapRange(v2, 0.0f, VMAX*VMAX, 0.0f, 1.0f) + satInc, ofLerp(0.5, 1, mass) * alpha);
 		Color color( ci::CM_HSV, 0, v2 / ( VMAX * VMAX ), lerp( 0.5f, 1.0f, mass ) * alpha );
 		
 		colBuffer[ci++] = color.r;

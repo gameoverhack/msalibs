@@ -77,7 +77,9 @@ void msaFluidParticlesApp::addToFluid( Vec2f pos, Vec2f vel, bool addColor, bool
         int index = fluidSolver.getIndexForPos(pos);
 		
 		if(addColor) {
-			ci::Color drawColor( CM_HSV, ( getElapsedFrames() % 360 ) / 360.0f, 1, 1 );
+			Color drawColor( CM_HSV, ( getElapsedFrames() % 360 ) / 360.0f, 1, 1 );
+//			Color drawColor;
+//			drawColor.setHSV(( getElapsedFrames() % 360 ) / 360.0f, 1, 1 );
 			
 			fluidSolver.addColorAtIndex(index, drawColor * colorMult);
 			

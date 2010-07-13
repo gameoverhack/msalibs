@@ -7,11 +7,6 @@ MSABulletPhysics
 A simple to use C++ wrapper for the bullet physics engine. See the provided example for usage. Not all functionality is wrapped, but you have access to underlying bullet objects so you can still do everything you want by combining the wrappers and underlying bullet objects.
 
 
-MSAColor
--------------------------
-Advanced color classes allowing lots of operations on Color types including HSV conversion.
-
-
 MSACore
 -------------------------
 This contains core utility / math functions requred by most other classes. Also is the glue that maps the MSA types to openFrameworks or Cinder types. Pretty much every class will require this.

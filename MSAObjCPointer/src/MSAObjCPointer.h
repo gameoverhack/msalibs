@@ -54,13 +54,12 @@
 
 /***************
  DEPENDENCIES:
- - none
+ - MSACore
  ***************/ 
 
 #pragma once
 
-#include <string>
-using namespace std;
+#include "MSACore.h"
 
 namespace MSA {
 	

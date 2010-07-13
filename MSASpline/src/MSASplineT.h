@@ -152,7 +152,7 @@ namespace MSA {
 		}
 		
 		const Type& at(int i) {
-			return _data.at(clamp(i, 0, size()-1));
+			return _data.at(constrain(i, 0, size()-1));
 		}
 		
 		vector<Type> getData() {

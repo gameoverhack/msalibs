@@ -86,7 +86,7 @@ namespace MSA {
 			GLfloat vertex[numSteps * 2];
 			int i=0;
 			for(float f=0; f<1; f+= spacing) {
-				ofxVec2f v		= spline.sampleAt(f);
+				Vec2f v			= spline.sampleAt(f);
 				vertex[i*2]		= v.x;
 				vertex[(i*2)+1] = v.y;
 				i++;
@@ -101,7 +101,7 @@ namespace MSA {
 			GLfloat vertex[numSteps * 2];
 			int i=0;
 			for(float f=0; f<1; f+= spacing) {
-				ofxVec2f v		= spline.sampleAt(f);
+				Vec2f v			= spline.sampleAt(f);
 				vertex[i*2]		= v.x;
 				vertex[(i*2)+1] = v.y;
 				i++;

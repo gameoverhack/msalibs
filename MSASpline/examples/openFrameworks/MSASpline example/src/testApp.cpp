@@ -188,7 +188,7 @@ void testApp::mousePressed(int x, int y, int button) {
 	
 	MSA::Vec3f pt;
 	pt.set(x-ofGetWidth()/2, y, 0);
-	pt.rotate(-currentRot, MSA::Vec3f(0, 1, 0));
+	pt.rotate(0, -currentRot, 0);
 	spline3D.push_back(pt);
 }
 

@@ -4,6 +4,11 @@ TODO:
 - auto calculate bin size (keep track of largest particle, on physics::addParticle and particle::setSize)
 
 
+v3.1
+--------------------
+- moved to all template classes for 2D/3D (or more). so MSA::Physics::WorldT<T>. e.g. World2D, World3D.
+
+
 v3.0
 --------------------
 - move to centralized MSALibs (requires MSACore)

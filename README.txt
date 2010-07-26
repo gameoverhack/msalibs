@@ -47,7 +47,7 @@ Ken Perlin's noise and fractal noise (upto 3 dimensions).
 
 MSAPhysics
 -------------------------
-A 3D particle/constraint based physics library for openFrameworks with springs, attractors and collision. It uses a very similar api to the traer.physics library for processing to make getting into it as easy as possible.
+A template based particle/constraint based physics library for openFrameworks with springs, attractors and collision. It uses a very similar api to the traer.physics library for processing to make getting into it as easy as possible. All classes are template based with typedefs for 2D and 3D physics. Potentially more. 
 Demo at http://www.msavisuals.com/msaphysics
 
 

@@ -59,7 +59,7 @@ namespace MSA {
 	
 	void drawQuadAtCenter() {
 		glEnableClientState( GL_TEXTURE_COORD_ARRAY );
-		glTexCoordPointer(2, GL_FLOAT, 0, verts );
+		glTexCoordPointer(2, GL_FLOAT, 0, tex_coords );
 		glEnableClientState(GL_VERTEX_ARRAY);		
 		glVertexPointer(2, GL_FLOAT, 0, verts );
 		glDrawArrays( GL_TRIANGLE_FAN, 0, 4 );

@@ -1,5 +1,5 @@
 /*
- *  Sector.h
+ *  SectorT.h
  *  Physics demo
  *
  *  Created by Mehmet Akten on 09/06/2010.
@@ -15,11 +15,12 @@ namespace MSA {
 	
 	namespace Physics {
 		
-		class Sector {
+		template <typename T>
+		class SectorT : public ObjCPointer {
 		public:
 			void	checkSectorCollisions();
 			
-			void	addParticle(Particle *p) {
+			void	addParticle(ParticleT<T> *p) {
 				_particles.push_back(p);
 			}
 			
@@ -27,12 +28,43 @@ namespace MSA {
 				_particles.clear();
 			}
 			
-			//	void	checkParticle(Particle *p);
+			//	void	checkParticle(ParticleT *p);
 			
 		protected:
-			bool	checkCollisionBetween(Particle *a, Particle* b);
-			vector<Particle*>	_particles;
+			bool	checkCollisionBetween(ParticleT<T>* a, ParticleT<T>* b);
+			vector<ParticleT<T>*>	_particles;
 		};
+		
+		
+		template <typename T>
+		void SectorT<T>::checkSectorCollisions() {
+			int s = _particles.size();
+			for(int i=0; i<s-1; i++) {
+				for(int j=i+1; j<s; j++) {
+					checkCollisionBetween(_particles[i], _particles[j]);
+				}
+			}
+		}
+		
+		
+		template <typename T>
+		bool SectorT<T>::checkCollisionBetween(ParticleT<T> *a, ParticleT<T> *b) {
+			float restLength = b->getRadius() + a->getRadius();
+			T delta = b->getPosition() - a->getPosition();
+			float deltaLength2 = delta.lengthSquared();
+			if(deltaLength2 >restLength * restLength) return false;
+			
+			float deltaLength = sqrt(deltaLength2);	// TODO: fast approximation of square root (1st order Taylor-expansion at a neighborhood of the rest length r (one Newton-Raphson iteration with initial guess r))
+			float force = (deltaLength - restLength) / (deltaLength * (a->getInvMass() + b->getInvMass()));
+			
+			T deltaForce = delta * force;
+			
+			if (a->isFree()) a->moveBy(deltaForce * a->getInvMass(), false);
+			if (b->isFree()) b->moveBy(deltaForce * -b->getInvMass(), false);
+			
+			return true;
+		}
+		
 		
 	}
 }

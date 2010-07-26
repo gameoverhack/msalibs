@@ -30,7 +30,7 @@
  * ***********************************************************************/
 
 
-#include "MSAPhysics.h"
+#include "MSAPhysics3D.h"
 #include "testApp.h"
 
 using namespace MSA;
@@ -77,10 +77,10 @@ static int			width;
 static int			height;
 
 
-Physics::World			physics;
-Physics::Particle		mouseNode;
+Physics::World3D		physics;
+Physics::Particle3D		mouseNode;
 
-ofImage				ballImage;
+ofImage					ballImage;
 
 
 void initScene() {
@@ -153,7 +153,7 @@ void addRandomParticle() {
 	float radius	= ofMap(mass, MIN_MASS, MAX_MASS, NODE_MIN_RADIUS, NODE_MAX_RADIUS);
 	
 	// physics.makeParticle returns a particle pointer so you can customize it
-	Physics::Particle* p = physics.makeParticle(Vec3f(posX, posY, posZ));
+	Physics::Particle3D *p = physics.makeParticle(Vec3f(posX, posY, posZ));
 	
 	// and set a bunch of properties (you don't have to set all of them, there are defaults)
 	p->setMass(mass)->setBounce(bounce)->setRadius(radius)->enableCollision()->makeFree();
@@ -163,24 +163,24 @@ void addRandomParticle() {
 }
 
 void addRandomSpring() {
-	Physics::Particle *a = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
-	Physics::Particle *b = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
+	Physics::Particle3D *a = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
+	Physics::Particle3D *b = physics.getParticle((int)ofRandom(0, physics.numberOfParticles()));
 	physics.makeSpring(a, b, ofRandom(SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH), ofRandom(10, width/2));
 }
 
 
 void killRandomParticle() {
-	Physics::Particle *p = physics.getParticle(floor(ofRandom(0, physics.numberOfParticles())));
+	Physics::Particle3D *p = physics.getParticle(floor(ofRandom(0, physics.numberOfParticles())));
 	if(p && p != &mouseNode) p->kill();
 }
 
 void killRandomSpring() {
-	Physics::Spring *s = physics.getSpring( floor(ofRandom(0, physics.numberOfSprings())));
+	Physics::Spring3D *s = physics.getSpring( floor(ofRandom(0, physics.numberOfSprings())));
 	if(s) s->kill();
 }
 
 void killRandomConstraint() {
-	Physics::Constraint *c = physics.getConstraint(floor(ofRandom(0, physics.numberOfConstraints())));
+	Physics::Constraint3D *c = physics.getConstraint(floor(ofRandom(0, physics.numberOfConstraints())));
 	if(c) c->kill();
 }
 
@@ -200,14 +200,14 @@ void toggleMouseAttract() {
 void addRandomForce(float f) {
 	forceTimer = f;
 	for(int i=0; i<physics.numberOfParticles(); i++) {
-		Physics::Particle *p = physics.getParticle(i);
+		Physics::Particle3D *p = physics.getParticle(i);
 		if(p->isFree()) p->addVelocity(Vec3f(ofRandom(-f, f), ofRandom(-f, f), ofRandom(-f, f)));
 	}
 }
 
 void lockRandomParticles() {
 	for(int i=0; i<physics.numberOfParticles(); i++) {
-		Physics::Particle *p = physics.getParticle(i);
+		Physics::Particle3D *p = physics.getParticle(i);
 		if(ofRandom(0, 100) < FIX_PROBABILITY) p->makeFixed();
 		else p->makeFree();
 	}
@@ -216,7 +216,7 @@ void lockRandomParticles() {
 
 void unlockRandomParticles() {
 	for(int i=0; i<physics.numberOfParticles(); i++) {
-		Physics::Particle *p = physics.getParticle(i);
+		Physics::Particle3D *p = physics.getParticle(i);
 		p->makeFree();
 	}
 	mouseNode.makeFixed();
@@ -293,9 +293,9 @@ void testApp::draw() {
 		// draw springs
 		glColor4f(0.5, 0.5, 0.5, 0.5);
 		for(int i=0; i<physics.numberOfSprings(); i++) {
-			Physics::Spring *spring = (Physics::Spring *) physics.getSpring(i);
-			Physics::Particle *a = spring->getOneEnd();
-			Physics::Particle *b = spring->getTheOtherEnd();
+			Physics::Spring3D *spring = (Physics::Spring3D *) physics.getSpring(i);
+			Physics::Particle3D *a = spring->getOneEnd();
+			Physics::Particle3D *b = spring->getTheOtherEnd();
 			Vec3f vec = b->getPosition() - a->getPosition();
 			float dist = vec.length();
 			float angle = acos( vec.z / dist ) * RAD_TO_DEG;
@@ -304,9 +304,9 @@ void testApp::draw() {
 			float ry =  vec.x * vec.z;
 			
 			glPushMatrix();
-			glTranslatef(a->getX(), a->getY(), a->getZ());
+			glTranslatef(a->getPosition().x, a->getPosition().y, a->getPosition().z);
 			glRotatef(angle, rx, ry, 0.0);
-			float size  = ofMap(spring->strength, SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH, SPRING_MIN_WIDTH, SPRING_MAX_WIDTH);
+			float size  = ofMap(spring->getStrength(), SPRING_MIN_STRENGTH, SPRING_MAX_STRENGTH, SPRING_MIN_WIDTH, SPRING_MAX_WIDTH);
 			
 			glScalef(size, size, dist);
 			glTranslatef(0, 0, 0.5);
@@ -321,7 +321,7 @@ void testApp::draw() {
 		ofEnableNormalizedTexCoords();
 		ballImage.getTextureReference().bind();
 		for(int i=0; i<physics.numberOfParticles(); i++) {
-			Physics::Particle *p = physics.getParticle(i);
+			Physics::Particle3D *p = physics.getParticle(i);
 			if(p->isFixed()) glColor4f(1, 0, 0, 1);
 			else glColor4f(1, 1, 1, 1);
 
@@ -329,7 +329,7 @@ void testApp::draw() {
 			
 			// draw ball
 			glPushMatrix();
-			glTranslatef(p->getX(), p->getY(), p->getZ());
+			glTranslatef(p->getPosition().x, p->getPosition().y, p->getPosition().z);
 			glRotatef(180-rot, 0, 1, 0);
 
 			glBegin(GL_QUADS);
@@ -342,10 +342,10 @@ void testApp::draw() {
 			
 			glDisable(GL_ALPHA_TEST);
 			
-			float alpha = ofMap(p->getY(), -height * 1.5, height, 0, 1);
+			float alpha = ofMap(p->getPosition().y, -height * 1.5, height, 0, 1);
 			if(alpha>0) {
 				glPushMatrix();
-				glTranslatef(p->getX(), height, p->getZ());
+				glTranslatef(p->getPosition().x, height, p->getPosition().z);
 				glRotatef(-90, 1, 0, 0);
 				glColor4f(0, 0, 0, alpha * alpha * alpha * alpha);
 //				ofCircle(0, 0, p->getRadius());

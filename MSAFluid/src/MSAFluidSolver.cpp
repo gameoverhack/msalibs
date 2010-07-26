@@ -199,6 +199,14 @@ namespace MSA {
 		return invHeight;
 	}
 	
+	Vec2f FluidSolver::getSize() {
+		return Vec2f(getWidth(), getHeight());
+	}
+	
+	Vec2f FluidSolver::getInvSize() {
+		return Vec2f(invWidth, invHeight);
+	}
+	
 	
 	
 	FluidSolver& FluidSolver::setVisc(float newVisc) {

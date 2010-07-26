@@ -49,11 +49,12 @@ namespace MSA {
 		
 		
 		
-		class Constraint : public ObjCPointer {
+		template <typename T>
+		class ConstraintT : public ObjCPointer {
 		public:
-			friend class World;
+			friend class WorldT<T>;
 			
-			Constraint() {
+			ConstraintT() {
 				_isOn	= true;
 				_type	= kConstraintTypeCustom;
 				_isDead = false;
@@ -63,10 +64,10 @@ namespace MSA {
 				setMinDistance(0);
 				setMaxDistance(0);
 				
-				setClassName("Constraint");
+				setClassName("ConstraintT");
 			}
 			
-			virtual ~Constraint() {
+			virtual ~ConstraintT() {
 				_a->release();
 				_b->release();
 			}
@@ -75,11 +76,11 @@ namespace MSA {
 			
 			// getOneEnd is a same as getA and getTheOtherEnd is same as getB
 			// just have both methods so you can choose whichever you please
-			Particle* getOneEnd();
-			Particle* getTheOtherEnd();
+			ParticleT<T>* getOneEnd();
+			ParticleT<T>* getTheOtherEnd();			
 			
-			Particle* getA();
-			Particle* getB();
+			ParticleT<T>* getA();
+			ParticleT<T>* getB();
 			
 			void turnOff();
 			void turnOn();
@@ -120,14 +121,14 @@ namespace MSA {
 			float			_maxDist;
 			float			_maxDist2;
 			
-			Particle	*_a, *_b;
-			Params *_params;
+			ParticleT<T>	*_a, *_b;
+			ParamsT<T>		*_params;
 			virtual void solve() = 0;
 			
 			virtual void debugDraw() {
 				//ofLine(_a->x, _a->y, _b->x, _b->y);
 				/*
-				 Vec3f vec = (*_b - *_a);
+				 T vec = (*_b - *_a);
 				 float dist = msaLength(vec);
 				 float angle = acos( vec.z / dist ) * RAD_TO_DEG;
 				 if(vec.z <= 0 ) angle = -angle;
@@ -147,71 +148,89 @@ namespace MSA {
 			}
 		};
 		
-		inline int Constraint::type() {
+		
+		
+		template <typename T>
+		inline int ConstraintT<T>::type() {
 			return _type;
 		}
 		
-		inline Particle* Constraint::getOneEnd() {
+		template <typename T>
+		inline ParticleT<T>* ConstraintT<T>::getOneEnd() {
 			return _a;
 		}
 		
-		inline Particle* Constraint::getTheOtherEnd() {
+		template <typename T>
+		inline ParticleT<T>* ConstraintT<T>::getTheOtherEnd() {
 			return _b;
 		}
 		
-		inline Particle* Constraint::getA() {
+		template <typename T>
+		inline ParticleT<T>* ConstraintT<T>::getA() {
 			return _a;
 		}
 		
-		inline Particle* Constraint::getB() {
+		template <typename T>
+		inline ParticleT<T>* ConstraintT<T>::getB() {
 			return _b;
 		}
 		
-		inline void Constraint::turnOff() {
+		template <typename T>
+		inline void ConstraintT<T>::turnOff() {
 			_isOn = false;
 		}
 		
-		inline void Constraint::turnOn() {
+		template <typename T>
+		inline void ConstraintT<T>::turnOn() {
 			_isOn = true;
 		}
 		
-		inline bool Constraint::isOn() {
+		template <typename T>
+		inline bool ConstraintT<T>::isOn() {
 			return (_isOn == true);
 		}
 		
-		inline bool Constraint::isOff(){
+		template <typename T>
+		inline bool ConstraintT<T>::isOff(){
 			return (_isOn == false);
 		}
 		
-		inline void Constraint::kill() {
+		template <typename T>
+		inline void ConstraintT<T>::kill() {
 			_isDead = true;
 		}
 		
-		inline bool Constraint::isDead() {
+		template <typename T>
+		inline bool ConstraintT<T>::isDead() {
 			return _isDead;
 		}
 		
 		
-		inline void Constraint::setMinDistance(float d) {
+		template <typename T>
+		inline void ConstraintT<T>::setMinDistance(float d) {
 			_minDist = d;
 			_minDist2 = d*d;
 		}
 		
-		inline float Constraint::getMinDistance() {
+		template <typename T>
+		inline float ConstraintT<T>::getMinDistance() {
 			return _minDist;
 		}
 		
-		inline void Constraint::setMaxDistance(float d) {
+		template <typename T>
+		inline void ConstraintT<T>::setMaxDistance(float d) {
 			_maxDist = d;
 			_maxDist2 = d*d;
 		}
 		
-		inline float Constraint::getMaxDistance() {
+		template <typename T>
+		inline float ConstraintT<T>::getMaxDistance() {
 			return _maxDist;
 		}
 		
 		// only worth solving the constraint if its on, and at least one end is free
-		inline bool Constraint::shouldSolve() {
+		template <typename T>
+		inline bool ConstraintT<T>::shouldSolve() {
 			
 			// if the constraint is off or both sides are fixed then return false
 			if(isOff() || (_a->isFixed() && _b->isFixed())) return false;	
@@ -219,7 +238,7 @@ namespace MSA {
 			// if no length restrictions then return true (by this point we know above condition is false)
 			if(_minDist == 0 && _maxDist == 0) return true;
 			
-			Vec3f delta = _b->getPosition() - _a->getPosition();
+			T delta = _b->getPosition() - _a->getPosition();
 			float deltaLength2 = delta.lengthSquared();
 			
 			bool minDistSatisfied;

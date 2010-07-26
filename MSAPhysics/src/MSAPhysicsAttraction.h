@@ -38,50 +38,50 @@ namespace MSA {
 	
 	namespace Physics {
 		
-		class Attraction : public Constraint {
+		template <typename T>
+		class AttractionT : public ConstraintT<T> {
 		public:
-			friend class World;
+			friend class WorldT<T>;
 			
-			Attraction(Particle *a, Particle *b, float strength) {
-				this->_a = a;
-				this->_b = b;
+			AttractionT(ParticleT<T> *a, ParticleT<T> *b, float strength) {
+				this->_a	= a;
+				this->_b	= b;
+				this->_type = kConstraintTypeAttraction;
+				this->setClassName("AttractionT");
+
 				setStrength(strength);
-				
-				_type = kConstraintTypeAttraction;
 			}
 			
-			// set strength of attraction (+ve
-			void setStrength(float newStrength);
-			
-			// get strength of attraction
+			void setStrength(float s);
 			float getStrength();
 			
 		protected:
 			float _strength;
 			
 			void solve() {
-				Vec3f delta = _b->getPosition() - _a->getPosition();
+				T delta = this->_b->getPosition() - this->_a->getPosition();
 				float deltaLength2 = delta.lengthSquared();
 				
-				float force = _strength * (_b->getMass()) * (_a->getMass()) / (deltaLength2 + 0.001);		// to avoid divide by zero
+				float force = _strength * (this->_b->getMass()) * (this->_a->getMass()) / (deltaLength2 + 0.001);		// to avoid divide by zero
 				
-				Vec3f deltaForce = delta * force;
+				T deltaForce = delta * force;
 				
-				if (_a->isFree()) _a->moveBy(deltaForce * _a->getInvMass(), false);
-				if (_b->isFree()) _b->moveBy(deltaForce * -_b->getInvMass(), false);
+				if (this->_a->isFree()) this->_a->moveBy(deltaForce * this->_a->getInvMass(), false);
+				if (this->_b->isFree()) this->_b->moveBy(deltaForce * -this->_b->getInvMass(), false);
 			}
 			
 			void debugDraw() {
-				Constraint::debugDraw();
+				ConstraintT<T>::debugDraw();
 			}
 		};
 		
-		// set strength of attraction (+ve
-		inline void Attraction::setStrength(float newStrength) {
-			_strength = newStrength;
+		template <typename T>
+		inline void AttractionT<T>::setStrength(float s) {
+			_strength = s;
 		}
 		
-		inline float Attraction::getStrength() {
+		template <typename T>
+		inline float AttractionT<T>::getStrength() {
 			return _strength;
 		}
 		

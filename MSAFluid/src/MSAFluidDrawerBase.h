@@ -59,7 +59,8 @@ namespace MSA {
 		bool	doInvert;
 		bool	useAdditiveBlending;
 		float	brightness;
-		float	velThreshold;
+		float	velDrawThreshold;
+		float	velDrawMult;
 		
 		FluidDrawMode		drawMode;
 

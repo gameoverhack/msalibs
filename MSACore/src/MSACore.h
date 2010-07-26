@@ -43,7 +43,7 @@
 // uncomment only ONE of the below #defines
 // better to do this via project settings, but AFAIK neither openFrameworks or Cinder have a global #define
 
-#define MSA_HOST_OPENFRAMEWORKS
+//#define MSA_HOST_OPENFRAMEWORKS
 //#define MSA_HOST_CINDER
 
 
@@ -56,8 +56,7 @@
 #include "MSACore-Cinder.h"
 
 #else
-printf("*** host not selected ***\n");
-std::exit(1);
+This will give an error. you need to make sure a host is #defined either above, or in project settings
 #endif
 
 #include "MSACoreCommon.h"

@@ -1,5 +1,5 @@
 /***********************************************************************
- 
+
  Copyright (c) 2008, 2009, Memo Akten, www.memo.tv
  *** The Mega Super Awesome Visuals Company ***
  * All rights reserved.
@@ -12,33 +12,33 @@
  *     * Redistributions in binary form must reproduce the above copyright
  *       notice, this list of conditions and the following disclaimer in the
  *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of MSA Visuals nor the names of its contributors 
+ *     * Neither the name of MSA Visuals nor the names of its contributors
  *       may be used to endorse or promote products derived from this software
  *       without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
  * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS 
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
  * OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+ * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
- * OF THE POSSIBILITY OF SUCH DAMAGE. 
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * ***********************************************************************/ 
+ * ***********************************************************************/
 
 
 #include "MSAOpenCL.h"
 #include "MSAOpenCLProgram.h"
 #include "MSAOpenCLKernel.h"
 
-namespace MSA { 
-	
+namespace MSA {
+
 	OpenCL *OpenCL::currentOpenCL = NULL;
-	
-	
+
+
 	OpenCL::OpenCL() {
 		ofLog(OF_LOG_VERBOSE, "OpenCL::OpenCL");
 		isSetup		= false;
@@ -46,30 +46,30 @@ namespace MSA {
 		clDevice	= NULL;
 		clQueue		= NULL;
 	}
-	
+
 	OpenCL::~OpenCL() {
 		ofLog(OF_LOG_VERBOSE, "OpenCL::~OpenCL");
-		
+
 		clFinish(clQueue);
-		
+
 		for(int i=0; i<memObjects.size(); i++) delete memObjects[i];	// FIX
 		for(map<string, OpenCLKernel*>::iterator it = kernels.begin(); it !=kernels.end(); ++it) delete (OpenCLKernel*)it->second;
 		for(int i=0; i<programs.size(); i++) delete programs[i];
 		clReleaseCommandQueue(clQueue);
 		clReleaseContext(clContext);
 	}
-	
-	
+
+
 	void OpenCL::setup(int clDeviceType, int numDevices) {
 		ofLog(OF_LOG_VERBOSE, "OpenCL::setup " + ofToString(clDeviceType) + ", " + ofToString(numDevices));
-		
+
 		if(isSetup) {
 			ofLog(OF_LOG_VERBOSE, "... already setup. returning");
 			return;
 		}
-		
+
 		cl_int err;
-		
+
 		int numDevicesToUse = createDevice(clDeviceType, numDevices);
 		clContext = clCreateContext(NULL, numDevicesToUse, &clDevice, NULL, NULL, &err);
 		if(clContext == NULL) {
@@ -83,34 +83,69 @@ namespace MSA {
 			assert(err != CL_OUT_OF_HOST_MEMORY);
 			assert(false);
 		}
-		
-		
+
+
 		createQueue();
-	}	
-	
-	
+	}
+
+
 	void OpenCL::setupFromOpenGL() {
 		ofLog(OF_LOG_VERBOSE, "OpenCL::setupFromOpenGL ");
-		
+
 		if(isSetup) {
 			ofLog(OF_LOG_VERBOSE, "... already setup. returning");
 			return;
 		}
-		
+
 		cl_int err;
-		
+
 		createDevice(CL_DEVICE_TYPE_GPU, 1);
-		
-#ifdef MSA_TARGET_OSX	
-		CGLContextObj kCGLContext = CGLGetCurrentContext();
-		CGLShareGroupObj kCGLShareGroup = CGLGetShareGroup(kCGLContext);
-		cl_context_properties properties[] = { CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE, (cl_context_properties)kCGLShareGroup, 0 };
-#else
-		ofLog(OF_LOG_ERROR, "OpenCL::setupFromOpenGL() only implemented for mac osx at the moment.\nIf you know how to do this for windows/linux please go ahead and implement it here.");
-		assert(false);
+
+        cl_int numDevices;	// added by gameover (matt gingold)
+
+#ifdef TARGET_OSX   // modified by gameover (matt gingold)
+
+        CGLContextObj kCGLContext = CGLGetCurrentContext();
+        CGLShareGroupObj kCGLShareGroup = CGLGetShareGroup(kCGLContext);
+        cl_context_properties properties[] = {
+            CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE, (cl_context_properties)kCGLShareGroup,
+            CL_CONTEXT_PLATFORM, (cl_context_properties)clPlatform,	// modified by gameover (matt gingold)
+            0
+        };
+
+        numDevices = 0; // very odd that we should use 0 devices, but it must be so to run...
+
 #endif
-		
-		clContext = clCreateContext(properties, 0, 0, NULL, NULL, &err);
+
+#ifdef TARGET_WIN32	    // added by gameover (matt gingold)
+
+        cl_context_properties properties[] = {
+            CL_GL_CONTEXT_KHR, (cl_context_properties)wglGetCurrentContext(),
+            CL_WGL_HDC_KHR, (cl_context_properties)wglGetCurrentDC(),
+            CL_CONTEXT_PLATFORM, (cl_context_properties)clPlatform,
+            0
+        };
+
+        numDevices = 1; // I presume on a PC this means more than 1 device could be used
+                        // indeed perhaps numDevicesFound from createDevice(...) maybe?
+
+#endif
+
+#ifdef TARGET_LINUX     // added by gameover (matt gingold)
+
+        cl_context_properties properties[] = {
+            CL_GL_CONTEXT_KHR, (cl_context_properties)glXGetCurrentContext(),
+            CL_WGL_HDC_KHR, (cl_context_properties)glXGetCurrentDC(),
+            CL_CONTEXT_PLATFORM, (cl_context_properties)clPlatform,
+            0
+        };
+
+        numDevices = 1;
+
+#endif
+
+        clContext = clCreateContext(properties, numDevices, &clDevice, NULL, NULL, &err); // modified by gameover (matt gingold)
+
 		if(clContext == NULL) {
 			ofLog(OF_LOG_ERROR, "Error creating clContext.");
 			assert(err != CL_INVALID_PLATFORM);
@@ -122,44 +157,44 @@ namespace MSA {
 			assert(err != CL_OUT_OF_HOST_MEMORY);
 			assert(false);
 		}
-		
+
 		createQueue();
-	}	
-	
-	
+	}
+
+
 	cl_device_id& OpenCL::getDevice() {
 		return clDevice;
 	}
-	
-	
+
+
 	cl_context& OpenCL::getContext() {
 		return clContext;
 	}
-	
+
 	cl_command_queue& OpenCL::getQueue() {
 		return clQueue;
 	}
-	
-	
-	
-	OpenCLProgram* OpenCL::loadProgramFromFile(string filename, bool isBinary) { 
+
+
+
+	OpenCLProgram* OpenCL::loadProgramFromFile(string filename, bool isBinary) {
 		ofLog(OF_LOG_VERBOSE, "OpenCL::loadProgramFromFile");
 		OpenCLProgram *p = new OpenCLProgram();
 		p->loadFromFile(filename, isBinary);
 		programs.push_back(p);
 		return p;
 	}
-	
-	
+
+
 	OpenCLProgram* OpenCL::loadProgramFromSource(string source) {
 		ofLog(OF_LOG_VERBOSE, "OpenCL::loadProgramFromSource");
 		OpenCLProgram *p = new OpenCLProgram();
 		p->loadFromSource(source);
 		programs.push_back(p);
 		return p;
-	} 
-	
-	
+	}
+
+
 	OpenCLKernel* OpenCL::loadKernel(string kernelName, OpenCLProgram *program) {
 		ofLog(OF_LOG_VERBOSE, "OpenCL::loadKernel " + kernelName + ", " + ofToString((int)program));
 		if(program == NULL) program = programs[programs.size() - 1];
@@ -167,82 +202,86 @@ namespace MSA {
 		kernels[kernelName] = k;
 		return k;
 	}
-	
-	
+
+
 	OpenCLBuffer* OpenCL::createBuffer(int numberOfBytes, cl_mem_flags memFlags, void *dataPtr, bool blockingWrite) {
 		OpenCLBuffer *clBuffer = new OpenCLBuffer();
 		clBuffer->initBuffer(numberOfBytes, memFlags, dataPtr, blockingWrite);
 		memObjects.push_back(clBuffer);
 		return clBuffer;
 	}
-	
-	
+
+
 	OpenCLBuffer* OpenCL::createBufferFromGLObject(GLuint glBufferObject, cl_mem_flags memFlags) {
 		OpenCLBuffer *clBuffer = new OpenCLBuffer();
 		clBuffer->initFromGLObject(glBufferObject, memFlags);
 		memObjects.push_back(clBuffer);
 		return clBuffer;
 	}
-	
-	
+
+
 	OpenCLImage* OpenCL::createImage2D(int width, int height, cl_channel_order imageChannelOrder, cl_channel_type imageChannelDataType, cl_mem_flags memFlags, void *dataPtr, bool blockingWrite) {
 		return createImage3D(width, height, 1, imageChannelOrder, imageChannelDataType, memFlags, dataPtr, blockingWrite);
 	}
-	
-	
+
+
 	OpenCLImage* OpenCL::createImageFromTexture(ofTexture &tex, cl_mem_flags memFlags, int mipLevel) {
 		OpenCLImage *clImage = new OpenCLImage();
 		clImage->initFromTexture(tex, memFlags, mipLevel);
 		memObjects.push_back(clImage);
 		return clImage;
 	}
-	
+
 	OpenCLImage* OpenCL::createImageWithTexture(int width, int height, int glType, cl_mem_flags memFlags) {
 		OpenCLImage *clImage = new OpenCLImage();
 		clImage->initWithTexture(width, height, glType, memFlags);
 		memObjects.push_back(clImage);
 		return clImage;
 	}
-	
-	
+
+
 	OpenCLImage* OpenCL::createImage3D(int width, int height, int depth, cl_channel_order imageChannelOrder, cl_channel_type imageChannelDataType, cl_mem_flags memFlags, void *dataPtr, bool blockingWrite) {
 		OpenCLImage *clImage = new OpenCLImage();
 		clImage->initWithoutTexture(width, height, height, imageChannelOrder, imageChannelDataType, memFlags, dataPtr, blockingWrite);
 		memObjects.push_back(clImage);
 		return clImage;
 	}
-	
-	
-	
+
+
+
 	OpenCLKernel* OpenCL::kernel(string kernelName) {
 		return kernels[kernelName];
 	}
-	
+
 	void OpenCL::flush() {
 		clFlush(clQueue);
 	}
-	
-	
+
+
 	void OpenCL::finish() {
 		clFinish(clQueue);
 	}
-	
-	
-	
+
+
+
 	int OpenCL::createDevice(int clDeviceType, int numDevices) {
-		cl_int err;
-		cl_uint numDevicesFound;
-		
-		err = clGetDeviceIDs(NULL, clDeviceType, numDevices, &clDevice, &numDevicesFound);
-		if(err != CL_SUCCESS) {
-			ofLog(OF_LOG_ERROR, "Error creating clDevice.");
+        cl_int err;
+        cl_uint numDevicesFound;
+
+        err = clGetPlatformIDs(1, &clPlatform, &numDevicesFound);   // added by gameover (matt gingold)
+
+        err = clGetDeviceIDs(clPlatform, clDeviceType, numDevices, &clDevice, NULL); // modified by gameover (matt gingold) - not sure if OSX 10.6.x compatible?
+
+        //err = clGetDeviceIDs(NULL, clDeviceType, numDevices, &clDevice, &numDevicesFound);
+        if(err != CL_SUCCESS) {
+            ofLog(OF_LOG_ERROR, "Error creating clDevice.");
 			assert(false);
-		}	
-		
+		}
+
 		ofLog(OF_LOG_VERBOSE, ofToString(numDevicesFound, 0) + " devices found\n");
-		
+
 		int numDevicesToUse = min((int)numDevicesFound, numDevices);
-		
+
 		for(int i=0; i<numDevicesToUse; i++) {
 			size_t	size;
 			cl_device_id &d = (&clDevice)[i];
@@ -276,31 +315,31 @@ namespace MSA {
 			err |= clGetDeviceInfo(d, CL_DEVICE_ENDIAN_LITTLE, sizeof(info.endianLittle), &info.endianLittle, &size);
 			err |= clGetDeviceInfo(d, CL_DEVICE_PROFILE, sizeof(info.profile), info.profile, &size);
 			err |= clGetDeviceInfo(d, CL_DEVICE_EXTENSIONS, sizeof(info.extensions), info.extensions, &size);
-			
+
 			if(err != CL_SUCCESS) {
 				ofLog(OF_LOG_ERROR, "Error getting clDevice information.");
 				assert(false);
 			}
-			
+
 			ofLog(OF_LOG_VERBOSE, getInfoAsString());
 		}
-		
-		
+
+
 		return numDevicesToUse;
 	}
-	
+
 	string OpenCL::getInfoAsString() {
-		return string("\n\n*********\nOpenCL Device information:") + 
-		"\n vendorName.................." + string((char*)info.vendorName) + 
-		"\n deviceName.................." + string((char*)info.deviceName) + 
+		return string("\n\n*********\nOpenCL Device information:") +
+		"\n vendorName.................." + string((char*)info.vendorName) +
+		"\n deviceName.................." + string((char*)info.deviceName) +
 		"\n driverVersion..............." + string((char*)info.driverVersion) +
 		"\n deviceVersion..............." + string((char*)info.deviceVersion) +
 		"\n maxComputeUnits............." + ofToString(info.maxComputeUnits, 0) +
 		"\n maxWorkItemDimensions......." + ofToString(info.maxWorkItemDimensions, 0) +
-		"\n maxWorkItemSizes[0]........." + ofToString(info.maxWorkItemSizes[0], 0) + 
+		"\n maxWorkItemSizes[0]........." + ofToString(info.maxWorkItemSizes[0], 0) +
 		"\n maxWorkGroupSize............" + ofToString(info.maxWorkGroupSize, 0) +
 		"\n maxClockFrequency..........." + ofToString(info.maxClockFrequency, 0) +
-		"\n maxMemAllocSize............." + ofToString(info.maxMemAllocSize/1024.0f/1024.0f, 3) + " MB" + 
+		"\n maxMemAllocSize............." + ofToString(info.maxMemAllocSize/1024.0f/1024.0f, 3) + " MB" +
 		"\n imageSupport................" + (info.imageSupport ? "YES" : "NO") +
 		"\n maxReadImageArgs............" + ofToString(info.maxReadImageArgs, 0) +
 		"\n maxWriteImageArgs..........." + ofToString(info.maxWriteImageArgs, 0) +
@@ -311,7 +350,7 @@ namespace MSA {
 		"\n image3dMaxDepth............." + ofToString(info.image3dMaxDepth, 0) +
 		"\n maxSamplers................." + ofToString(info.maxSamplers, 0) +
 		"\n maxParameterSize............" + ofToString(info.maxParameterSize, 0) +
-		"\n globalMemCacheSize.........." + ofToString(info.globalMemCacheSize/1024.0f/1024.0f, 3) + " MB" + 
+		"\n globalMemCacheSize.........." + ofToString(info.globalMemCacheSize/1024.0f/1024.0f, 3) + " MB" +
 		"\n globalMemSize..............." + ofToString(info.globalMemSize/1024.0f/1024.0f, 3) + " MB" +
 		"\n maxConstantBufferSize......." + ofToString(info.maxConstantBufferSize/1024.0f, 3) + " KB"
 		"\n maxConstantArgs............." + ofToString(info.maxConstantArgs, 0) +
@@ -323,17 +362,17 @@ namespace MSA {
 		"\n extensions.................." + string((char*)info.extensions) +
 		"\n*********\n\n";
 	}
-	
-	
+
+
 	void OpenCL::createQueue() {
 		clQueue = clCreateCommandQueue(clContext, clDevice, 0, NULL);
 		if(clQueue == NULL) {
 			ofLog(OF_LOG_ERROR, "Error creating command queue.");
 			assert(false);
 		}
-		
+
 		isSetup = true;
 		currentOpenCL = this;
 	}
-	
+
 }

@@ -59,15 +59,15 @@ namespace MSA {
 			// this method retains the constraint, so you should release it after adding (obj-c style)
 			ConstraintT<T>*		addConstraint(ConstraintT<T> *c);
 			
-			ParticleT<T>*		getParticle(uint i);
-			ConstraintT<T>*		getConstraint(uint i);			// generally you wouldn't use this but use the ones below
-			SpringT<T>*			getSpring(uint i);
-			AttractionT<T>*		getAttraction(uint i);
+			ParticleT<T>*		getParticle(long i);
+			ConstraintT<T>*		getConstraint(long i);			// generally you wouldn't use this but use the ones below
+			SpringT<T>*			getSpring(long i);
+			AttractionT<T>*		getAttraction(long i);
 			
-			uint				numberOfParticles();
-			uint				numberOfConstraints();		// all constraints: springs, attractions and user created
-			uint				numberOfSprings();			// only springs
-			uint				numberOfAttractions();		// only attractions
+			long				numberOfParticles();
+			long				numberOfConstraints();		// all constraints: springs, attractions and user created
+			long				numberOfSprings();			// only springs
+			long				numberOfAttractions();		// only attractions
 			
 			WorldT<T>*			setDrag(float drag = 0.99);					// set the drag. 1: no drag at all, 0.9: quite a lot of drag, 0: particles can't even move
 			WorldT<T>*			setGravity(float gy = 0);					// set gravity (y component only)
@@ -90,10 +90,10 @@ namespace MSA {
 			WorldT<T>*			setSectorCount(T vCount);	// set the number of sectors in each axis
 			
 			// preallocate buffers if you know how big they need to be (they grow automatically if need be)
-			WorldT<T>*			setParticleCount(uint i);
-			WorldT<T>*			setConstraintCount(uint i);
-			WorldT<T>*			setSpringCount(uint i);
-			WorldT<T>*			setAttractionCount(uint i);
+			WorldT<T>*			setParticleCount(long i);
+			WorldT<T>*			setConstraintCount(long i);
+			WorldT<T>*			setSpringCount(long i);
+			WorldT<T>*			setAttractionCount(long i);
 			
 			
 			void clear();
@@ -129,10 +129,10 @@ namespace MSA {
 			
 #ifdef MSAPHYSICS_USE_RECORDER
 			DataRecorder<T>			_recorder;
-			uint					_frameCounter;
-			uint					_replayMode;
+			long					_frameCounter;
+			long					_replayMode;
 			float					_playbackScaler;
-			void load(uint frameNum);
+			void load(long frameNum);
 #endif
 		};
 		
@@ -235,43 +235,43 @@ namespace MSA {
 		
 		
 		template <typename T>
-		ParticleT<T>*		WorldT<T>::getParticle(uint i) {
+		ParticleT<T>*		WorldT<T>::getParticle(long i) {
 			return i < numberOfParticles() ? _particles[i] : NULL;
 		}
 		
 		template <typename T>
-		ConstraintT<T>*	WorldT<T>::getConstraint(uint i) {
+		ConstraintT<T>*	WorldT<T>::getConstraint(long i) {
 			return i < numberOfConstraints() ? _constraints[kConstraintTypeCustom][i] : NULL;
 		}
 		
 		template <typename T>
-		SpringT<T>*		WorldT<T>::getSpring(uint i) {
+		SpringT<T>*		WorldT<T>::getSpring(long i) {
 			return i < numberOfSprings() ? (SpringT<T>*)_constraints[kConstraintTypeSpring][i] : NULL;
 		}
 		
 		template <typename T>
-		AttractionT<T>*	WorldT<T>::getAttraction(uint i) {
+		AttractionT<T>*	WorldT<T>::getAttraction(long i) {
 			return i < numberOfAttractions() ? (AttractionT<T>*)_constraints[kConstraintTypeAttraction][i] : NULL;
 		}
 		
 		
 		template <typename T>
-		uint WorldT<T>::numberOfParticles() {
+		long WorldT<T>::numberOfParticles() {
 			return _particles.size();
 		}
 		
 		template <typename T>
-		uint WorldT<T>::numberOfConstraints() {
+		long WorldT<T>::numberOfConstraints() {
 			return _constraints[kConstraintTypeCustom].size();
 		}
 		
 		template <typename T>
-		uint WorldT<T>::numberOfSprings() {
+		long WorldT<T>::numberOfSprings() {
 			return _constraints[kConstraintTypeSpring].size();
 		}
 		
 		template <typename T>
-		uint WorldT<T>::numberOfAttractions() {
+		long WorldT<T>::numberOfAttractions() {
 			return _constraints[kConstraintTypeAttraction].size();
 		}
 		
@@ -408,7 +408,7 @@ namespace MSA {
 		
 		
 		template <typename T>
-		WorldT<T>*  WorldT<T>::setParticleCount(uint i) {
+		WorldT<T>*  WorldT<T>::setParticleCount(long i) {
 			_particles.reserve(i);
 #ifdef MSAPHYSICS_USE_RECORDER
 			//	if(_replayMode == OFX_MSA_DATA_SAVE)
@@ -419,19 +419,19 @@ namespace MSA {
 		
 		
 		template <typename T>
-		WorldT<T>* WorldT<T>::setConstraintCount(uint i){
+		WorldT<T>* WorldT<T>::setConstraintCount(long i){
 			_constraints[kConstraintTypeCustom].reserve(i);
 			return this;
 		}
 		
 		template <typename T>
-		WorldT<T>* WorldT<T>::setSpringCount(uint i){
+		WorldT<T>* WorldT<T>::setSpringCount(long i){
 			_constraints[kConstraintTypeSpring].reserve(i);
 			return this;
 		}
 		
 		template <typename T>
-		WorldT<T>* WorldT<T>::setAttractionCount(uint i){
+		WorldT<T>* WorldT<T>::setAttractionCount(long i){
 			_constraints[kConstraintTypeAttraction].reserve(i);
 			return this;
 		}
@@ -520,7 +520,7 @@ namespace MSA {
 		
 #ifdef MSAPHYSICS_USE_RECORDER
 		template <typename T>
-		void WorldT<T>::load(uint frameNum) {
+		void WorldT<T>::load(long frameNum) {
 			_recorder.load(frameNum);
 			for(vector<ParticleT<T>*>::iterator it = _particles.begin(); it != _particles.end(); it++) {
 				ParticleT<T>* particle = *it;
@@ -610,7 +610,7 @@ namespace MSA {
 		
 #ifdef MSAPHYSICS_USE_RECORDER
 		template <typename T>
-		WorldT<T>*  WorldT<T>::setReplayMode(uint i, float playbackScaler) {
+		WorldT<T>*  WorldT<T>::setReplayMode(long i, float playbackScaler) {
 			_replayMode = i;
 			_playbackScaler = playbackScaler;
 			//	if(_replayMode == OFX_MSA_DATA_SAVE)		// NEW

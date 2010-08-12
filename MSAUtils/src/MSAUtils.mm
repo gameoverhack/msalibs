@@ -30,7 +30,10 @@
  * ***********************************************************************/ 
 
 #include "MSAUtils.h"
+
+#ifdef MSA_TARGET_OSX
 #import <Cocoa/Cocoa.h>
+#endif
 
 namespace MSA {
 	
@@ -97,6 +100,7 @@ namespace MSA {
 	
 	// pass a string e.g. "output/images/capture/
 	void createDir(string fullpath) {
+#ifdef MSA_TARGET_OSX
 		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 		
 		NSString *nsPath = [NSString stringWithUTF8String:fullpath.c_str()];		// convert stl-string to NSString
@@ -128,6 +132,7 @@ namespace MSA {
 		
 		
 		[pool release];
+#endif		
 	}
 	
 	

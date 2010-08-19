@@ -136,6 +136,12 @@ T lerp( const T &a, const T &b, L factor )
 	return a + ( b - a ) * factor;
 }
 
+template<typename T>
+T lmap(T val, T inMin, T inMax, T outMin, T outMax)
+{
+	return outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin));
+}
+
 template<typename T, typename L>
 T bezierInterp( T a, T b, T c, T d, L t)
 {

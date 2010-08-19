@@ -22,19 +22,6 @@ m_page(owner)
 	if(numChoices <=1)
 		numChoices = 1;
 	m_hasFocus=false;
-//	beenPressed = false;
-	
-	
-	//   if(name.size()) {
-	//      //we truncate names and titles if need be
-	//      int offset;
-	//      offset = strlen(name.c_str()) - kMaxNameStringLen;
-	//      m_title = (char*)malloc(strlen(name.c_str()) + kMaxChoiceStringLen);
-	//      strcpy(m_title, name.c_str() + (offset > 0? offset : 0));
-	//   } else {
-	//      m_title = "";
-	//   }
-	
 	m_title = name;
 	
 	for(int i=0; i<numChoices; i++){
@@ -50,32 +37,12 @@ ofxSimpleGuiComboBox::~ofxSimpleGuiComboBox() {
 
 
 void ofxSimpleGuiComboBox::setTitleForIndex(int index, string title) {
-	if(index < 0 || index >= m_choices.size())
-		return;
-	
-	//   int offset = 0;
-	//   if(title)   
-	//      offset = strlen(title) - kMaxChoiceStringLen;
-	//
-	//   char* titlestring = (char*)malloc(title?strlen(title + (offset > 0? offset : 0)):10);
-	//   if(m_choices[index])
-	//      free(m_choices[index]);
-	//
-	//   if(title)
-	//      strcpy(titlestring,title + (offset > 0? offset : 0));
-	//   else {
-	//      strcpy(titlestring,"00");
-	//      //fill it in with an index string that starts at 1.  only valid for 99 entries, but thats a lot.
-	//      titlestring[0]+=((index+1)%100)/10;
-	//      titlestring[1]+=(index+1)%10;
-	//   }
+	if(index < 0 || index >= m_choices.size()) return;
 	m_choices[index] = title;
-	
 }
 
 string ofxSimpleGuiComboBox::getTitleForIndex(int index) {
-	if(index < 0 || index >= m_choices.size())
-		return m_choices.size() ? m_choices[m_selectedChoice] : "No Choices Available";
+	if(index < 0 || index >= m_choices.size())return m_choices.size() ? m_choices[m_selectedChoice] : "No Choices Available";
 	return m_choices[index];
 }
 
@@ -83,12 +50,9 @@ string ofxSimpleGuiComboBox::getTitleForIndex(int index) {
 void ofxSimpleGuiComboBox::addChoice(string title, int index) {
 	int insertIndex = m_choices.size();
 	
-	if(index >= 0 && index < m_choices.size())
-		insertIndex = index;
+	if(index >= 0 && index < m_choices.size()) insertIndex = index;
 	
 	m_choices.insert(m_choices.begin() + insertIndex, title);
-	
-	//   setTitleForIndex(insertIndex, title);
 }
 
 
@@ -122,7 +86,7 @@ void ofxSimpleGuiComboBox::setup() {
 }
 
 void ofxSimpleGuiComboBox::loadFromXML(ofxXmlSettings &XML) {
-	setValue(XML.getValue("controls:" + controlType + "_" + key + ":value", 0));
+	setValue(XML.getValue(controlType + "_" + key + ":value", 0));
 }
 
 void ofxSimpleGuiComboBox::saveToXML(ofxXmlSettings &XML) {
@@ -134,8 +98,6 @@ void ofxSimpleGuiComboBox::saveToXML(ofxXmlSettings &XML) {
 }
 
 void ofxSimpleGuiComboBox::keyPressed( int key ) {
-	//TODO do up/down
-	//	if(key==keyboardShortcut) toggle();
 }
 
 int ofxSimpleGuiComboBox::getValue() {

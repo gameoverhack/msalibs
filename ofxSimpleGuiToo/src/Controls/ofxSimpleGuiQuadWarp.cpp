@@ -26,8 +26,8 @@ void ofxSimpleGuiQuadWarp::setup() {
 
 void ofxSimpleGuiQuadWarp::loadFromXML(ofxXmlSettings &XML) {
 	for(int i=0; i<4; i++) {
-		pts[i].x = XML.getValue("controls:" + controlType + "_" + key + ":values_" + ofToString(i) + "_x", 0.0f);
-		pts[i].y = XML.getValue("controls:" + controlType + "_" + key + ":values_" + ofToString(i) + "_y", 0.0f);
+		pts[i].x = XML.getValue(controlType + "_" + key + ":values_" + ofToString(i) + "_x", 0.0f);
+		pts[i].y = XML.getValue(controlType + "_" + key + ":values_" + ofToString(i) + "_y", 0.0f);
 	}
 }
 

@@ -17,7 +17,7 @@ void ofxSimpleGuiSlider2d::setup() {
 }
 
 void ofxSimpleGuiSlider2d::loadFromXML(ofxXmlSettings &XML) {
-	value->set(XML.getValue("controls:" + controlType + "_" + key + ":valueX", 0.0f), XML.getValue("controls:" + controlType + "_" + key + ":valueY", 0.0f));
+	value->set(XML.getValue(controlType + "_" + key + ":valueX", 0.0f), XML.getValue(controlType + "_" + key + ":valueY", 0.0f));
 }
 
 

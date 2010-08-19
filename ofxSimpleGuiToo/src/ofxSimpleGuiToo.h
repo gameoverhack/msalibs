@@ -40,12 +40,11 @@
 
 #include "ofxSimpleGuiIncludes.h"
 
-
 class ofxSimpleGuiToo {
 	
 public:
 	int							guiFocus;
-
+	
 	ofxSimpleGuiConfig			*config;	
 	
 	ofxSimpleGuiToo();
@@ -58,12 +57,12 @@ public:
 	void						setAlignRight(bool b);
 	void						setDefaultKeys(bool b);
 	
-//	int		getValueI(string nameID);
-//	float	getValueF(string nameID);
-//	bool	getValueB(string nameID);
+	//	int		getValueI(string nameID);
+	//	float	getValueF(string nameID);
+	//	bool	getValueB(string nameID);
 	
 	void						drawFocus(float x, float y);
-
+	
 	
 	void						setDraw(bool b);
 	void						toggleDraw();
@@ -84,24 +83,24 @@ public:
 	vector <ofxSimpleGuiPage*>&	getPages();
 	
 	ofxSimpleGuiControl			&control(string name);		// returns control by name
-
+	
 	
 	ofxSimpleGuiPage			&addPage(string name = "");
 	ofxSimpleGuiControl			&addControl(ofxSimpleGuiControl& control);
 	ofxSimpleGuiContent			&addContent(string name, ofBaseDraws &content, float fixwidth = -1);
 	ofxSimpleGuiButton			&addButton(string name, bool &value);
 	ofxSimpleGuiFPSCounter		&addFPSCounter();
-//	ofxSimpleGuiMovieSlider		&addMovieSlider(string name, ofVideoPlayer& input);
+	//	ofxSimpleGuiMovieSlider		&addMovieSlider(string name, ofVideoPlayer& input);
 	ofxSimpleGuiQuadWarp		&addQuadWarper(string name, ofBaseDraws &baseDraw, ofPoint *pts);
 	ofxSimpleGuiSliderInt		&addSlider(string name, int &value, int min, int max);
-	ofxSimpleGuiSliderFloat		&addSlider(string name, float &value, float min, float max, float smoothing = 0);
+	ofxSimpleGuiSliderFloat		&addSlider(string name, float &value, float min, float max);
 	ofxSimpleGuiSlider2d		&addSlider2d(string name, ofPoint& value, float xmin, float xmax, float ymin, float ymax);
 	ofxSimpleGuiTitle			&addTitle(string name="", float height = 0);
 	ofxSimpleGuiToggle			&addToggle(string name, bool &value);
 	ofxSimpleGuiColorPicker		&addColorPicker(string name, float *values);
-   ofxSimpleGuiComboBox        &addComboBox(string name, int &value, int numChoices, string* choiceTitles=NULL);
-
-
+	ofxSimpleGuiComboBox        &addComboBox(string name, int &value, int numChoices, string* choiceTitles=NULL);
+	
+	
 	void						draw();
 	
 protected:
@@ -112,12 +111,12 @@ protected:
 	bool							changePage;
 	int								currentPageIndex;			// 1 based index of page (0 is for global controls)
 	
-//	ofxXmlSettings					XML;
-//	string							xmlFilename;
+	//	ofxXmlSettings					XML;
+	//	string							xmlFilename;
 	
 	bool							doDraw;
 	float							border;
-
+	
 	ofxSimpleGuiPage				*headerPage;
 	ofxSimpleGuiButton				*titleButton;
 	vector <ofxSimpleGuiPage*>		pages;				// 0 is for headerPage
@@ -125,10 +124,10 @@ protected:
 	void addListeners();
 	void removeListeners();
 	
-//	void setup(ofEventArgs &e);
+	//	void setup(ofEventArgs &e);
 	void update(ofEventArgs &e);
-//  void draw(ofEventArgs &e);
-//	void exit(ofEventArgs &e);
+	//  void draw(ofEventArgs &e);
+	//	void exit(ofEventArgs &e);
 	
 	void mouseMoved(ofMouseEventArgs &e);
 	void mousePressed(ofMouseEventArgs &e);	

@@ -1,12 +1,12 @@
 /***********************************************************************
-
+ 
  Copyright (c) 2008, 2009, 2010, Memo Akten, www.memo.tv
  *** The Mega Super Awesome Visuals Company ***
  * All rights reserved.
-
+ 
  based on Todd Vanderlin's ofxSimpleGui API
  http://toddvanderlin.com/
-
+ 
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -40,7 +40,7 @@ ofxSimpleGuiPage::ofxSimpleGuiPage(string name) : ofxSimpleGuiControl(name) {
 	disableAllEvents();
 	width = 0;
 	height = ofGetHeight();
-   eventStealingControl = NULL;
+	eventStealingControl = NULL;
 	setXMLName(name + "_settings.xml");
 }
 
@@ -53,39 +53,30 @@ ofxSimpleGuiPage &ofxSimpleGuiPage::setXMLName(string s) {
 	xmlFilename = s;
 	return *this;
 }
-/*
-void ofxSimpleGuiPage::loadFromXML(ofxXmlSettings &XML) {
-	for(int i=0; i < controls.size(); i++) {
-		controls[i]->loadFromXML(XML);
-	}
-}
 
-
-void ofxSimpleGuiPage::saveToXML(ofxXmlSettings &XML) {
-	for(int i=0; i < controls.size(); i++) {
-		controls[i]->saveToXML(XML);
-	}
-}
-*/
 
 void ofxSimpleGuiPage::loadFromXML() {
 	ofLog(OF_LOG_VERBOSE, "ofxSimpleGuiPage::loadFromXML: " + xmlFilename);
 	
 	if(xmlFilename.compare("") == 0) return;
-	
+
 	if(XML.loadFile(xmlFilename) == false) {
 		ofLog(OF_LOG_ERROR, "Error loading xmlFilename: " + xmlFilename);
 		return;
 	}
 	
+	XML.pushTag("controls");
 	for(int i=0; i < controls.size(); i++) {
 		controls[i]->loadFromXML(XML);
 	}
+	XML.popTag();
 }
 
 
 void ofxSimpleGuiPage::saveToXML() {
 	if(controls.size() <= 1 || xmlFilename.compare("") == 0) return;	// if it has no controls (title counts as one control)
+	
+	XML.saveFile(xmlFilename + ".bak");
 	
 	XML.clear();	// clear cause we are building a new xml file
 	
@@ -97,7 +88,7 @@ void ofxSimpleGuiPage::saveToXML() {
 	XML.popTag();
 	
 	XML.saveFile(xmlFilename);
-//	if(doSaveBackup) XML.saveFile(file+".bak");
+	//	if(doSaveBackup) 
 	ofLog(OF_LOG_VERBOSE, "ofxSimpleGuiPage::saveToXML: " + xmlFilename + " " + ofToString(controls.size(), 0) + " items");
 }
 
@@ -112,17 +103,17 @@ float ofxSimpleGuiPage::getNextY(float y) {
 void ofxSimpleGuiPage::draw(float x, float y, bool alignRight) {
 	setPos(x += config->offset.x, y += config->offset.y);
 	if(alignRight) x = ofGetWidth() - x -  config->gridSize.x;
-		
+	
 	float posX		= 0;
 	float posY		= 0;
-   float stealingX = 0;
-   float stealingY = 0;
-
+	float stealingX = 0;
+	float stealingY = 0;
+	
 	ofSetRectMode(OF_RECTMODE_CORNER);
-
+	
 	for(int i=0; i<controls.size(); i++) {
 		ofxSimpleGuiControl &control = *controls[i];
-
+		
 		if(control.newColumn) {
 			if(alignRight) posX -= config->gridSize.x;
 			else posX += config->gridSize.x;
@@ -132,13 +123,15 @@ void ofxSimpleGuiPage::draw(float x, float y, bool alignRight) {
 		float controlX = posX + x;
 		float controlY = posY + y;
 		
-      //we don't draw the event stealing controls until the end because they can expand and overlap with other controls (e.g. combo box)
-      if(eventStealingControl == &control) {
-         stealingX = controlX;
-         stealingY = controlY;
-      } else
-         control.draw(controlX, controlY);
-
+		//we don't draw the event stealing controls until the end because they can expand and overlap with other controls (e.g. combo box)
+		if(eventStealingControl == &control) {
+			stealingX = controlX;
+			stealingY = controlY;
+		} else {
+//			printf("drawing control: %s %s\n", control.controlType.c_str(), control.name.c_str());
+			control.draw(controlX, controlY);
+		}
+		
 		if(control.hasTitle) {
 			ofNoFill();
 			ofSetColor(config->borderColor);
@@ -146,7 +139,7 @@ void ofxSimpleGuiPage::draw(float x, float y, bool alignRight) {
 			ofRect(controlX, controlY, control.width, control.height);
 		}
 		posY = getNextY(posY + control.height + config->padding.y);
-
+		
 		if(posY + y >= height - control.height - config->padding.y) {
 			if(alignRight) posX -= config->gridSize.x;
 			else posX += config->gridSize.x;
@@ -156,16 +149,16 @@ void ofxSimpleGuiPage::draw(float x, float y, bool alignRight) {
 		//		if(guiFocus == controls[i]->guiID) controls[i]->focused = true;		// MEMO
 		//		else							   controls[i]->focused = false;
 	}
-   //event stealing controls get drawn on top
-   if(eventStealingControl) {
-      eventStealingControl->draw(stealingX, stealingY);
-      if(eventStealingControl->hasTitle) {
+	//event stealing controls get drawn on top
+	if(eventStealingControl) {
+		eventStealingControl->draw(stealingX, stealingY);
+		if(eventStealingControl->hasTitle) {
 			ofNoFill();
 			ofSetColor(config->borderColor);
 			glLineWidth(0.5f);
 			ofRect(stealingX, stealingY, eventStealingControl->width, eventStealingControl->height);
 		}
-   }
+	}
 }
 
 
@@ -197,11 +190,11 @@ ofxSimpleGuiQuadWarp &ofxSimpleGuiPage::addQuadWarper(string name, ofBaseDraws &
 //}
 
 ofxSimpleGuiSliderInt &ofxSimpleGuiPage::addSlider(string name, int &value, int min, int max) {
-	return (ofxSimpleGuiSliderInt &)addControl(* new ofxSimpleGuiSliderInt(name, value, min, max, 0));
+	return (ofxSimpleGuiSliderInt &)addControl(* new ofxSimpleGuiSliderInt(name, value, min, max));
 }
 
-ofxSimpleGuiSliderFloat &ofxSimpleGuiPage::addSlider(string name, float &value, float min, float max, float smoothing) {
-	return (ofxSimpleGuiSliderFloat &)addControl(* new ofxSimpleGuiSliderFloat(name, value, min, max, smoothing));
+ofxSimpleGuiSliderFloat &ofxSimpleGuiPage::addSlider(string name, float &value, float min, float max) {
+	return (ofxSimpleGuiSliderFloat &)addControl(* new ofxSimpleGuiSliderFloat(name, value, min, max));
 }
 
 ofxSimpleGuiSlider2d &ofxSimpleGuiPage::addSlider2d(string name, ofPoint& value, float xmin, float xmax, float ymin, float ymax) {
@@ -240,39 +233,55 @@ void ofxSimpleGuiPage::ReleaseEventStealingControl() {
 }
 
 void ofxSimpleGuiPage::mouseMoved(ofMouseEventArgs &e) {
-   if(eventStealingControl)
-      eventStealingControl->_mouseMoved(e);
-   else
-      for(int i=0; i<controls.size(); i++) controls[i]->_mouseMoved(e);
+	if(eventStealingControl)
+		eventStealingControl->_mouseMoved(e);
+	else
+		for(int i=0; i<controls.size(); i++) controls[i]->_mouseMoved(e);
 }
 
 void ofxSimpleGuiPage::mousePressed(ofMouseEventArgs &e) {
-   if(eventStealingControl)
-      eventStealingControl->_mousePressed(e);
-   else
-      for(int i=0; i<controls.size(); i++) controls[i]->_mousePressed(e);
+	if(eventStealingControl)
+		eventStealingControl->_mousePressed(e);
+	else
+		for(int i=0; i<controls.size(); i++) controls[i]->_mousePressed(e);
 }
 
 void ofxSimpleGuiPage::mouseDragged(ofMouseEventArgs &e) {
-   if(eventStealingControl)
-      eventStealingControl->_mouseDragged(e);
-   else
-      for(int i=0; i<controls.size(); i++) controls[i]->_mouseDragged(e);
+	if(eventStealingControl)
+		eventStealingControl->_mouseDragged(e);
+	else
+		for(int i=0; i<controls.size(); i++) controls[i]->_mouseDragged(e);
 }
 
 void ofxSimpleGuiPage::mouseReleased(ofMouseEventArgs &e) {
-   if(eventStealingControl)
-      eventStealingControl->_mouseReleased(e);
-   else
-      for(int i=0; i<controls.size(); i++) controls[i]->_mouseReleased(e);
+	if(eventStealingControl)
+		eventStealingControl->_mouseReleased(e);
+	else
+		for(int i=0; i<controls.size(); i++) controls[i]->_mouseReleased(e);
 }
 
 void ofxSimpleGuiPage::keyPressed(ofKeyEventArgs &e) {
-	for(int i=0; i<controls.size(); i++) controls[i]->_keyPressed(e);
+	bool keyUp		= e.key == OF_KEY_UP;
+	bool keyDown	= e.key == OF_KEY_DOWN;
+	bool keyLeft	= e.key == OF_KEY_LEFT;
+	bool keyRight	= e.key == OF_KEY_RIGHT;
+	bool keyEnter	= e.key == OF_KEY_RETURN;
+	
+	for(int i=0; i<controls.size(); i++) {
+		ofxSimpleGuiControl *c = controls[i];
+		if(c->isMouseOver()) {
+			if(keyUp)		c->onKeyUp();
+			if(keyDown)		c->onKeyDown();
+			if(keyLeft)		c->onKeyLeft();
+			if(keyRight)	c->onKeyRight();
+			if(keyEnter)	c->onKeyEnter();
+			c->_keyPressed(e);
+		}
+	}
 }
 
 void ofxSimpleGuiPage::keyReleased(ofKeyEventArgs &e) {
-	for(int i=0; i<controls.size(); i++) controls[i]->_keyReleased(e);
+	for(int i=0; i<controls.size(); i++) if(controls[i]->isMouseOver()) controls[i]->_keyReleased(e);
 }
 
 

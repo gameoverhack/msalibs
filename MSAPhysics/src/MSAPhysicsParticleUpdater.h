@@ -34,7 +34,6 @@
 #include "MSAObjCPointer.h"
 #include "MSAPhysicsParticle.h"
 
-
 namespace MSA {
 	
 	namespace Physics {

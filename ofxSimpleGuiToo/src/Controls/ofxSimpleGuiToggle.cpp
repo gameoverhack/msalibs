@@ -20,7 +20,7 @@ void ofxSimpleGuiToggle::setup() {
 }
 
 void ofxSimpleGuiToggle::loadFromXML(ofxXmlSettings &XML) {
-	setValue(XML.getValue("controls:" + controlType + "_" + key + ":value", 0));
+	setValue(XML.getValue(controlType + "_" + key + ":value", 0));
 }
 
 void ofxSimpleGuiToggle::saveToXML(ofxXmlSettings &XML) {

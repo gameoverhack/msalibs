@@ -48,7 +48,9 @@ namespace MSA {
 	
 	void createDir(string fullpath);
 	
+	void setDataPathToBundle();
 	
+	void restoreDataPath();
 	
 	
 	/***************************************************************/

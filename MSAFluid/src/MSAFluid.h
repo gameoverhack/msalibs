@@ -52,7 +52,6 @@
 #pragma once
 
 #include "MSAFluidSolver.h"
-#include "MSAFluidParticleUpdater.h"
 
 #if defined( MSA_HOST_OPENFRAMEWORKS )
 #include "MSAFluidDrawerGl-OF.h"

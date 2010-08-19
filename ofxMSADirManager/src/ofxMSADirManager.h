@@ -32,7 +32,7 @@
 #pragma once
 
 #include "ofxDirList.h"
-#include "ofxMSADataProtector.h"
+#include "MSADataProtector.h"
 
 namespace MSA {
 	

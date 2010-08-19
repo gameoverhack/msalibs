@@ -2,10 +2,9 @@
 #include "ofxSimpleGuiButton.h"
 
 
-ofxSimpleGuiButton::ofxSimpleGuiButton(string name, bool &value) : ofxSimpleGuiControl(name) {
+ofxSimpleGuiButton::ofxSimpleGuiButton(string name, bool &value) : ofxSimpleGuiValueControl<bool>(name, value) {
 	beToggle	= false;
 	beenPressed = false;
-	this->value	= &value;
 	controlType = "Button";
 	setup();
 }
@@ -15,7 +14,7 @@ void ofxSimpleGuiButton::setup() {
 }
 
 void ofxSimpleGuiButton::loadFromXML(ofxXmlSettings &XML) {
-	setValue(XML.getValue("controls:" + controlType + "_" + key + ":value", 0));
+	setValue(XML.getValue(controlType + "_" + key + ":value", 0));
 }
 
 void ofxSimpleGuiButton::saveToXML(ofxXmlSettings &XML) {

@@ -12,6 +12,7 @@
 
 
 class ofxSimpleGuiPage;
+
 class ofxSimpleGuiComboBox : public ofxSimpleGuiControl {
 public:
 	//create a combo box which displays "Name : selection"
@@ -75,11 +76,9 @@ protected:
 	
 	int            m_mouseChoice;
 	int            &m_selectedChoice;
-//	int            m_numChoices;
 	bool           m_hasFocus;
 	bool           m_mouseMovedSinceClick;
 	string          m_title;
 	vector<string>  m_choices;
 	ofxSimpleGuiPage* m_page;
-//	bool beenPressed;
 };

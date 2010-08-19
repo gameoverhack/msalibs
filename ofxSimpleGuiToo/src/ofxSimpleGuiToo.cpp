@@ -140,7 +140,6 @@ void ofxSimpleGuiToo::loadFromXML() {
 	}
 
 	setPage(1);
-//	setDraw(doDraw);
 }
 
 
@@ -312,9 +311,9 @@ ofxSimpleGuiSliderInt &ofxSimpleGuiToo::addSlider(string name, int &value, int m
 	return pages[currentPageIndex]->addSlider(name, value, min, max);
 }
 
-ofxSimpleGuiSliderFloat &ofxSimpleGuiToo::addSlider(string name, float &value, float min, float max, float smoothing) {
+ofxSimpleGuiSliderFloat &ofxSimpleGuiToo::addSlider(string name, float &value, float min, float max) {
 	if(!config) setup();
-	return pages[currentPageIndex]->addSlider(name, value, min, max, smoothing);
+	return pages[currentPageIndex]->addSlider(name, value, min, max);
 }
 
 ofxSimpleGuiSlider2d &ofxSimpleGuiToo::addSlider2d(string name, ofPoint& value, float xmin, float xmax, float ymin, float ymax) {

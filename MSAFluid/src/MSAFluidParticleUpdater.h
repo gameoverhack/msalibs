@@ -1,9 +1,9 @@
 /***********************************************************************
-
+ 
  This class interfaces the fluid solver with ofxMSAPhysics (applies fluid velocity as forces to particles)
-
+ 
  /***********************************************************************
-
+ 
  Copyright (c) 2008, 2009, 2010, Memo Akten, www.memo.tv
  *** The Mega Super Awesome Visuals Company ***
  * All rights reserved.
@@ -33,32 +33,34 @@
  *
  * ***********************************************************************/
 
+// only include this if you have MSAPhysics as well
+
 
 #pragma once
 
-#ifdef OF_ADDON_USING_OFXMSAPHYSICS
-
-#include "CellUpdater.h"
 #include "MSAFluid.h"
+#include "MSAPhysicsParticleUpdater.h"
 
-namespace {
-
-class FluidParticleUpdater : public CellUpdater {
-public:
-    float strength;
-	FluidSolver *fluidSolver;
-
-	FluidParticleUpdater() {
-		fluidSolver = NULL;
-	}
-
-	void update(Cell* p) {
-		ofPoint vel;
-		fluidSolver->getInfoAtPos(p->x * p->getParams()->worldSizeInv.x, p->y * p->getParams()->worldSizeInv.y, &vel, NULL);
-		float invMass = p->getInvMass();
-		p->addVelocity(vel.x * invMass * strength, vel.y * invMass * strength, 0);
-	}
-
-};
-
-#endif
+namespace MSA {
+	
+	template <typename T>
+	class FluidParticleUpdater : public Physics::ParticleUpdaterT<T> {
+	public:
+		float strength;
+		FluidSolver *fluidSolver;
+		
+		FluidParticleUpdater() {
+			fluidSolver = NULL;
+		}
+		
+		void update(Physics::ParticleT<T> *p) {
+			if(fluidSolver) {
+				Vec2f fluidVel = fluidSolver->getVelocityAtPos(p->getPosition()* p->getParams()->worldSizeInv);
+				float invMass = p->getInvMass();
+				p->addVelocity(fluidVel.x * invMass * strength, fluidVel.y * invMass * strength, 0);
+			}
+		}
+		
+	};
+	
+}

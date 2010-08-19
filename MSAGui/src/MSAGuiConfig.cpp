@@ -43,7 +43,7 @@ namespace MSA {
 	GuiConfig::GuiConfig() {
 		
 		sliderHeight		= 10;
-		sliderTextHeight	= 20;
+		sliderTextHeight	= 38;
 		titleHeight			= sliderHeight + sliderTextHeight;
 		toggleHeight		= titleHeight;
 		buttonHeight		= titleHeight;

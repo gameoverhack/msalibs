@@ -213,11 +213,11 @@ namespace MSA {
 	
 	
 	void OpenCLImage::draw(float x, float y) {
-		texture->draw(x, y);
+		if(texture) texture->draw(x, y);
 	}
 	
 	void OpenCLImage::draw(float x, float y, float w, float h) {
-		texture->draw(x, y, w, h);
+		if(texture) texture->draw(x, y, w, h);
 	}
 }
 

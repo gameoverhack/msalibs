@@ -25,14 +25,5 @@ public:
 	virtual ofPoint		getScreenSize();
 	virtual ofPoint		getWindowSize();
 
-//	virtual void		timerLoop();
-	
-	
-	virtual void		keyPressed(int key);
-	virtual void		mousePressed(float x, float y, int button);
-	virtual void		mouseMoved(float x, float y);
-	virtual void		mouseDragged(float x, float y, int button);
-	virtual void		mouseReleased(int button);
-	
 	int					numberOfFSAASamples;
 };

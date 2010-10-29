@@ -12,8 +12,6 @@
 #pragma once
 
 #import "ofAppBaseWindow.h"
-#import "GLViewProtocol.h"
-#import "ofxCocoa.h"
 
 class CocoaWindowBase : public ofAppBaseWindow {
 public:
@@ -49,13 +47,13 @@ public:
 	virtual void		enableSetupScreen();
 	virtual void		disableSetupScreen();
 	
+	
+	// extras
 	virtual void		update();
-	virtual void		render(int width, int height);
-	virtual void		timerLoop();
+	virtual void		draw();
+	virtual void		draw(int width, int height);
 	
 	virtual void		initWindowSize();
-	
-	id<GLViewProtocol>	glView;
 	
 	int					windowMode;
 	ofPoint				screenSize;

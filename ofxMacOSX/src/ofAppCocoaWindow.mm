@@ -8,7 +8,7 @@
  */
 
 #include "ofAppCocoaWindow.h"
-#include "ofMain.h"
+#import "ofxCocoa.h"
 
 #import <AppKit/AppKit.h>
 
@@ -24,37 +24,39 @@ void ofAppCocoaWindow::setUseFSAA(int numberOfFSAASamples) {
 
 
 void ofAppCocoaWindow::setWindowPosition(int requestedX, int requestedY) {
-	NSRect viewFrame = [glView frame];
+	NSRect viewFrame = [ofxGetGLView() frame];
 	NSRect screenRect = [[NSScreen mainScreen] frame];
 	
 	NSPoint point;
 	point.x = requestedX;
 	point.y = screenRect.size.height - requestedY + viewFrame.origin.y; 
 	
-	[[glView window] setFrameTopLeftPoint:point];
+	[ofxGetGLWindow() setFrameTopLeftPoint:point];
 }
 
 
 
 void ofAppCocoaWindow::setWindowShape(int requestedWidth, int requestedHeight) {
-	NSRect windowFrame  = [[glView window] frame];
-	NSRect viewFrame = [glView frame];
+	NSRect windowFrame  = [ofxGetGLWindow() frame];
+	NSRect viewFrame = [ofxGetGLView() frame];
 	NSLog(@"ofAppCocoaWindow::setWindowShape requested:(%i %i) window:%@ view:%@", requestedWidth, requestedHeight, NSStringFromRect(windowFrame), NSStringFromRect(viewFrame));
 	
 	windowFrame.origin.y -= requestedHeight -  viewFrame.size.height;
 	windowFrame.size = NSMakeSize(requestedWidth + windowFrame.size.width - viewFrame.size.width, requestedHeight + windowFrame.size.height - viewFrame.size.height);
 	
-	[[glView window] setFrame:windowFrame display:YES];
+	[ofxGetGLWindow() setFrame:windowFrame display:YES];
+	
+	[ofxGetGLWindow() windowDidResize:NULL];
 }
 
 ofPoint	ofAppCocoaWindow::getScreenSize() {
-	NSRect screenRect = [[[glView window] screen] frame];
+	NSRect screenRect = [[ofxGetGLWindow() screen] frame];
 	screenSize.set(screenRect.size.width, screenRect.size.height);
 	return screenSize;
 }
 
 ofPoint	ofAppCocoaWindow::getWindowSize() {
-	NSRect viewFrame = [glView frame];
+	NSRect viewFrame = [ofxGetGLView() frame];
 	windowSize.set(viewFrame.size.width, viewFrame.size.height);
 	return windowSize;
 }
@@ -62,43 +64,5 @@ ofPoint	ofAppCocoaWindow::getWindowSize() {
 
 void ofAppCocoaWindow::setWindowTitle(string windowString) {
 	NSString *stringFromUTFString = [[NSString alloc] initWithUTF8String:windowString.c_str() ];
-	[ [glView window] setTitle: stringFromUTFString];
+	[ ofxGetGLWindow() setTitle: stringFromUTFString];
 }
-
-
-
-void ofAppCocoaWindow::keyPressed(int key){
-	if(key == OF_KEY_ESC){
-		OF_EXIT_APP(0);
-	}
-	ofGetAppPtr()->keyPressed(key);
-}
-
-void ofAppCocoaWindow::mousePressed(float x, float y, int button){
-	ofGetAppPtr()->mousePressed(x, windowSize.y-y, button);
-	ofGetAppPtr()->mouseX = x;
-	ofGetAppPtr()->mouseY = windowSize.y-y;
-}
-
-void ofAppCocoaWindow::mouseDragged(float x, float y, int button){
-	ofGetAppPtr()->mouseDragged(x, windowSize.y-y, button);
-	ofGetAppPtr()->mouseX = x;
-	ofGetAppPtr()->mouseY = windowSize.y-y;
-}
-
-void ofAppCocoaWindow::mouseReleased(int button){
-	ofGetAppPtr()->mouseReleased(ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY, button);
-	ofGetAppPtr()->mouseReleased();
-}
-
-
-void ofAppCocoaWindow::mouseMoved(float x, float y){
-	ofGetAppPtr()->mouseMoved(x, windowSize.y-y);
-	ofGetAppPtr()->mouseX = x;
-	ofGetAppPtr()->mouseY = windowSize.y-y;
-}
-
-
-
-
-

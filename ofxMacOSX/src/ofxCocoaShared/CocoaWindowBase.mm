@@ -9,12 +9,12 @@
 // Shared between iPhone and Desktop 
 
 #import "CocoaWindowBase.h"
-#import "ofxAppDelegateBase.h"
+#import "ofxAppDelegate.h"
+#import "ofxCocoa.h"
 
-#import "ofMain.h"
 
 static CocoaWindowBase * ofWindowPtr = NULL;
-CocoaWindowBase* ofxGetCocoaWindow() {
+CocoaWindowBase* ofxGetAppCocoaWindow() {
 	return ofWindowPtr;
 }
 
@@ -36,7 +36,6 @@ CocoaWindowBase::CocoaWindowBase() {
 	timeNow, timeThen, fps	= 0.0f;
 	
 	frameRate				= 0;
-	glView					= nil;
 }
 
 
@@ -76,7 +75,11 @@ void CocoaWindowBase::update(){
 	ofGetAppPtr()->update();
 }
 
-void CocoaWindowBase::render(int width, int height){
+void CocoaWindowBase::draw() {
+	draw(ofGetWidth(), ofGetHeight());
+}
+
+void CocoaWindowBase::draw(int width, int height){
 
 	// set viewport, clear the screen
 	glViewport( 0, 0, width, height );
@@ -101,19 +104,6 @@ void CocoaWindowBase::render(int width, int height){
 	// --------------
 	
 	nFrameCount++;		// increase the overall frame count
-	
-}
-
-
-
-void CocoaWindowBase::timerLoop() {
-	update();
-	
-	[glView setCurrentContext];
-	
-	render(ofGetWidth(), ofGetHeight());
-	
-	[glView flush];
 }
 
 
@@ -150,10 +140,10 @@ void CocoaWindowBase::setFullscreen(bool fullscreen) {
 	
 	if(fullscreen) {
 		windowMode		= OF_FULLSCREEN;
-		[glView goFullscreen];
+		[ofxGetGLView() goFullscreen];
 	} else {
 		windowMode		= OF_WINDOW;
-		[glView goWindow];
+		[ofxGetGLView() goWindow];
 	}
 }
 

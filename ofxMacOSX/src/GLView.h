@@ -2,38 +2,51 @@
 
 #import "GLee.h"
 #import <Cocoa/Cocoa.h>
+#import <QuartzCore/CVDisplayLink.h>
 
-#import "GLViewProtocol.h"
+#import "ofAppCocoaWindow.h"
 
-class ofAppCocoaWindow;
+#define OF_CURRENT_SCREEN		-1
+#define OF_ALL_SCREENS			-2
 
-@interface GLView : NSOpenGLView <GLViewProtocol> {
-	ofAppCocoaWindow *cocoaWindowPtr;
+#import "CocoaDefines.h"
+
+@interface GLView : NSOpenGLView {
+	NSRect savedWindowFrame;
+	
+	NSOpenGLContext *openGLContext;
+	NSOpenGLPixelFormat *pixelFormat;
+	
+	float			targetFrameRate;
+	BOOL			useDisplayLink;
+	CVDisplayLinkRef displayLink;
+	NSTimer			*timer;
+	BOOL			isAnimating;
 }
 
-//-(void)drawRect:(NSRect)bounds;
+-(id) initWithFrame:(NSRect)frameRect;
+-(id) initWithFrame:(NSRect)frameRect shareContext:(NSOpenGLContext*)context;
 
-- (void) keyDown:(NSEvent *)theEvent;
-- (void) mouseDown:(NSEvent *)theEvent;
-- (void) rightMouseDown:(NSEvent *)theEvent;
-- (void) otherMouseDown:(NSEvent *)theEvent;
-- (void) mouseUp:(NSEvent *)theEvent;
-- (void) rightMouseUp:(NSEvent *)theEvent;
-- (void) otherMouseUp:(NSEvent *)theEvent;
-- (void) mouseDragged:(NSEvent *)theEvent;
-- (void) scrollWheel:(NSEvent *)theEvent;
-- (void) rightMouseDragged:(NSEvent *)theEvent;
-- (void) otherMouseDragged:(NSEvent *)theEvent;
-- (void) mouseMoved:(NSEvent *)theEvent;
+-(NSOpenGLContext*) openGLContext;
 
 
-// GLViewProtocol:
--(void)setCurrentContext;
--(void)flush;
+-(void) updateAndDraw;
+-(void) startAnimation;
+-(void) stopAnimation;
+-(void) toggleAnimation;
 
-- (void)goFullscreen:(int)whichScreen;
+-(void) setFrameRate:(float)rate;
+
+//-------
+
+
+
+//-(void)setCurrentContext;
+//-(void)flush;
+
+-(void)goFullscreen:(int)whichScreen;
 -(void)goFullscreen;	// defaults to fulscreen only on current screen
-- (void)goWindow;
+-(void)goWindow;
 
 
 @end

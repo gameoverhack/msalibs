@@ -1,14 +1,34 @@
+//
+//  ofxAppDelegate.h
+//  Cocoa Test
+//
+//  Created by Mehmet Akten on 16/08/2009.
+//  Copyright 2009 MSA Visuals Ltd.. All rights reserved.
+//
+
+// Shared between iPhone and Desktop 
+
+#pragma once
 
 
-#import "ofxCocoa.h"
-#import "ofxAppDelegateBase.h"
+#import "CocoaDefines.h"
+#import "GLWindow.h"
+#import "GLView.h"
 
-@interface ofxAppDelegate : ofxAppDelegateBase {
-	
+@interface ofxAppDelegate : NSObject {
+	GLWindow			*glWindow;
+	GLView				*glView;
 }
 
--(IBAction)toggleFullscreen:(id)sender;
--(IBAction)goFullScreen:(id)sender;
 
+@property (readonly) GLWindow	*glWindow;
+
++(ofxAppDelegate*)instance;
+
+-(void) setFrameRate:(float)rate;
 
 @end
+
+/*************************************************************/
+
+

@@ -112,4 +112,10 @@ namespace MSA {
 		}
 	}
 	
+	template <typename T>
+	bool inRange(T a, T min, T max) {
+		return (a >= min) && (a <= max);
+	}
+
+	
 }

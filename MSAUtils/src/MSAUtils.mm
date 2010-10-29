@@ -93,6 +93,14 @@ namespace MSA {
 	}
 	
 	
+	void hideCursor() {
+		[NSCursor hide];
+	}
+	void showCursor() {
+		[NSCursor unhide];
+	}
+
+	
 	void setMouseCursor(bool forceOn) {
 		if(forceOn || ofGetWindowMode() == OF_WINDOW) ofShowCursor();
 		else ofHideCursor();
@@ -121,6 +129,24 @@ namespace MSA {
 	void restoreDataPath() {
 //		ofEnableDataPath();
 //		if(savedDataPath.empty()) ofSetDataPathRoot(savedDataPath);
+	}
+
+	string padWithZero(float num, float precision) {
+		string str = ofToString(num, precision);
+		if(num<10) str = "0" + str;
+		return str;
+	}
+
+	
+	string secondsToString(float secs) {
+		int mins = floor(secs / 60);
+		int hours = floor(mins/24);
+
+		secs -= mins * 60;
+		mins %= 60;
+		hours %= 24;
+		
+		return padWithZero(hours) + ":" + padWithZero(mins) + ":" + padWithZero(secs, 2);
 	}
 
 	
@@ -162,6 +188,25 @@ namespace MSA {
 	}
 	
 	
+	int showDialog(string message, string info, int style) {
+		int ret;
+#ifdef MSA_TARGET_OSX
+
+		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+		NSAlert *alert = [[NSAlert alloc] init];
+//		[alert addButtonWithTitle:@"OK"];
+//		[alert addButtonWithTitle:@"Cancel"];
+		[alert setMessageText:[NSString stringWithUTF8String:message.c_str()]];
+		[alert setInformativeText:[NSString stringWithUTF8String:info.c_str()]];
+		[alert setAlertStyle:style];
+		
+		ret = [alert runModal];
+		ret -= NSAlertFirstButtonReturn;
+		[alert release];
+		[pool release];
+#endif		
+		return ret;
+	}
 	
 	
 	

@@ -61,6 +61,7 @@ namespace MSA {
 		float	brightness;
 		float	velDrawThreshold;
 		float	velDrawMult;
+		int		vectorSkipCount;
 		
 		FluidDrawMode		drawMode;
 

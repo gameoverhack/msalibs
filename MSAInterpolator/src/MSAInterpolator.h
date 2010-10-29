@@ -29,10 +29,10 @@
  *
  * ***********************************************************************/ 
 
-/**************************** Interpolator Classes ****************************
+/**************************** InterpolatorT Classes ****************************
 Usage:
-	MSA::Interpolator<float>		myInterpolator1;		// create spline of floats
-	MSA::Interpolator<myDataType>	myInterpolator2;		// create spline of custom data types (more info below)
+	MSA::InterpolatorT<float>		myInterpolator1;		// create spline of floats
+	MSA::InterpolatorT<myDataType>	myInterpolator2;		// create spline of custom data types (more info below)
  
 // OR use preset classes:
  
@@ -63,7 +63,7 @@ Usage:
 	myInterpolator.drawSmooth(int numSteps, int dotSize, int lineWidth);	// draws smoothed data in  (make either zero to not draw dots or lines)
  
 Using custom data type:
-	MSA::Interpolator<myDataType>	myInterpolator2;		// create spline of custom data types (more info below)
+	MSA::InterpolatorT<myDataType>	myInterpolator2;		// create spline of custom data types (more info below)
 	myDataType has to be a scalar or class with the overloaded operators:
 		+  (myDataType&)
 		-  (myDataType&)

@@ -30,7 +30,7 @@
  * ***********************************************************************/ 
 
 
-/**************************** 3D Interpolator (of Vec3) ****************************/
+/**************************** 3D InterpolatorT (of Vec3) ****************************/
 
 #pragma once
 
@@ -38,7 +38,7 @@
 
 namespace MSA {
 	
-	typedef Interpolator<Vec3f> Interpolator3D;
+	typedef InterpolatorT<Vec3f> Interpolator3D;
 	
 	
 	inline float lengthOf(const Vec3f& v) {

@@ -30,7 +30,7 @@
  * ***********************************************************************/ 
 
 
-/**************************** 1D Interpolator (of floats) ****************************/
+/**************************** 1D InterpolatorT (of floats) ****************************/
 
 #pragma once
 
@@ -43,5 +43,5 @@ namespace MSA {
 	}
 	
 	
-	typedef Interpolator<float> Interpolator1D;
+	typedef InterpolatorT<float> Interpolator1D;
 }

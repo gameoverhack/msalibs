@@ -30,7 +30,7 @@
  * ***********************************************************************/ 
 
 
-/**************************** 2D Interpolator (of Vec2) ****************************/
+/**************************** 2D InterpolatorT (of Vec2) ****************************/
 
 #pragma once
 
@@ -38,7 +38,7 @@
 
 namespace MSA {
 	
-	typedef Interpolator<Vec2f> Interpolator2D;
+	typedef InterpolatorT<Vec2f> Interpolator2D;
 
 	
 	inline float lengthOf(const Vec2f& v) {

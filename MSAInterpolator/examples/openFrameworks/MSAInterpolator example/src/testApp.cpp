@@ -186,9 +186,8 @@ void testApp::mousePressed(int x, int y, int button) {
 	spherePosPerc = spherePosPerc * numPoints / (numPoints + 1);
 	
 	
-	MSA::Vec3f pt;
-	pt.set(x-ofGetWidth()/2, y, 0);
-	pt.rotate(0, -currentRot, 0);
+	MSA::Vec3f pt(x-ofGetWidth()/2, y, 0);
+	pt.rotate(MSA::Vec3f(0, 1, 0), -currentRot);
 	spline3D.push_back(pt);
 }
 

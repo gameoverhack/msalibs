@@ -29,7 +29,7 @@
  *
  * ***********************************************************************/ 
 
-/**************************** Interpolator Template Class ****************************/
+/**************************** InterpolatorT Template Class ****************************/
 #pragma once
 
 
@@ -41,12 +41,12 @@ namespace MSA {
 #define kLengthCalcSegments		100
 	
 	template <typename Type>
-	class Interpolator {
+	class InterpolatorT {
 	public:
 		
 		bool verbose;
 		
-		Interpolator() {
+		InterpolatorT() {
 			setInterpolation(kInterpolationCubic);
 			setUseLength(false);
 			verbose = false;
@@ -58,7 +58,7 @@ namespace MSA {
 		Type sampleAt(float t) {
 			int numItems = size();
 			if(numItems == 0) {
-//				if(verbose) printf("Interpolator: not enough samples", t);
+//				if(verbose) printf("InterpolatorT: not enough samples", t);
 				return Type();
 			}
 			

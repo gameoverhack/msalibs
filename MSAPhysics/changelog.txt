@@ -7,6 +7,7 @@ TODO:
 v3.1
 --------------------
 - moved to all template classes for 2D/3D (or more). so MSA::Physics::WorldT<T>. e.g. World2D, World3D.
+- enable() and disable() for particles, to not update and leave out of collision
 
 
 v3.0

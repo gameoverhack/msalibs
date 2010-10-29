@@ -377,7 +377,7 @@ namespace MSA {
 		template <typename T>
 		WorldT<T>* WorldT<T>::setSectorCount(T vCount) {
 			for(int i=0; i<T::DIM; i++) if(vCount[i] <= 0) vCount[i] = 1;
-
+			
 			params.sectorCount = vCount;
 			
 			//	params.sectorCount.x = 1 << (int)vPow.x;
@@ -454,11 +454,11 @@ namespace MSA {
 				_constraints[i].clear();
 			}
 			
-//			for(typename vector<SectorT<T>*>::iterator it = _sectors.begin(); it != _sectors.end(); it++) {
-//				SectorT<T>* sector = *it;
-//				sector->release();
-//			}
-//			_sectors.clear();
+			//			for(typename vector<SectorT<T>*>::iterator it = _sectors.begin(); it != _sectors.end(); it++) {
+			//				SectorT<T>* sector = *it;
+			//				sector->release();
+			//			}
+			//			_sectors.clear();
 			
 			
 		}
@@ -549,25 +549,27 @@ namespace MSA {
 					}
 					
 					// find which sector particle is in
-//					int i = mapRange(particle->getX(), params.worldMin.x, params.worldMax.x, 0.0f, params.sectorCount.x, true);
-//					int j = mapRange(particle->getY(), params.worldMin.y, params.worldMax.y, 0.0f, params.sectorCount.y, true);
-//					int k = mapRange(particle->getZ(), params.worldMin.z, params.worldMax.z, 0.0f, params.sectorCount.z, true);
+					//					int i = mapRange(particle->getX(), params.worldMin.x, params.worldMax.x, 0.0f, params.sectorCount.x, true);
+					//					int j = mapRange(particle->getY(), params.worldMin.y, params.worldMax.y, 0.0f, params.sectorCount.y, true);
+					//					int k = mapRange(particle->getZ(), params.worldMin.z, params.worldMax.z, 0.0f, params.sectorCount.z, true);
 					
-					int sectorIndex=0;
-					for(int i=0; i<T::DIM; i++) {
-						int t = params.sectorCount[i] ? mapRange(particle->getPosition()[i], params.worldMin[i], params.worldMax[i], 0.0f, params.sectorCount[1]-1, true) : 0;
+					if(isCollisionEnabled()) {
+						int sectorIndex=0;
+						for(int i=0; i<T::DIM; i++) {
+							int t = params.sectorCount[i] ? mapRange(particle->getPosition()[i], params.worldMin[i], params.worldMax[i], 0.0f, params.sectorCount[1]-1, true) : 0;
+							
+							// TODO:
+							//						for(int j=0; j<i; j++) {
+							//							t *= params.sectorCount[i];
+							//						}
+							//						sectorIndex += t;
+							
+						}
 						
-						// TODO:
-//						for(int j=0; j<i; j++) {
-//							t *= params.sectorCount[i];
-//						}
-//						sectorIndex += t;
-						
+						_sectors[sectorIndex]->addParticle(particle);
 					}
 					
-					_sectors[sectorIndex]->addParticle(particle);
-					
-//					_sectors[i * params.sectorCount.y * params.sectorCount.x + j * params.sectorCount.x + k]->addParticle(particle);
+					//					_sectors[i * params.sectorCount.y * params.sectorCount.x + j * params.sectorCount.x + k]->addParticle(particle);
 					
 					//			printf("sector for particle at %f, %f, %f is %i %i %i\n", particle->getX(), particle->getY(), particle->getZ(), i, j, k);
 					//			for(int s=0; s<_sectors.size(); s++) _sectors[s].checkParticle(particle);
@@ -665,5 +667,5 @@ namespace MSA {
 			return params;
 		}
 	}
-
+	
 }

@@ -78,6 +78,10 @@ namespace MSA {
 			ParticleT*		makeFixed();
 			ParticleT*		makeFree();
 			
+			// quick way of enabling (collision and update) and disabling
+			ParticleT*		enable();
+			ParticleT*		disable();
+			
 			// move the particle
 			// if preserveVelocity == true, the particle will move to new position and keep it's old velocity
 			// if preserveVelocity == false, the particle will move to new position but gain the velocity of the displacement
@@ -104,10 +108,14 @@ namespace MSA {
 			void			*data;
 			
 			ParamsT<T>		*getParams();
-			
+
+			// only particles sharing bits in the collision plane collide with each other
+			unsigned int	collisionPlane;
+
 		protected:
 			ParamsT<T>		*_params;
 			WorldT<T>		*_world;
+			
 			
 			T				_pos;
 			T				_oldPos;
@@ -303,6 +311,9 @@ namespace MSA {
 			_age = 0;
 			verbose = true;
 			data = NULL;
+			
+			collisionPlane = -1;
+			
 			setClassName("ParticleT");
 		}
 		
@@ -321,6 +332,22 @@ namespace MSA {
 		template <typename T>
 		bool ParticleT<T>::hasCollision() {
 			return _collisionEnabled;
+		}
+		
+		
+		
+		template <typename T>
+		ParticleT<T>* ParticleT<T>::enable(){
+			enableCollision();
+			makeFree();
+			return this;
+		}
+		
+		template <typename T>
+		ParticleT<T>* ParticleT<T>::disable() {
+			disableCollision();
+			makeFixed();
+			return this;
 		}
 		
 		

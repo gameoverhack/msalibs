@@ -6,6 +6,8 @@
 .DS_Store
 
 build/
+*.app
+*.app/*
 
 # Windows cruft
 *.suo

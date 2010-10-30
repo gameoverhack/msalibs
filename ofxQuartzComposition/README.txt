@@ -39,6 +39,7 @@
 ofxQuartzComposition
 ------------------------------------------------------------------------
 This is an addon for openFrameworks to manage Quartz Compositions (.qtz files).
+See http://www.vimeo.com/16346790
 
 Currently there is support for:
 - loading multiple QTZ files inside an openframeworks application.

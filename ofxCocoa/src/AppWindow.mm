@@ -1,0 +1,272 @@
+/***********************************************************************
+ 
+ Copyright (c) 2008, 2009, 2010, Memo Akten, www.memo.tv
+ *** The Mega Super Awesome Visuals Company ***
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of MSA Visuals nor the names of its contributors
+ *       may be used to endorse or promote products derived from this software
+ *       without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+ * OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
+ * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+ * OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * ***********************************************************************/
+
+/***************
+ DEPENDENCIES:
+ - NONE
+ ***************/ 
+
+
+#import "ofxCocoa.h"
+
+#import <AppKit/AppKit.h>
+
+
+namespace MSA {
+	namespace ofxCocoa {
+		
+		static AppWindow * ofWindowPtr = NULL;
+		
+		AppWindow* appWindow() {
+			return ofWindowPtr;
+		}
+		
+		
+		
+		/******** Constructor ************/
+		
+		AppWindow::AppWindow(InitSettings initSettings):_initSettings(initSettings) {
+			NSLog(@"AppWindow::AppWindow()");
+			nFrameCount				= 0;
+			bEnableSetupScreen		= true;
+			
+			windowPos.set(0, 0);
+			windowSize.set(0, 0);
+			screenSize.set(0, 0);
+			
+			nFrameCount				= 0;
+			windowMode				= 0;
+			timeNow, timeThen, fps	= 0.0f;
+			
+			frameRate				= 0;
+		}
+		
+		
+		/******** Initialization methods ************/
+		void AppWindow::setupOpenGL(int w, int h, int screenMode) {
+			NSLog(@"AppWindow::setupOpenGL(%i, %i, %i)", w, h, screenMode);
+			
+			windowMode = screenMode;
+			windowSize.set(w, h);
+		}
+		
+		
+		void AppWindow::initializeWindow() {
+			
+		}
+		
+		
+		void AppWindow::runAppViaInfiniteLoop(ofBaseApp * appPtr) {
+			NSLog(@"AppWindow::runAppViaInfiniteLoop()");
+			
+			ofWindowPtr = this;
+			ofGetAppPtr()->mouseX = 0;
+			ofGetAppPtr()->mouseY = 0;
+			
+			NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+			
+			NSApplicationMain(0,  NULL);
+			[pool release];	
+		}
+		
+		
+		
+		
+		void AppWindow::showCursor() {
+		}
+		
+		void AppWindow::hideCursor() {
+		}
+		
+		
+		
+		void AppWindow::setWindowPosition(int requestedX, int requestedY) {
+			NSRect viewFrame = [glView() frame];
+			NSRect screenRect = [[NSScreen mainScreen] frame];
+			
+			NSPoint point;
+			point.x = requestedX;
+			point.y = screenRect.size.height - requestedY + viewFrame.origin.y; 
+			
+			[glWindow() setFrameTopLeftPoint:point];
+		}
+		
+		
+		
+		void AppWindow::setWindowShape(int requestedWidth, int requestedHeight) {
+			NSRect windowFrame  = [glWindow() frame];
+			NSRect viewFrame = [glView() frame];
+			NSLog(@"AppWindow::setWindowShape requested:(%i %i) window:%@ view:%@", requestedWidth, requestedHeight, NSStringFromRect(windowFrame), NSStringFromRect(viewFrame));
+			
+			windowFrame.origin.y -= requestedHeight -  viewFrame.size.height;
+			windowFrame.size = NSMakeSize(requestedWidth + windowFrame.size.width - viewFrame.size.width, requestedHeight + windowFrame.size.height - viewFrame.size.height);
+			
+			[glWindow() setFrame:windowFrame display:YES];
+			
+			[glWindow() windowDidResize:NULL];
+		}
+		
+		
+		int AppWindow::getFrameNum(){
+			return nFrameCount;
+		}
+		
+		float AppWindow::getFrameRate(){
+			return frameRate;
+		}
+		
+		double AppWindow::getLastFrameTime(){
+			return lastFrameTime;
+		}
+		
+		
+		
+		ofPoint	AppWindow::getWindowPosition() {
+			return windowPos;
+		}
+		
+		
+		ofPoint	AppWindow::getWindowSize() {
+			NSRect viewFrame = [glView() frame];
+			windowSize.set(viewFrame.size.width, viewFrame.size.height);
+			return windowSize;
+		}
+		
+		
+		ofPoint	AppWindow::getScreenSize() {
+			NSRect screenRect = [[glWindow() screen] frame];
+			screenSize.set(screenRect.size.width, screenRect.size.height);
+			return screenSize;
+		}
+		
+		
+		void AppWindow::setWindowTitle(string windowString) {
+			NSString *stringFromUTFString = [[NSString alloc] initWithUTF8String:windowString.c_str() ];
+			[ glWindow() setTitle: stringFromUTFString];
+		}
+		
+		
+		void AppWindow::update(){	
+			ofGetAppPtr()->update();
+		}
+		
+		void AppWindow::draw() {
+			draw(ofGetWidth(), ofGetHeight());
+		}
+		
+		void AppWindow::draw(int width, int height){
+			
+			// set viewport, clear the screen
+			glViewport( 0, 0, width, height );
+			if(bEnableSetupScreen) ofSetupScreen();
+			
+			if(ofbClearBg()){
+				float * bgPtr = ofBgColorPtr();
+				glClearColor(bgPtr[0],bgPtr[1],bgPtr[2], bgPtr[3]);
+				glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			}
+			
+			ofGetAppPtr()->draw();
+			
+			// -------------- fps calculation:
+			timeNow = ofGetElapsedTimef();
+			double diff = timeNow-timeThen;
+			if( diff  > 0.00001 ){
+				fps			= 1.0 / diff;
+				frameRate	*= 0.9f;
+				frameRate	+= 0.1f*fps;
+			}
+			lastFrameTime	= diff;
+			timeThen		= timeNow;
+			// --------------
+			
+			nFrameCount++;		// increase the overall frame count
+		}
+		
+		
+		
+		int	AppWindow::getWindowMode() {
+			return windowMode;
+		}
+		
+		/******** Other stuff ************/
+		void AppWindow::setFrameRate(float targetRate) {
+			[appDelegate() setFrameRate:targetRate];
+			
+		}
+		
+		
+		void AppWindow::setFullscreen(bool fullscreen) {
+			
+			if(fullscreen) {
+				windowMode		= OF_FULLSCREEN;
+				[glView() goFullscreen];
+			} else {
+				windowMode		= OF_WINDOW;
+				[glView() goWindow];
+			}
+		}
+		
+		void AppWindow::toggleFullscreen() {
+			if(windowMode == OF_FULLSCREEN) setFullscreen(false);
+			else setFullscreen(true);
+		}
+		
+		
+		void AppWindow::enableSetupScreen(){
+			bEnableSetupScreen = true;
+		};
+		
+		void AppWindow::disableSetupScreen(){
+			bEnableSetupScreen = false;
+		};
+		
+		
+		void AppWindow::initWindowSize() {
+			if(windowSize.x && windowSize.y) setWindowShape(windowSize.x, windowSize.y);
+			
+			if(windowMode == OF_FULLSCREEN) setFullscreen(true);
+		}
+		
+		
+		
+		void AppWindow::setWindowMode(int newWindowMode) {
+			windowMode = newWindowMode;
+		}
+		
+		
+		InitSettings& AppWindow::initSettings() {
+			return _initSettings;
+		}
+		
+		
+	}
+}

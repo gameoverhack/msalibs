@@ -181,7 +181,7 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 	// Ignore if the display link is still running
 //	if (!CVDisplayLinkIsRunning(displayLink))
 //		[self updateAndDraw];
-	[[NSColor clearColor] set];
+//	[[NSColor clearColor] set];
 
 }
 

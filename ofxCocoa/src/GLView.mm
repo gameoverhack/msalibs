@@ -232,6 +232,7 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 			NSOpenGLPFADepthSize, 24,
 			NSOpenGLPFAAlphaSize, 8,
 			NSOpenGLPFAColorSize, 32,
+			NSOpenGLPFAMultisample,
 			NSOpenGLPFASampleBuffers, 1,
 			NSOpenGLPFASamples, appWindow()->initSettings().numFSAASamples,
 			NSOpenGLPFANoRecovery,
@@ -273,9 +274,13 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 	if (self = [super initWithFrame:frameRect]) {
 		[[self openGLContext] makeCurrentContext];
 		
-		// Synchronize buffer swaps with vertical refresh rate
-		GLint swapInt = 0;
-		[[self openGLContext] setValues:&swapInt forParameter:NSOpenGLCPSwapInterval]; 
+		if(appWindow()->initSettings().isOpaque == false) {
+			GLint swapInt = 0;
+			[[self openGLContext] setValues:&swapInt forParameter:NSOpenGLCPSurfaceOpacity]; 
+		}
+		
+		ofSetVerticalSync(true);
+		
 		
 		// Look for changes in view size
 		// Note, -reshape will not be called automatically on size changes because NSView does not export it to override 
@@ -397,17 +402,6 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 
 	appWindow()->setWindowMode(OF_WINDOW);
 }
-
-
-//-(void)setCurrentContext {
-//	[[self openGLContext] makeCurrentContext];
-//}
-//
-//-(void)flush {
-//	[[self openGLContext] flushBuffer];
-//}
-//
-//
 
 
 

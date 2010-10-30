@@ -41,21 +41,23 @@
 #import "GLView.h"
 
 @interface AppDelegate : NSObject {
-	GLWindow			*glWindow;
-	GLView				*glView;
+	IBOutlet GLWindow			*_glWindow;	// points to current window
+	IBOutlet GLView				*_glView;
 }
 
 
-@property (readonly) GLWindow	*glWindow;
-@property (readonly) GLView		*glView;
+@property (readonly) GLWindow	*_glWindow;
+@property (readonly) GLView		*_glView;
 
 +(AppDelegate*)instance;
 
--(void) startAnimation;
--(void) stopAnimation;
--(void) toggleAnimation;
+-(IBAction) startAnimation:(id)sender;
+-(IBAction) stopAnimation:(id)sender;
+-(IBAction) toggleAnimation:(id)sender;
 
--(void) setFrameRate:(float)rate;
+-(IBAction) goFullscreen:(id)sender;
+-(IBAction) goWindow:(id)sender;
+-(IBAction) toggleFullscreen:(id)sender;
 
 @end
 

@@ -52,9 +52,40 @@ namespace MSA {
 		GLView*				glView();
 		AppWindow*			appWindow();
 		
+		NSPoint				toNSPoint(ofPoint p);
+		ofPoint				fromNSPoint(NSPoint p);
 		
-		void enableDisplayLink();
-		void disableDisplayLink();
-		bool getUsingDisplayLink();
+		NSSize				toNSSize(ofPoint p);
+		ofPoint				fromNSSize(NSSize s);
+
+		NSScreen			*screen(int screenIndex);
+		NSScreen			*currentScreen();
+		NSScreen			*mainScreen();
+		
+		NSRect				rectForScreen(int screenIndex);
+		NSRect				rectForCurrentScreen();
+		NSRect				rectForMainScreen();
+		NSRect				rectForAllScreens();
+		
+		void				setWindowRect(NSRect rect);
+		NSRect				getWindowRect();
+		
+		void				goWindow();
+		void				goFullscreenOn(int screenIndex);
+		void				goFullscreenOnCurrent();
+		void				goFullscreenOnMain();
+		void				goFullscreenOnAll();
+		void				toggleFullscreen();
+		
+		void				setWindowLevel(int windowLevel = NSMainMenuWindowLevel);
+		int					getWindowLevel();
+		
+		void				showSystemUI(int mode = kUIModeNormal);
+		
+		void				setTransparent(bool b);
+		bool				getTransparent();
+		
+		void				setSyncToDisplayLink(bool b);
+		bool				getSyncToDisplayLink();
 	}
 }

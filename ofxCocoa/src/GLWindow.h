@@ -41,7 +41,7 @@
 
 }
 
--(id) initWithContentRect:(NSRect)windowRect;
+-(id) initWithContentRect:(NSRect)windowRect styleMask:(int)styleMask;
 
 
 @end

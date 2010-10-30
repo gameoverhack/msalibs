@@ -80,14 +80,9 @@ namespace MSA {
 			void	disableSetupScreen();
 			
 			
-			
 			// extras
-			void		update();
-			void		draw();
-			void		draw(int width, int height);
-			
-			void		initWindowSize();
-			
+			void		updateAndDraw();
+
 			void		setWindowMode(int newWindowMode);
 			
 			InitSettings& initSettings();
@@ -95,9 +90,8 @@ namespace MSA {
 		protected:
 			InitSettings _initSettings;
 			
-			int					windowMode;
 			ofPoint				screenSize;
-			ofPoint				windowSize;
+			ofPoint				viewSize;	// this is actually view size, NOT window size
 			ofPoint				windowPos;
 			
 			float				timeNow, timeThen, lastFrameTime, fps;

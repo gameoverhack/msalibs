@@ -38,41 +38,56 @@
 
 #import "ofxCocoa.h"
 
+using namespace MSA;
+using namespace ofxCocoa;
+
 
 @implementation AppDelegate
 
-@synthesize glWindow;
-@synthesize glView;
+@synthesize _glWindow;
+@synthesize _glView;
 
-static AppDelegate* appDelegate = NULL;
+static AppDelegate* _appDelegate = NULL;
 
 +(AppDelegate*)instance {
-	return appDelegate;
+	return _appDelegate;
 }
 
 
-- (void) startAnimation {
-	[glView startAnimation];
+- (IBAction) startAnimation:(id)sender {
+	[_glView startAnimation];
 }
 
-- (void) stopAnimation {
-	[glView stopAnimation];
+- (IBAction) stopAnimation:(id)sender {
+	[_glView stopAnimation];
 }
 
-- (void) toggleAnimation {
-	[glView toggleAnimation];
+- (IBAction) toggleAnimation:(id)sender {
+	[_glView toggleAnimation];
 }
 
+-(IBAction) goFullscreen:(id)sender {
+	goFullscreenOnCurrent();
+}
+
+-(IBAction) goWindow:(id)sender {
+	goWindow();
+}
+
+-(IBAction) toggleFullscreen:(id)sender {
+	toggleFullscreen();
+}
 
 
 
 -(void)createGLWindowAndView:(NSRect)windowRect {
 	NSLog(@"createGLWindowAndView: ");
-	glWindow	= [[GLWindow alloc] initWithContentRect:windowRect];		// release this?
-	glView		= [[[GLView alloc] initWithFrame:NSMakeRect(0, 0, windowRect.size.width, windowRect.size.height)] autorelease];
-	[glWindow setContentView:glView];
-	[glWindow makeKeyAndOrderFront:self];
-	[glWindow makeFirstResponder:glView];
+	_glWindow	= [[GLWindow alloc] initWithContentRect:windowRect styleMask:appWindow()->initSettings().windowStyle];
+	_glView		= [[GLView alloc] initWithFrame:NSMakeRect(0, 0, windowRect.size.width, windowRect.size.height)];
+	[_glWindow setContentView:_glView];
+	[_glWindow makeKeyAndOrderFront:self];
+	[_glWindow makeFirstResponder:_glView];
+	[_glView release];
 }
 
 
@@ -84,19 +99,16 @@ static AppDelegate* appDelegate = NULL;
 - (void)applicationDidFinishLaunching:(NSNotification*)n {
 	NSLog(@"applicationDidFinishLaunching");
 	
-	appDelegate	= self;
+	_appDelegate	= self;
 	
-	SetSystemUIMode(kUIModeAllHidden, NULL);
-	NSRect rect = NSZeroRect;
-	for(NSScreen *s in [NSScreen screens]) rect = NSUnionRect(rect, s.frame);
-		
-	[self createGLWindowAndView:rect];	
-	
-//	appWindow()->initWindowSize();
+	if(_glWindow == nil) { // if no window in xib, create programmatically
+		[self createGLWindowAndView:appWindow()->initSettings().initRect];	
+	} else {
+	}
 	
 	ofGetAppPtr()->setup();
 	
-	[self startAnimation];
+	[self startAnimation:self];
 	
 	// clear background
 	glClearColor(ofBgColorPtr()[0], ofBgColorPtr()[1], ofBgColorPtr()[2], ofBgColorPtr()[3]);
@@ -105,19 +117,14 @@ static AppDelegate* appDelegate = NULL;
 
 - (BOOL)applicationShouldTerminate:(NSNotification*)n {
 	NSLog(@"applicationShouldTerminate");
-	[self stopAnimation];
+	[self stopAnimation:self];
 	return NSTerminateNow;
 }
 
 
-
--(void) setFrameRate:(float)rate {
-	[glView setFrameRate:rate];
-}
-
 -(void) dealloc {
 	NSLog(@"AppDelegate::dealloc");
-	[glWindow release];
+	[_glWindow release];
     [super dealloc];
 }
 

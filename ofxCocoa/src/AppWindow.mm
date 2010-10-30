@@ -58,12 +58,9 @@ namespace MSA {
 			nFrameCount				= 0;
 			bEnableSetupScreen		= true;
 			
-			windowPos.set(0, 0);
-			windowSize.set(0, 0);
-			screenSize.set(0, 0);
+			viewSize				= fromNSSize(_initSettings.initRect.size);
 			
 			nFrameCount				= 0;
-			windowMode				= 0;
 			timeNow, timeThen, fps	= 0.0f;
 			
 			frameRate				= 0;
@@ -72,15 +69,12 @@ namespace MSA {
 		
 		/******** Initialization methods ************/
 		void AppWindow::setupOpenGL(int w, int h, int screenMode) {
-			NSLog(@"AppWindow::setupOpenGL(%i, %i, %i)", w, h, screenMode);
-			
-			windowMode = screenMode;
-			windowSize.set(w, h);
+			NSLog(@"AppWindow::setupOpenGL()");
 		}
 		
 		
 		void AppWindow::initializeWindow() {
-			
+			NSLog(@"AppWindow::initializeWindow()");
 		}
 		
 		
@@ -94,6 +88,7 @@ namespace MSA {
 			NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 			
 			NSApplicationMain(0,  NULL);
+			
 			[pool release];	
 		}
 		
@@ -101,9 +96,11 @@ namespace MSA {
 		
 		
 		void AppWindow::showCursor() {
+			[NSCursor unhide];
 		}
 		
 		void AppWindow::hideCursor() {
+			[NSCursor hide];
 		}
 		
 		
@@ -155,9 +152,7 @@ namespace MSA {
 		
 		
 		ofPoint	AppWindow::getWindowSize() {
-			NSRect viewFrame = [glView() frame];
-			windowSize.set(viewFrame.size.width, viewFrame.size.height);
-			return windowSize;
+			return viewSize;
 		}
 		
 		
@@ -173,19 +168,18 @@ namespace MSA {
 			[ glWindow() setTitle: stringFromUTFString];
 		}
 		
-		
-		void AppWindow::update(){	
+
+		void AppWindow::updateAndDraw() {
+			screenSize	= fromNSSize(currentScreen().frame.size);
+			viewSize	= fromNSSize(glView().frame.size);
+			windowPos	= fromNSPoint(glWindow().frame.origin);
+			windowPos.y	= screenSize.y = windowPos.y;		// vertically flip position
+
+
 			ofGetAppPtr()->update();
-		}
-		
-		void AppWindow::draw() {
-			draw(ofGetWidth(), ofGetHeight());
-		}
-		
-		void AppWindow::draw(int width, int height){
 			
 			// set viewport, clear the screen
-			glViewport( 0, 0, width, height );
+			glViewport( 0, 0, viewSize.x, viewSize.y );
 			if(bEnableSetupScreen) ofSetupScreen();
 			
 			if(ofbClearBg()){
@@ -214,30 +208,26 @@ namespace MSA {
 		
 		
 		int	AppWindow::getWindowMode() {
-			return windowMode;
+			return glView().windowMode;
 		}
 		
 		/******** Other stuff ************/
 		void AppWindow::setFrameRate(float targetRate) {
-			[appDelegate() setFrameRate:targetRate];
+			[glView() setFrameRate:targetRate];
 			
 		}
 		
 		
 		void AppWindow::setFullscreen(bool fullscreen) {
-			
 			if(fullscreen) {
-				windowMode		= OF_FULLSCREEN;
-				[glView() goFullscreen];
+				[glView() goFullscreen:currentScreen()];
 			} else {
-				windowMode		= OF_WINDOW;
 				[glView() goWindow];
 			}
 		}
 		
 		void AppWindow::toggleFullscreen() {
-			if(windowMode == OF_FULLSCREEN) setFullscreen(false);
-			else setFullscreen(true);
+			[glView() toggleFullscreen];
 		}
 		
 		
@@ -249,18 +239,6 @@ namespace MSA {
 			bEnableSetupScreen = false;
 		};
 		
-		
-		void AppWindow::initWindowSize() {
-			if(windowSize.x && windowSize.y) setWindowShape(windowSize.x, windowSize.y);
-			
-			if(windowMode == OF_FULLSCREEN) setFullscreen(true);
-		}
-		
-		
-		
-		void AppWindow::setWindowMode(int newWindowMode) {
-			windowMode = newWindowMode;
-		}
 		
 		
 		InitSettings& AppWindow::initSettings() {

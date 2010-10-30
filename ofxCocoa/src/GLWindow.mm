@@ -45,8 +45,8 @@ using namespace ofxCocoa;
 @implementation GLWindow
 
 
--(id) initWithContentRect:(NSRect)windowRect {
-	if(self = [super initWithContentRect:windowRect styleMask:appWindow()->initSettings().windowStyle backing:NSBackingStoreBuffered defer:YES]) {
+-(id) initWithContentRect:(NSRect)windowRect styleMask:(int)styleMask {
+	if(self = [super initWithContentRect:windowRect styleMask:styleMask backing:NSBackingStoreBuffered defer:YES]) {
 		[self setOpaque:appWindow()->initSettings().isOpaque];
 		if(appWindow()->initSettings().isOpaque) {
 			[self setBackgroundColor:[NSColor blackColor]]; 

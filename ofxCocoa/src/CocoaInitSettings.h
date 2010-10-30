@@ -50,6 +50,8 @@ namespace MSA {
 			int					windowLevel;
 			bool				hasWindowShadow;
 			int					numFSAASamples;
+			NSRect				initRect;
+			int					windowMode;
 		};
 		
 		
@@ -60,7 +62,8 @@ namespace MSA {
 			windowLevel			= NSMainMenuWindowLevel + 1;
 			hasWindowShadow		= true;
 			numFSAASamples		= 0;
-			
+			initRect			= NSMakeRect(100, 100, 1024, 768);
+			windowMode			= OF_WINDOW;
 		}
 	}
 }

@@ -50,15 +50,10 @@ using namespace ofxCocoa;
 @implementation GLView
 
 @synthesize useDisplayLink;
+@synthesize windowMode;
+@synthesize openGLContext;
+@synthesize pixelFormat;
 
-
--(NSOpenGLContext*)openGLContext {
-	return openGLContext;
-}
-
--(NSOpenGLPixelFormat*)pixelFormat {
-	return pixelFormat;
-}
 
 //------ DISPLAY LINK STUFF ------
 -(CVReturn)getFrameForTime:(const CVTimeStamp*)outputTime {
@@ -73,6 +68,7 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
     CVReturn result = [(GLView*)displayLinkContext getFrameForTime:outputTime];
     return result;
 }
+
 
 -(void)setupDisplayLink {
 	NSLog(@"glView::setupDisplayLink");
@@ -99,11 +95,12 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 	displayLink = 0;
 }
 
+
 // --------------------------------
 
 -(void)setupTimer {
 	NSLog(@"glView::setupTimer");
-
+	
 	float dur = targetFrameRate > 0 ? 1.0f /targetFrameRate : 0.001f;
 	
 	timer = [[NSTimer timerWithTimeInterval:dur target:self selector:@selector(updateAndDraw) userInfo:nil repeats:YES] retain];
@@ -120,6 +117,14 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 }
 
 // --------------------------------
+
+
+-(void) setSyncToDisplayLink:(BOOL)b {
+	[self stopAnimation];
+	useDisplayLink = b;
+	[self startAnimation];
+}
+
 
 -(void)startAnimation {
 	NSLog(@"glView::startAnimation using displayLink %@", useDisplayLink ? @"YES" : @"NO");
@@ -155,11 +160,8 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 
 -(void)setFrameRate:(float)rate {
 	NSLog(@"glView::setFrameRate %f", rate);
-	
 	[self stopAnimation];
-	
 	targetFrameRate = rate;
-	
 	[self startAnimation];
 }
 
@@ -167,22 +169,17 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 -(void)reshape {
 	// This method will be called on the main thread when resizing, but we may be drawing on a secondary thread through the display link
 	// Add a mutex around to avoid the threads accessing the context simultaneously
-	CGLLockContext((CGLContextObj)[[self openGLContext] CGLContextObj]);
+	if(useDisplayLink) CGLLockContext((CGLContextObj)[[self openGLContext] CGLContextObj]);
 	
 	// Delegate to the scene object to update for a change in the view size
 	//	[[controller scene] setViewportRect:[self bounds]];// TODO
 	[[self openGLContext] update];
 	
-	CGLUnlockContext((CGLContextObj)[[self openGLContext] CGLContextObj]);
+	if(useDisplayLink) CGLUnlockContext((CGLContextObj)[[self openGLContext] CGLContextObj]);
 }
 
 
 -(void)drawRect:(NSRect)dirtyRect {
-	// Ignore if the display link is still running
-//	if (!CVDisplayLinkIsRunning(displayLink))
-//		[self updateAndDraw];
-//	[[NSColor clearColor] set];
-
 }
 
 
@@ -197,18 +194,16 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 	// This method will be called on both the main thread (through -drawRect:) and a secondary thread (through the display link rendering loop)
 	// Also, when resizing the view, -reshape is called on the main thread, but we may be drawing on a secondary thread
 	// Add a mutex around to avoid the threads accessing the context simultaneously
-	CGLLockContext((CGLContextObj)[[self openGLContext] CGLContextObj]);
+	if(useDisplayLink) CGLLockContext((CGLContextObj)[[self openGLContext] CGLContextObj]);
 	
 	// Make sure we draw to the right context
 	[[self openGLContext] makeCurrentContext];
 	
-	// Delegate to the scene object for rendering
-	appWindow()->update();
-	appWindow()->draw();
+	appWindow()->updateAndDraw();
 	
 	[[self openGLContext] flushBuffer];
 	
-	CGLUnlockContext((CGLContextObj)[[self openGLContext] CGLContextObj]);
+	if(useDisplayLink) CGLUnlockContext((CGLContextObj)[[self openGLContext] CGLContextObj]);
 	
 	[pool release];
 }
@@ -218,12 +213,10 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 	NSLog(@"GLView::initWithFrame %@", NSStringFromRect(frameRect));
 	
 	isAnimating		= false;
-	
-	disableDisplayLink();
+	useDisplayLink	= false;
 	
 	pixelFormat = nil;
 	
-	/* Choose a pixel format */
 	if(appWindow()->initSettings().numFSAASamples) {
 		NSOpenGLPixelFormatAttribute attribs[] = {
 			NSOpenGLPFAAccelerated,
@@ -236,7 +229,7 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 			NSOpenGLPFASampleBuffers, 1,
 			NSOpenGLPFASamples, appWindow()->initSettings().numFSAASamples,
 			NSOpenGLPFANoRecovery,
-		0};
+			0};
 		
 		NSLog(@"   trying Multisampling");
 		pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attribs];
@@ -259,7 +252,7 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 			NSOpenGLPFAAlphaSize, 8,
 			NSOpenGLPFAColorSize, 32,
 			NSOpenGLPFANoRecovery,
-		0};		
+			0};		
 		
 		pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attribs];
 		glDisable(GL_MULTISAMPLE);
@@ -274,12 +267,13 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 	if (self = [super initWithFrame:frameRect]) {
 		[[self openGLContext] makeCurrentContext];
 		
-		if(appWindow()->initSettings().isOpaque == false) {
-			GLint swapInt = 0;
-			[[self openGLContext] setValues:&swapInt forParameter:NSOpenGLCPSurfaceOpacity]; 
-		}
+		// set surface opacity
+		GLint i = appWindow()->initSettings().isOpaque;
+		[[self openGLContext] setValues:&i forParameter:NSOpenGLCPSurfaceOpacity]; 
 		
-		ofSetVerticalSync(true);
+		// enable vertical sync
+		i = 1;
+		[[self openGLContext] setValues:&i forParameter:NSOpenGLCPSwapInterval]; 
 		
 		
 		// Look for changes in view size
@@ -291,9 +285,6 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 	}
 	
 	
-	if(appWindow()->initSettings().isOpaque) {
-	}
-	
 	return self;
 }
 
@@ -301,7 +292,7 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 	self = [self initWithFrame:frameRect shareContext:nil];
 	return self;
 }
-	
+
 -(void)lockFocus {
 	[super lockFocus];
 	if ([[self openGLContext] view] != self)
@@ -314,9 +305,7 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 	[openGLContext release];
 	[pixelFormat release];
 	
-	[[NSNotificationCenter defaultCenter] removeObserver:self 
-													name:NSViewGlobalFrameDidChangeNotification
-												  object:self];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSViewGlobalFrameDidChangeNotification object:self];
 	[super dealloc];
 }	
 
@@ -325,83 +314,74 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 -(void)awakeFromNib {
 	NSLog(@"GLView::awakeFromNib, window:%@",[self window]);
 	[[self window] setAcceptsMouseMovedEvents:YES]; 
-	appWindow()->initWindowSize();
 }
 
 
 
 
--(void)goFullscreen:(int)whichScreen {
-	NSLog(@"goFullscreen");
-	savedWindowFrame = [[self window] frame];
-	if(savedWindowFrame.size.width == 0 || savedWindowFrame.size.height == 0) {
-		savedWindowFrame.size = NSMakeSize(1024, 768);
+//-(void)goFullscreenOnRect:(NSRect)rect {
+//	windowMode = OF_FULLSCREEN;
+//	[self stopAnimation];
+//	
+//	savedWindowFrame = [[self window] frame];
+//	if(savedWindowFrame.size.width == 0 || savedWindowFrame.size.height == 0) {
+//		savedWindowFrame.size = NSMakeSize(1024, 768);
+//	}
+//	
+//	SetSystemUIMode(kUIModeAllHidden, NULL);
+//	[[self window] setFrame:rect display:YES animate:NO];
+//	[[self window] setLevel:NSMainMenuWindowLevel+1];
+//	
+//	[self startAnimation];
+//}
+
+
+-(void)goFullscreen:(NSScreen*)screen {
+	NSLog(@"GLView::goFullscreen: %@", screen);
+	windowMode = OF_FULLSCREEN;
+	[self stopAnimation];
+	
+	if([self respondsToSelector:@selector(isInFullScreenMode)]) {
+		[self enterFullScreenMode:screen
+					  withOptions:[NSDictionary dictionaryWithObjectsAndKeys: 
+								   [NSNumber numberWithBool: NO], NSFullScreenModeAllScreens, 
+								   nil]
+		 ];
 	}
 	
-	// need to create window from scratch, not nib
-	SetSystemUIMode(kUIModeAllHidden, NULL);
-	NSRect rect = NSZeroRect;
-
-	if(whichScreen == OF_ALL_SCREENS) {
-		for(NSScreen *s in [NSScreen screens]) rect = NSUnionRect(rect, s.frame);
-		NSLog(@"goFullscreen: OF_ALL_SCREENS %@", NSStringFromRect(rect));
-
-	} else {
-		SetSystemUIMode(kUIModeAllHidden,NULL);
-		
-		NSScreen *screen;
-		if(whichScreen == OF_CURRENT_SCREEN) screen = [[self window] screen];
-		else screen = [[NSScreen screens] objectAtIndex:whichScreen];
-		rect = screen.frame;
-
-		NSLog(@"goFullscreen: %@", screen);
-//
-//		NSScreen *screen;
-//		if(whichScreen == OF_CURRENT_SCREEN) screen = [[self window] screen];
-//		else screen = [[NSScreen screens] objectAtIndex:whichScreen];
-//		if([self respondsToSelector:@selector(isInFullScreenMode)]){
-//			[self enterFullScreenMode:[[self window] screen]
-//						  withOptions:[NSDictionary dictionaryWithObjectsAndKeys: 
-//									   [NSNumber numberWithBool: YES], NSFullScreenModeAllScreens, 
-//									   [NSNumber numberWithInt:NSNormalWindowLevel], NSFullScreenModeWindowLevel, 
-//									   nil]];
-//		}
-	}
-	
-	[[self window] setFrame:rect display:YES animate:NO];
-	[[self window] setLevel:NSMainMenuWindowLevel+1];
-	
-//		[[self window] setLevel:NSScreenSaverWindowLevel];	// FIX
-//		[self setBounds:rect];
-	
-	appWindow()->windowMode = OF_FULLSCREEN;
+	[self startAnimation];
 }
-
--(void)goFullscreen {
-	[self goFullscreen:OF_ALL_SCREENS];
-}
-
 
 
 // ---------------------------------
 -(void)goWindow{
-	SetSystemUIMode(kUIModeNormal, NULL);
-	if(savedWindowFrame.size.width == 0 || savedWindowFrame.size.height == 0) {
-		savedWindowFrame.size = NSMakeSize(1024, 768);
+	NSLog(@"GLView::goWindow");
+	
+	windowMode = OF_WINDOW;
+	[self stopAnimation];
+	
+	if([self respondsToSelector:@selector(isInFullScreenMode)] && [self isInFullScreenMode]){
+		[self exitFullScreenModeWithOptions:nil];
+		
+	} else {
+		SetSystemUIMode(kUIModeNormal, NULL);
+		if(savedWindowFrame.size.width == 0 || savedWindowFrame.size.height == 0) {
+			savedWindowFrame.size = NSMakeSize(1024, 768);
+		}
+		
+		[[self window] setFrame:savedWindowFrame display:YES animate:NO];
+		[[self window] setLevel:NSNormalWindowLevel];
+		
 	}
 	
-	[[self window] setFrame:savedWindowFrame display:YES animate:NO];
-	[[self window] setLevel:NSNormalWindowLevel];
-
-	
-//	if([self respondsToSelector:@selector(isInFullScreenMode)]){
-//		if([self isInFullScreenMode]){
-//			[self exitFullScreenModeWithOptions:nil];
-//		}
-//	}
-
-	appWindow()->setWindowMode(OF_WINDOW);
+	[self startAnimation];
 }
+
+-(void)toggleFullscreen {
+	if(windowMode == OF_WINDOW) [self goFullscreen:currentScreen()];
+	else [self goWindow];
+}
+
 
 
 
@@ -420,11 +400,9 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 
 #pragma mark Events
 
-//TODO: dispatch this properly
-
 
 -(void)keyDown:(NSEvent *)theEvent {
-//	NSLog(@"keyDown");
+	//	NSLog(@"keyDown");
 	NSString *characters = [theEvent characters];
 	if ([characters length]) {
 		unichar key = [characters characterAtIndex:0];
@@ -433,7 +411,7 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 }
 
 -(void)keyUp:(NSEvent *)theEvent {
-//	NSLog(@"keyUp");
+	//	NSLog(@"keyUp");
 	NSString *characters = [theEvent characters];
 	if ([characters length]) {
 		unichar key = [characters characterAtIndex:0];
@@ -444,7 +422,7 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 // ---------------------------------
 
 -(void)mouseDown:(NSEvent *)theEvent {
-//	NSLog(@"mouseDown");
+	//	NSLog(@"mouseDown");
 	if ([theEvent modifierFlags] & NSControlKeyMask) 
 		[self rightMouseDown:theEvent];
 	else if ([theEvent modifierFlags] & NSAlternateKeyMask) 

@@ -72,9 +72,9 @@ MSAUtils
 A collection of small and useful utility C++ classes and functions. (will eventually be phased out into MSACore and/or other libraries)
 
 
-ofxMacOSX
+ofxCocoa
 -------------------------
-openFrameworks only addon to allow native Mac OSX integration (instead of GLUT).
+A GLUT replacement add-on for openFrameworks 006+ to use native Cocoa OpenGL and windowing instead of GLUT. 
 
 
 ofxMSADirManager

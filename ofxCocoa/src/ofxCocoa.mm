@@ -46,29 +46,138 @@ namespace MSA {
 		}
 		
 		GLWindow* glWindow() {
-			return [appDelegate() glWindow];
+			return [appDelegate() _glWindow];
 		}
 		
 		GLView*	glView() {
-			return [appDelegate() glView];
+			return [appDelegate() _glView];
 		}
 		
 		
-		void enableDisplayLink() {
-			[appDelegate() stopAnimation];
-			glView().useDisplayLink = true;
-			[appDelegate() startAnimation];
+		void setSyncToDisplayLink(bool b) {
+			[glView() setSyncToDisplayLink:b];
 		}
 		
-		void disableDisplayLink() {
-			[appDelegate() stopAnimation];
-			glView().useDisplayLink = false;
-			[appDelegate() startAnimation];
-		}
-		
-		bool getUsingDisplayLink() {
+		bool getSyncToDisplayLink() {
 			return glView().useDisplayLink;
 		}
+		
+		
+		NSPoint	toNSPoint(ofPoint p) {
+			return NSMakePoint(p.x, p.y);
+		}
+		
+		ofPoint	fromNSPoint(NSPoint p) {
+			return ofPoint(p.x, p.y);
+		}
+		
+		NSSize toNSSize(ofPoint p) {
+			return NSMakeSize(p.x, p.y);
+		}
+		
+		ofPoint	fromNSSize(NSSize s) {
+			return ofPoint(s.width, s.height);
+		}
+		
+		
+		NSScreen *screen(int screenIndex) {
+			return [[NSScreen screens] objectAtIndex:screenIndex];
+		}
+		
+		NSScreen *currentScreen() {
+			return [glWindow() screen];
+		}
+		
+		NSScreen *mainScreen() {
+			return [NSScreen mainScreen];
+		}
+		
+		
+		NSRect rectForScreen(int screenIndex) {
+			return [screen(screenIndex) frame];
+		}
+		
+		NSRect rectForCurrentScreen() {
+			return [currentScreen() frame];
+		}
+		
+		NSRect rectForMainScreen() {
+			return [mainScreen() frame];
+		}
+		
+		NSRect rectForAllScreens() {
+			NSRect rect = NSZeroRect;
+			for(NSScreen *s in [NSScreen screens]) rect = NSUnionRect(rect, [s frame]);
+			return rect;
+		}
+		
+		void setWindowRect(NSRect rect) {
+			[glView() stopAnimation];
+			[glWindow() setFrame:rect display:YES animate:NO];
+			[glView() startAnimation];
+		}
+		
+		NSRect getWindowRect() {
+			return [glView() frame];
+		}
+
+		
+		void goWindow() {
+			[glView() goWindow];
+		}
+		
+		void goFullscreenOn(int screenIndex) {
+			[glView() goFullscreen:screen(screenIndex)];
+		}
+		
+		void goFullscreenOnCurrent() {
+			[glView() goFullscreen:currentScreen()];
+		}
+		
+		void goFullscreenOnMain() {
+			[glView() goFullscreen:mainScreen()];
+		}
+		
+		void goFullscreenOnAll() {
+			setWindowRect(rectForAllScreens());
+		}
+		
+		void toggleFullscreen() {
+			[glView() toggleFullscreen];
+		}
+		
+		
+		void setWindowLevel(int windowLevel) {
+			[glWindow() setLevel:windowLevel];
+		}
+		
+		int	getWindowLevel() {
+			return [glWindow() level];
+		}
+		
+		void showSystemUI(int mode) {
+			SetSystemUIMode(mode, NULL);
+		}
+
+		void setTransparent(bool b) {
+			[glWindow() setOpaque:!b];
+			if(b) {
+//				[glWindow() setBackgroundColor:[NSColor clearColor]]; 
+				GLint i = 0;
+				[[glView() openGLContext] setValues:&i forParameter:NSOpenGLCPSurfaceOpacity]; 
+			} else {
+//				[glWindow() setBackgroundColor:[NSColor blackColor]]; 
+				GLint i = 1;
+				[[glView() openGLContext] setValues:&i forParameter:NSOpenGLCPSurfaceOpacity]; 
+			}
+			
+		}
+		
+		bool getTransparent() {
+			return ![glWindow() isOpaque];
+		}
+
+		
 		
 		
 	}

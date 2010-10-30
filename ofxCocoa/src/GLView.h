@@ -41,12 +41,10 @@
 
 #import "AppWindow.h"
 
-#define OF_CURRENT_SCREEN		-1
-#define OF_ALL_SCREENS			-2
-
 
 @interface GLView : NSOpenGLView {
-	NSRect savedWindowFrame;
+	NSRect			savedWindowFrame;
+	int				windowMode;
 	
 	NSOpenGLContext *openGLContext;
 	NSOpenGLPixelFormat *pixelFormat;
@@ -58,14 +56,16 @@
 	BOOL			isAnimating;
 }
 
-@property (readwrite) BOOL useDisplayLink;
+@property (readonly) BOOL useDisplayLink;
+@property (readonly) int windowMode;
+@property (readonly) NSOpenGLContext* openGLContext;
+@property (readonly) NSOpenGLPixelFormat* pixelFormat;
 
 
 -(id) initWithFrame:(NSRect)frameRect;
 -(id) initWithFrame:(NSRect)frameRect shareContext:(NSOpenGLContext*)context;
 
--(NSOpenGLContext*) openGLContext;
-
+-(void) setSyncToDisplayLink:(BOOL)b;
 
 -(void) updateAndDraw;
 -(void) startAnimation;
@@ -74,16 +74,10 @@
 
 -(void) setFrameRate:(float)rate;
 
-//-------
 
-
-
-//-(void)setCurrentContext;
-//-(void)flush;
-
--(void)goFullscreen:(int)whichScreen;
--(void)goFullscreen;	// defaults to fulscreen only on current screen
+-(void)goFullscreen:(NSScreen*)screen;
 -(void)goWindow;
+-(void)toggleFullscreen;
 
 
 @end

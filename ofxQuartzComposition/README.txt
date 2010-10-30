@@ -40,19 +40,22 @@ ofxQuartzComposition
 ------------------------------------------------------------------------
 This is an addon for openFrameworks to manage Quartz Compositions (.qtz files).
 
-How is this different to Vades ofxQCPlugin (http://code.google.com/p/ofxqcplugin/) ?
-This is the opposite of ofxQCPlugin. ofxQCPlugin allows you to build your openframeworks application as a QCPlugin to run inside QC.
-ofxQuartzComposition allows you to run your Quartz Composition (.qtz) inside openframerworks.
-
-
 Currently there is support for:
-- loading multiple QTZ files.
+- loading multiple QTZ files inside an openframeworks application.
 - rendering to screen (use FBO to render offscreen)
 - passing input parameters (float, int, string, bool etc) to the QTZ input ports
 - reading ports (input and output) from the QTZ (float, int, string, bool etc)
 
 Todo:
 - passing Images to and from the composition
+
+
+How is this different to Vades ofxQCPlugin (http://code.google.com/p/ofxqcplugin/) ?
+ofxQuartzComposition is the opposite of ofxQCPlugin. ofxQCPlugin allows you to build your openframeworks application as a QCPlugin to run inside QC.
+ofxQuartzComposition allows you to run and control your Quartz Composition (.qtz) inside an openframeworks application.
+
+
+
 
 
 

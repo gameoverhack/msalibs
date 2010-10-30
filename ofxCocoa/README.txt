@@ -40,13 +40,16 @@ ofxCocoa
 ------------------------------------------------------------------------
 
 A GLUT replacement add-on for openFrameworks 006+ to use native Cocoa OpenGL and windowing instead of GLUT. Can provide upto 200% better performance in certain situations (multiscreen + fullscreen)
+Supports Fbos, shaders, FSAA, setting window stylemasks/decorations/transparency, programmatic windows, Interface Builder integration, fullscreen on single or more screens, NSTimer or CVDisplayLink callback.
+
 Thanks to Anton (aka Vade http://vade.info/) for countless hours of Mac+OpenGL debates and of course the entire openFrameworks team (www.openframeworks.cc)
-Some features and points (See ofxCocoa.h for more)
- 
+
+
+
 
 PROGRAMMATIC CREATION VS INTERFACE BUILDER
 ------------------------------------------------------------------------
-Programmatic creation of windows & views or via Interface builder (see README.txt in 'nibs' folder)
+See README.txt in 'nibs' folder for info on Programmatic creation of windows & views or via Interface builder 
 
 
 
@@ -58,8 +61,7 @@ In main.mm, initalize the initSettings struct before the window and opengl view 
 
 CVDISPLAYLINK VS NSTIMER
 ------------------------------------------------------------------------
-Options to setup the loop timer using NSTimer (default) or the new CVDisplayLink which creates a callback just before the screen is about to refresh
-MSA::ofxCocoa::setSyncToDisplayLink(bool b)
+MSA::ofxCocoa::setSyncToDisplayLink(bool b) to setup the loop timer using NSTimer (default) or the new CVDisplayLink which creates a separate thread callback just before the screen is about to refresh
 
 
 

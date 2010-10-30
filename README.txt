@@ -74,7 +74,8 @@ A collection of small and useful utility C++ classes and functions. (will eventu
 
 ofxCocoa
 -------------------------
-A GLUT replacement add-on for openFrameworks 006+ to use native Cocoa OpenGL and windowing instead of GLUT. 
+A GLUT replacement add-on for openFrameworks 006+ to use native Cocoa OpenGL and windowing instead of GLUT. Can provide upto 200% better performance in certain situations (multiscreen + fullscreen)
+Supports Fbos, shaders, FSAA, setting window stylemasks/decorations/transparency, programmatic windows, Interface Builder integration, fullscreen on single or more screens, NSTimer or CVDisplayLink callback.
 
 
 ofxMSADirManager

@@ -57,6 +57,9 @@ namespace MSA {
 		
 		NSSize				toNSSize(ofPoint p);
 		ofPoint				fromNSSize(NSSize s);
+		
+		NSString*			toNSString(string s);
+		string				fromNSString(NSString *s);
 
 		NSScreen			*screen(int screenIndex);
 		NSScreen			*currentScreen();

@@ -79,6 +79,14 @@ namespace MSA {
 			return ofPoint(s.width, s.height);
 		}
 		
+		NSString* toNSString(string s) {
+			return [NSString stringWithUTF8String:s.c_str()];
+		}
+		
+		string fromNSString(NSString *s) {
+			return string([s UTF8String]);
+		}
+
 		
 		NSScreen *screen(int screenIndex) {
 			return [[NSScreen screens] objectAtIndex:screenIndex];

@@ -16,12 +16,16 @@ int main( ){
 	initSettings.windowMode				= OF_WINDOW;
 	
 	// to go fullscreen across all windows:
-	//	initSettings.windowStyle			= NSBorderlessWindowMask;
-	//	initSettings.initRect				= MSA::ofxCocoa::rectForAllScreens();
+//	initSettings.windowStyle			= NSBorderlessWindowMask;
+//	initSettings.initRect				= MSA::ofxCocoa::rectForMainScreen();
+	initSettings.initRect				= MSA::ofxCocoa::rectForAllScreens();
 	
+	MSA::ofxCocoa::AppWindow		cocoaWindow(initSettings);
+
 	
-	MSA::ofxCocoa::AppWindow		window(initSettings);
-	ofSetupOpenGL(&window, 0, 0, 0);			// all other parameters are ignored, use initSettings above
+	ofAppGlutWindow glutWindow;		// use this instead of cocoaWindow in ofSetupOpenGL below to use glut instead of cocoa
+	
+	ofSetupOpenGL(&cocoaWindow, 0, 0, 0);			// all other parameters are ignored, use initSettings above
 
 	ofRunApp( new testApp());
 }

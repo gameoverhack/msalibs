@@ -14,6 +14,8 @@ public:
 	void keyPressed  (int key);
 	
 	float	lineWidth;
+	bool	doVSync;
+	bool	doDisplayLink;
 };
 
 #endif

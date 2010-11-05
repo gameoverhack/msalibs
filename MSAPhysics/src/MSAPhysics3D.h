@@ -38,11 +38,11 @@ namespace MSA {
 	namespace Physics  {
 		
 		
-		template class WorldT<Vec3f>;
-		template class ParticleT<Vec3f>;
-		template class SpringT<Vec3f>;
-		template class AttractionT<Vec3f>;
-		template class ConstraintT<Vec3f>;
+//		template class WorldT<Vec3f>;
+//		template class ParticleT<Vec3f>;
+//		template class SpringT<Vec3f>;
+//		template class AttractionT<Vec3f>;
+//		template class ConstraintT<Vec3f>;
 		
 		typedef WorldT<Vec3f>			World3D;
 		typedef ParticleT<Vec3f>		Particle3D;

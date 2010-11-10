@@ -130,16 +130,16 @@ public:
 		ofEnableAlphaBlending();
 		ofFill();
 		ofSetColor(255, 255, 255, 200);
-//		if(isMouseOver()) ofSetColor(config->overColor.r, config->overColor.g, config->overColor.b);
-//		if(focused && !isMouseOver()) ofSetColor(config->focusColor.r, config->focusColor.g, config->focusColor.b);
+//		if(isMouseOver()) ofSetHexColor(config->overColor.r, config->overColor.g, config->overColor.b);
+//		if(focused && !isMouseOver()) ofSetHexColor(config->focusColor.r, config->focusColor.g, config->focusColor.b);
 		ofRect(0, 0, width, height);
 
 		setFullColor();
 		ofRect(0, 0, barwidth, height);
 
-		ofSetColor(config->textBGColor);
+		ofSetHexColor(config->textBGColor);
 		ofRect(0, height, width, 20);
-		ofSetColor(config->textColor);
+		ofSetHexColor(config->textColor);
 		float inputpos = ofMap(input->getPosition(), 0.0, 1.0, 0.0, videoLength);
 		ostringstream info;
 		info << name << ":" << ofToString(inputpos, 3) << "/" << ofToString(videoLength, 3) << endl;
@@ -147,11 +147,11 @@ public:
 
 		// cues
 //		if(cuePoint1 > 0.0) {
-//			ofSetColor(config->overColor.r, config->overColor.g, config->overColor.b, 200);
+//			ofSetHexColor(config->overColor.r, config->overColor.g, config->overColor.b, 200);
 //			ofRect(ofMap(cuePoint1, 0.0, 1.0, 0.0, width), 0, 1, height);
 //		}
 //		if(cuePoint2 < 1.0) {
-//			ofSetColor(config->overColor.r, config->overColor.g, config->overColor.b, 200);
+//			ofSetHexColor(config->overColor.r, config->overColor.g, config->overColor.b, 200);
 //			ofRect(ofMap(cuePoint2, 0.0, 1.0, 0.0, width), 0, 1, height);
 //		}
 

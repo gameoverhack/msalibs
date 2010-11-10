@@ -27,7 +27,7 @@ void ofxSimpleGuiContent::draw(float x, float y) {
 	glColor4f(0, 0, 0, 0.8f);
 	ofRect(0, 0, width, fixheight);
 	
-	ofSetColor(0xffffff);
+	ofSetHexColor(0xffffff);
 	content->draw(0, 0, width, fixheight);
 	
 	ofFill();

@@ -58,7 +58,7 @@ namespace MSA {
 	void drawFPS(int color) {
 		ofSetRectMode(OF_RECTMODE_CORNER);
 		ofFill();
-		ofSetColor(color);
+		ofSetHexColor(color);
 		string fpsStr = "FPS: "+ofToString(ofGetFrameRate(), 2);
 		ofDrawBitmapString(fpsStr, 20, ofGetHeight()-20);
 	}

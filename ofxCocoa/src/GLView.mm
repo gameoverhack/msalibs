@@ -400,123 +400,75 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 
 #pragma mark Events
 
-
 -(void)keyDown:(NSEvent *)theEvent {
-	//	NSLog(@"keyDown");
 	NSString *characters = [theEvent characters];
 	if ([characters length]) {
 		unichar key = [characters characterAtIndex:0];
-		ofGetAppPtr()->keyPressed(key);
+		ofNotifyKeyPressed(key);
 	}
 }
 
 -(void)keyUp:(NSEvent *)theEvent {
-	//	NSLog(@"keyUp");
 	NSString *characters = [theEvent characters];
 	if ([characters length]) {
 		unichar key = [characters characterAtIndex:0];
-		ofGetAppPtr()->keyReleased(key);
+		ofNotifyKeyReleased(key);
 	}
 }
 
-// ---------------------------------
+-(ofPoint) ofPointFromEvent:(NSEvent*)theEvent {
+	NSPoint p = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+	return ofPoint(p.x, self.frame.size.height - p.y, 0);
+}
 
 -(void)mouseDown:(NSEvent *)theEvent {
-	//	NSLog(@"mouseDown");
-	if ([theEvent modifierFlags] & NSControlKeyMask) 
-		[self rightMouseDown:theEvent];
-	else if ([theEvent modifierFlags] & NSAlternateKeyMask) 
-		[self otherMouseDown:theEvent];
-	else {
-		NSPoint p = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-		ofGetAppPtr()->mouseX = p.x;
-		ofGetAppPtr()->mouseY = self.frame.size.height-p.y;
-		ofGetAppPtr()->mousePressed(ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY, 0);
-	}
+	ofPoint p = [self ofPointFromEvent:theEvent];
+	ofNotifyMousePressed(p.x, p.y, 0);
 }
-
-// ---------------------------------
 
 -(void)rightMouseDown:(NSEvent *)theEvent {
-	//	NSLog(@"rightMouseDown");
-	NSPoint p = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-	ofGetAppPtr()->mouseX = p.x;
-	ofGetAppPtr()->mouseY = self.frame.size.height-p.y;
-	ofGetAppPtr()->mousePressed(ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY, 1);
+	ofPoint p = [self ofPointFromEvent:theEvent];
+	ofNotifyMousePressed(p.x, p.y, 1);
 }
 
-// ---------------------------------
-
 -(void)otherMouseDown:(NSEvent *)theEvent {
-	//	NSLog(@"otherMouseDown");
-	NSPoint p = [self convertPoint:[theEvent locationInWindow] fromView:nil];	
-	ofGetAppPtr()->mouseX = p.x;
-	ofGetAppPtr()->mouseY = self.frame.size.height-p.y;
-	ofGetAppPtr()->mousePressed(ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY, 2);
+	ofPoint p = [self ofPointFromEvent:theEvent];
+	ofNotifyMousePressed(p.x, p.y, 2);
 }
 
 -(void)mouseMoved:(NSEvent *)theEvent{
-	//	NSLog(@"mouseMoved");
-	NSPoint p = [self convertPoint:[theEvent locationInWindow] fromView:nil];	
-	ofGetAppPtr()->mouseX = p.x;
-	ofGetAppPtr()->mouseY = self.frame.size.height-p.y;
-	ofGetAppPtr()->mouseMoved(ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY);
+	ofPoint p = [self ofPointFromEvent:theEvent];
+	ofNotifyMouseMoved(p.x, p.y);
 }
-
-
-// ---------------------------------
 
 -(void)mouseUp:(NSEvent *)theEvent {
-	//	NSLog(@"mouseUp");
-	ofGetAppPtr()->mouseReleased(ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY, 0);
-	ofGetAppPtr()->mouseReleased();
+	ofPoint p = [self ofPointFromEvent:theEvent];
+	ofNotifyMouseReleased(p.x, p.y, 0);
 }
-
-// ---------------------------------
 
 -(void)rightMouseUp:(NSEvent *)theEvent {
-	//	NSLog(@"rightMouseUp");
-	ofGetAppPtr()->mouseReleased(ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY, 1);
-	ofGetAppPtr()->mouseReleased();
+	ofPoint p = [self ofPointFromEvent:theEvent];
+	ofNotifyMouseReleased(p.x, p.y, 1);
 }
-
-// ---------------------------------
 
 -(void)otherMouseUp:(NSEvent *)theEvent {
-	//	NSLog(@"otherMouseUp");
-	ofGetAppPtr()->mouseReleased(ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY, 2);
-	ofGetAppPtr()->mouseReleased();
+	ofPoint p = [self ofPointFromEvent:theEvent];
+	ofNotifyMouseReleased(p.x, p.y, 2);
 }
-
-// ---------------------------------
 
 -(void)mouseDragged:(NSEvent *)theEvent {
-	//	NSLog(@"mouseDragged");
-	NSPoint p = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-	ofGetAppPtr()->mouseX = p.x;
-	ofGetAppPtr()->mouseY = self.frame.size.height-p.y;
-	ofGetAppPtr()->mouseDragged(ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY, 0);
+	ofPoint p = [self ofPointFromEvent:theEvent];
+	ofNotifyMouseDragged(p.x, p.y, 0);
 }
-
-// ---------------------------------
 
 -(void)rightMouseDragged:(NSEvent *)theEvent {
-	//	NSLog(@"rightMouseDragged");
-	NSPoint p = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-	ofGetAppPtr()->mouseX = p.x;
-	ofGetAppPtr()->mouseY = self.frame.size.height-p.y;
-	ofGetAppPtr()->mouseDragged(ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY, 1);
+	ofPoint p = [self ofPointFromEvent:theEvent];
+	ofNotifyMouseDragged(p.x, p.y, 1);
 }
 
-// ---------------------------------
-
 -(void)otherMouseDragged:(NSEvent *)theEvent {
-	//	NSLog(@"otherMouseDragged");
-	
-	NSPoint p = [self convertPoint:[theEvent locationInWindow] fromView:nil];
-	ofGetAppPtr()->mouseX = p.x;
-	ofGetAppPtr()->mouseY = self.frame.size.height-p.y;
-	ofGetAppPtr()->mouseDragged(ofGetAppPtr()->mouseX, ofGetAppPtr()->mouseY, 2);
+	ofPoint p = [self ofPointFromEvent:theEvent];
+	ofNotifyMouseDragged(p.x, p.y, 2);
 }
 
 -(void)scrollWheel:(NSEvent *)theEvent {

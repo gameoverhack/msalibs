@@ -81,7 +81,7 @@ static AppDelegate* _appDelegate = NULL;
 
 
 -(void)createGLWindowAndView:(NSRect)windowRect {
-	NSLog(@"createGLWindowAndView: ");
+//	NSLog(@"createGLWindowAndView: ");
 	_glWindow	= [[GLWindow alloc] initWithContentRect:windowRect styleMask:appWindow()->initSettings().windowStyle];
 	_glView		= [[GLView alloc] initWithFrame:NSMakeRect(0, 0, windowRect.size.width, windowRect.size.height)];
 	[_glWindow setContentView:_glView];
@@ -97,7 +97,7 @@ static AppDelegate* _appDelegate = NULL;
 
 
 - (void)applicationDidFinishLaunching:(NSNotification*)n {
-	NSLog(@"applicationDidFinishLaunching");
+//	NSLog(@"applicationDidFinishLaunching");
 	
 	_appDelegate	= self;
 	
@@ -106,7 +106,7 @@ static AppDelegate* _appDelegate = NULL;
 	} else {
 	}
 	
-	ofGetAppPtr()->setup();
+	ofNotifySetup();
 	
 	[self startAnimation:self];
 	
@@ -116,14 +116,17 @@ static AppDelegate* _appDelegate = NULL;
 }
 
 - (BOOL)applicationShouldTerminate:(NSNotification*)n {
-	NSLog(@"applicationShouldTerminate");
+//	NSLog(@"applicationShouldTerminate");
+	
+	ofNotifyExit();
+	
 	[self stopAnimation:self];
 	return NSTerminateNow;
 }
 
 
 -(void) dealloc {
-	NSLog(@"AppDelegate::dealloc");
+//	NSLog(@"AppDelegate::dealloc");
 	[_glWindow release];
     [super dealloc];
 }

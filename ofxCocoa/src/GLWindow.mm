@@ -73,13 +73,8 @@ using namespace ofxCocoa;
 	int w = self.frame.size.width;
 	int h = self.frame.size.height;
 	
-	if(ofGetAppPtr()) ofGetAppPtr()->windowResized(w, h);
 	
-#ifdef OF_USING_POCO
-	resizeEventArgs.width = w;
-	resizeEventArgs.height = h;
-	ofNotifyEvent( ofEvents.windowResized, resizeEventArgs );
-#endif
+	ofNotifyWindowResized(w, h);
 	
 	[self.contentView setNeedsDisplay:YES];
 }

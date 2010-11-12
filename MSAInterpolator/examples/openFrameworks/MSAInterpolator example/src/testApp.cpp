@@ -133,7 +133,7 @@ void testApp::draw() {
 	string uiDist = spline3D.getUseLength() ? "* " : "  ";
 	ofDrawBitmapString( ofToString(ofGetFrameRate(), 2) + "\n"
 					   + "numSteps (resampling resolution - mouseX to change): " + ofToString(numSteps) + "\n"
-					   + "mouse click around the area to draw a 3D spline\n"
+					   + "mouse click around the area to draw a 3D spline (length = " + ofToString(spline3D.getLength()) + "\n"
 					   + "\n"
 					   + uiLin + "'1' to use linear interpolation\n"
 					   + uiCub + "'2' to use cubic (catmull rom) interpolation\n"

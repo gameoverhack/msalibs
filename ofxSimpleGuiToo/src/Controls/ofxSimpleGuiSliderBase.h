@@ -80,13 +80,13 @@ public:
 	
 
 	void increase() {
-		if(increment == 0) setIncrement((max - min) * 0.01);
+		if(increment == 0) setIncrement((max - min) * 0.001);
 //		oldValue = *value;		// save oldValue (so the draw doesn't update target but uses it)
 		setTargetValue(*value + increment);
 	}
 
 	void decrease() {
-		if(increment == 0) setIncrement((max - min) * 0.01);
+		if(increment == 0) setIncrement((max - min) * 0.001);
 //		oldValue = *value;		// save oldValue (so the draw doesn't update target but uses it)
 		setTargetValue(*value - increment);
 	}

@@ -80,7 +80,7 @@ namespace MSA {
 		void				goFullscreenOnAll();
 		void				toggleFullscreen();
 		
-		void				setWindowLevel(int windowLevel = NSMainMenuWindowLevel);
+		void				setWindowLevel(int windowLevel = NSNormalWindowLevel);
 		int					getWindowLevel();
 		
 		void				showSystemUI(int mode = kUIModeNormal);

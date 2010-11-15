@@ -401,9 +401,31 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 #pragma mark Events
 
 -(void)keyDown:(NSEvent *)theEvent {
+//	NSLog(@"%@", theEvent);
 	NSString *characters = [theEvent characters];
 	if ([characters length]) {
 		unichar key = [characters characterAtIndex:0];
+		switch(key) {
+			case OF_KEY_ESC:
+				OF_EXIT_APP(0);
+				break;
+				
+			case 63232:
+				key = OF_KEY_UP;
+				break;
+			
+			case 63235:
+				key = OF_KEY_RIGHT;
+				break;
+			
+			case 63233:
+				key = OF_KEY_DOWN;
+				break;
+
+			case 63234:
+				key = OF_KEY_LEFT;
+				break;
+		}
 		ofNotifyKeyPressed(key);
 	}
 }

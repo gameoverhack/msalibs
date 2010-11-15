@@ -59,7 +59,7 @@ namespace MSA {
 		InitSettings::InitSettings() {
 			isOpaque			= true;
 			windowStyle			= NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask;
-			windowLevel			= NSMainMenuWindowLevel + 1;
+			windowLevel			= NSNormalWindowLevel;
 			hasWindowShadow		= true;
 			numFSAASamples		= 0;
 			initRect			= NSMakeRect(100, 100, 1024, 768);

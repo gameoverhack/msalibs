@@ -69,6 +69,9 @@ namespace MSA {
 			if (a->isFree()) a->moveBy(deltaForce * a->getInvMass(), false);
 			if (b->isFree()) b->moveBy(deltaForce * -b->getInvMass(), false);
 			
+			a->collidedWithParticle(b, deltaForce);
+			b->collidedWithParticle(a, -deltaForce);
+			
 			return true;
 		}
 		

@@ -98,8 +98,10 @@ namespace MSA {
 			T				getVelocity();
 			
 			// override these functions if you create your own particle type with custom behaviour and/or drawing
-			virtual void	update() {}
-			virtual void	draw() {}
+			virtual void	update() {}		// called every frame in world::update();
+			virtual void	draw() {}		// called every frame in world::draw();
+			virtual void	collidedWithParticle(ParticleT *other, T collisionForce) {}	// called when this particle collides with another particle (called for both particles)
+			virtual void	collidedWithEdgeOfWorld(T collisionForce) {}
 			
 			void			kill();
 			bool			isDead();
@@ -377,6 +379,9 @@ namespace MSA {
 
 			// not keen on this solution, but best so far
 			//			T r;
+			
+			bool collided = false;
+			T oldVel = getVelocity();
 			for(int i=0; i<T::DIM; i++) {
 				//				r[i] = _radius;
 				
@@ -384,11 +389,17 @@ namespace MSA {
 				if(_pos[i] < _params->worldMin[i] + _radius) {
 					_pos[i] = _params->worldMin[i] + _radius;
 					_oldPos[i] = _pos[i] + vel * _bounce;
+					collided = true;
 				} else if(_pos[i] > _params->worldMax[i] - _radius) {
 					_pos[i] = _params->worldMax[i] - _radius;
 					_oldPos[i] = _pos[i] + vel * _bounce;
+					collided = true;
 				}
 			}
+			
+			if(collided) collidedWithEdgeOfWorld(getVelocity() - oldVel);
+
+			
 			//			if(_pos.x < _params->worldMin.x + _radius) {
 			//				float vel = _pos.x - _oldPos.x;
 			//				_pos.x = _params->worldMin.x + _radius;

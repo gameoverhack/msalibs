@@ -52,11 +52,15 @@ namespace MSA {
 				
 				setStrength(strength);
 				setRestLength(restLength);
+				setForceCap(0);
 			}
 			
 			
 			void setStrength(float s);
 			float getStrength();
+			
+			void setForceCap (float c);
+			float getForceCap ();
 			
 			void setRestLength(float l);
 			float getRestLength();
@@ -65,7 +69,7 @@ namespace MSA {
 		protected:
 			float _restLength;
 			float _strength;
-			
+			float _forceCap;
 			
 			
 			void solve() {
@@ -73,7 +77,12 @@ namespace MSA {
 				float deltaLength2 = delta.lengthSquared();
 				float deltaLength = sqrt(deltaLength2);	// TODO: fast approximation of square root (1st order Taylor-expansion at a neighborhood of the rest length r (one Newton-Raphson iteration with initial guess r))
 				float force = _strength * (deltaLength - _restLength) / (deltaLength * (this->_a->getInvMass() + this->_b->getInvMass()));
+				
+				
 				T deltaForce = delta * force;
+				
+				if (_forceCap > 0)
+					deltaForce.limit(_forceCap);
 				
 				if (this->_a->isFree()) this->_a->moveBy(deltaForce * this->_a->getInvMass(), false);
 				if (this->_b->isFree()) this->_b->moveBy(deltaForce * -this->_b->getInvMass(), false);
@@ -96,6 +105,17 @@ namespace MSA {
 		inline float SpringT<T>::getStrength() {
 			return _strength;
 		}
+		
+		template <typename T>
+		inline void SpringT<T>::setForceCap(float c) {
+			_forceCap = c;
+		}
+		
+		template <typename T>
+		inline float SpringT<T>::getForceCap() {
+			return _forceCap;
+		}
+		
 		
 		template <typename T>
 		inline void SpringT<T>::setRestLength(float l) {

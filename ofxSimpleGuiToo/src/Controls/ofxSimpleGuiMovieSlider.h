@@ -166,12 +166,12 @@ public:
 		cue2Btn->draw(x+46, y+35);
 		resetBtn->draw(x+69, y+35);
 
-		ofSetColor(0xffffff);
+		ofSetHexColor(0xffffff);
 		ofDrawBitmapString("1", x+30, y+49);
 		ofDrawBitmapString("2", x+53, y+49);
 		ofDrawBitmapString("R", x+76, y+49);
 
-		ofSetColor(0xffffff);
+		ofSetHexColor(0xffffff);
 		ofFill();
 
 		if(!doPause) {

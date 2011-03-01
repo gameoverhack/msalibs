@@ -122,6 +122,8 @@ namespace MSA {
 		int getHeight() const;
 		float getInvWidth() const;
 		float getInvHeight() const;
+		Vec2f getSize();
+		Vec2f getInvSize();
 		
 		bool isInited() const;
 		

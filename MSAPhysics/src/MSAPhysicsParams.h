@@ -38,7 +38,8 @@ namespace MSA {
 	
 	namespace Physics {
 		
-		struct Params {
+		template <typename T>
+		struct ParamsT {
 			float		timeStep, timeStep2;
 			float		drag;
 			
@@ -46,15 +47,15 @@ namespace MSA {
 			bool		isCollisionEnabled;
 			
 			bool		doGravity;
-			Vec3f		gravity;
+			T			gravity;
 			
 			// do world boundaries
 			bool		doWorldEdges;
-			Vec3f		worldMin;					// use for sectors
-			Vec3f		worldMax;
-			Vec3f		worldSize;                  // cache these
-			Vec3f		worldSizeInv;
-			Vec3f		sectorCount;				// number of sectors in each axis
+			T			worldMin;					// use for sectors
+			T			worldMax;
+			T			worldSize;                  // cache these
+//			T			worldSizeInv;
+			T			sectorCount;				// number of sectors in each axis
 		};
 		
 	}

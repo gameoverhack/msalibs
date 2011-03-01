@@ -55,6 +55,8 @@ namespace MSA {
 		useAdditiveBlending = false;
 		brightness			= 1;
 		doInvert			= false;
+		velDrawMult				= 1;
+		vectorSkipCount		= 0;
 		
 		enableAlpha(false);
 		
@@ -315,17 +317,16 @@ namespace MSA {
 		glTranslatef(x, y, 0);
 		glScalef(renderWidth/(fw-2), renderHeight/(fh-2), 1.0);
 		
-		float velMult = 50000;
 		float maxVel = 5.0f/20000;
 		
 		Vec2f vel;
-		float vt = velThreshold * _fluidSolver->getInvWidth() * _fluidSolver->getInvHeight();
+		float vt = velDrawThreshold * _fluidSolver->getInvWidth() * _fluidSolver->getInvHeight();
 		vt *= vt;
 		
-		for (int j=0; j<fh-2; j++ ){
-			for (int i=0; i<fw-2; i++ ){
-				_fluidSolver->getInfoAtCell(i+1, j+1, &vel, NULL);
-				float d2 = vel.x * vel.x + vel.y * vel.y;
+		for (int j=0; j<fh-2; j+=vectorSkipCount+1 ){
+			for (int i=0; i<fw-2; i+=vectorSkipCount+1 ){
+				vel = _fluidSolver->getVelocityAtCell(i+1, j+1);
+				float d2 = vel.lengthSquared();
 				if(d2>vt) {
 					if(d2 > maxVel * maxVel) {
 						float mult = maxVel * maxVel/ d2;
@@ -333,7 +334,7 @@ namespace MSA {
 						vel.x *= mult;
 						vel.y *= mult;
 					}
-					vel *= velMult;
+					vel *= velDrawMult * 50000;
 					
 #ifndef MSA_TARGET_OPENGLES
 					float b = mapRange(d2, vt, maxVel, 0.0f, brightness);

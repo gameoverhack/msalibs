@@ -41,7 +41,7 @@ void ParticleSystem::updateAndDraw( bool drawingFluid ){
 	glEnableClientState(GL_COLOR_ARRAY);
 	glColorPointer(3, GL_FLOAT, 0, colArray);
 	
-	glDrawArrays(GL_LINES, 0, MAX_PARTICLES * 2);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, MAX_PARTICLES * 2);
 	
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);

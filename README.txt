@@ -47,7 +47,7 @@ Ken Perlin's noise and fractal noise (upto 3 dimensions).
 
 MSAPhysics
 -------------------------
-A 3D particle/constraint based physics library for openFrameworks with springs, attractors and collision. It uses a very similar api to the traer.physics library for processing to make getting into it as easy as possible.
+A template based particle/constraint based physics library for openFrameworks with springs, attractors and collision. It uses a very similar api to the traer.physics library for processing to make getting into it as easy as possible. All classes are template based with typedefs for 2D and 3D physics. Potentially more. 
 Demo at http://www.msavisuals.com/msaphysics
 
 
@@ -72,9 +72,10 @@ MSAUtils
 A collection of small and useful utility C++ classes and functions. (will eventually be phased out into MSACore and/or other libraries)
 
 
-ofxMacOSX
+ofxCocoa
 -------------------------
-openFrameworks only addon to allow native Mac OSX integration (instead of GLUT).
+A GLUT replacement add-on for openFrameworks 006+ to use native Cocoa OpenGL and windowing instead of GLUT. Can provide upto 200% better performance in certain situations (multiscreen + fullscreen)
+Supports Fbos, shaders, FSAA, setting window stylemasks/decorations/transparency, programmatic windows, Interface Builder integration, fullscreen on single or more screens, NSTimer or CVDisplayLink callback.
 
 
 ofxMSADirManager

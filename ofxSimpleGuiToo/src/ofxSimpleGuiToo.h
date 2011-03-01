@@ -63,7 +63,6 @@ public:
 
 	void						drawFocus(float x, float y);
 
-
 	void						setDraw(bool b);
 	void						toggleDraw();
 	void						show();		// simply calls setDraw(true);
@@ -84,7 +83,6 @@ public:
 
 	ofxSimpleGuiControl			&control(string name);		// returns control by name
 
-
 	ofxSimpleGuiPage			&addPage(string name = "");
 	ofxSimpleGuiControl			&addControl(ofxSimpleGuiControl& control);
 	ofxSimpleGuiContent			&addContent(string name, ofBaseDraws &content, float fixwidth = -1);
@@ -100,7 +98,6 @@ public:
 	ofxSimpleGuiColorPicker		&addColorPicker(string name, float *values);
 	ofxSimpleGuiComboBox        &addComboBox(string name, int &value, int numChoices, string* choiceTitles=NULL);
 
-
 	void						draw();
 	void                        draw(float x, float y);
 
@@ -111,9 +108,6 @@ protected:
 	bool							doSave;//, doSaveBackup;
 	bool							changePage;
 	int								currentPageIndex;			// 1 based index of page (0 is for global controls)
-
-	//	ofxXmlSettings					XML;
-	//	string							xmlFilename;
 
 	bool							doDraw;
 	float							border;

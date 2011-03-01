@@ -2,21 +2,21 @@
 
 	<version>1.2</version>
 	<author>Mehmet Akten</author>
-	<url>code.google.com/p/ofxmsaof/</url>
+	<url>www.msalibs.org</url>
 
     <requires>
 	</requires>
     
 	<add>	
 		<src>
-			<folder name="addons/ofxObjCPointer/src">			
-				<file>../../../addons/ofxObjCPointer/src/ofxObjCPointer.h</file>
-				<file>../../../addons/ofxObjCPointer/src/ofxObjCPointer.cpp</file>
+			<folder name="addons/MSAObjCPointer/src">			
+				<file>../../../addons/MSAObjCPointer/src/MSAObjCPointer.h</file>
+				<file>../../../addons/MSAObjCPointer/src/MSAObjCPointer.cpp</file>
 			</folder>
 		</src>
 
 		<include>
-			<path>../../../addons/ofxObjCPointer/src</path>
+			<path>../../../addons/MSAObjCPointer/src</path>
 		</include>
 		
 		<link>

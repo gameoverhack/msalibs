@@ -128,9 +128,9 @@ void testApp::draw() {
 	
 	// draw fps
 	glDisable(GL_DEPTH_TEST);
-	glColor3f(0, 0, 0);
+	glColor4f(0, 0, 0, 1);
 	ofRect(0, 0, ofGetWidth(), 20);
 	
-	glColor3f(1, 1, 1);
+	glColor4f(1, 1, 1, 1);
 	ofDrawBitmapString(ofToString(ofGetFrameRate()), 10, 10);
 }

@@ -133,7 +133,7 @@ void testApp::draw() {
 	string uiDist = spline3D.getUseLength() ? "* " : "  ";
 	ofDrawBitmapString( ofToString(ofGetFrameRate(), 2) + "\n"
 					   + "numSteps (resampling resolution - mouseX to change): " + ofToString(numSteps) + "\n"
-					   + "mouse click around the area to draw a 3D spline\n"
+					   + "mouse click around the area to draw a 3D spline (length = " + ofToString(spline3D.getLength()) + "\n"
 					   + "\n"
 					   + uiLin + "'1' to use linear interpolation\n"
 					   + uiCub + "'2' to use cubic (catmull rom) interpolation\n"
@@ -186,9 +186,8 @@ void testApp::mousePressed(int x, int y, int button) {
 	spherePosPerc = spherePosPerc * numPoints / (numPoints + 1);
 	
 	
-	MSA::Vec3f pt;
-	pt.set(x-ofGetWidth()/2, y, 0);
-	pt.rotate(0, -currentRot, 0);
+	MSA::Vec3f pt(x-ofGetWidth()/2, y, 0);
+	pt.rotate(MSA::Vec3f(0, 1, 0), -currentRot);
 	spline3D.push_back(pt);
 }
 

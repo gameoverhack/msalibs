@@ -30,7 +30,7 @@
  * ***********************************************************************/ 
 
 
-/**************************** 2D Interpolator (of Vec2) ****************************/
+/**************************** 2D InterpolatorT (of Vec2) ****************************/
 
 #pragma once
 
@@ -38,7 +38,7 @@
 
 namespace MSA {
 	
-	typedef Interpolator<Vec2f> Interpolator2D;
+	typedef InterpolatorT<Vec2f> Interpolator2D;
 
 	
 	inline float lengthOf(const Vec2f& v) {
@@ -49,7 +49,7 @@ namespace MSA {
 	// OpenGL ES compatibility added by Rob Seward
 	// http://www.openframeworks.cc/forum/viewtopic.php?f=25&t=3767&p=19865
 	
-	inline void drawInterpolatorRaw(Interpolator2D spline, int dotSize = 20, int lineWidth = 4){
+	inline void drawInterpolatorRaw(Interpolator2D &spline, int dotSize = 20, int lineWidth = 4){
 		int numItems = spline.size();
 		
 		if(lineWidth) {
@@ -78,7 +78,7 @@ namespace MSA {
 	}
 	
 	
-	inline void drawInterpolatorSmooth(Interpolator2D spline, int numSteps, int dotSize = 8, int lineWidth = 2) {
+	inline void drawInterpolatorSmooth(Interpolator2D &spline, int numSteps, int dotSize = 8, int lineWidth = 2) {
 		float spacing = 1.0/numSteps;
 		if(lineWidth) {
 			glLineWidth(lineWidth);

@@ -10,47 +10,27 @@
 
 	<add>	
 		<src>
-			<folder name="addons/ofxMSAPhysics/src">			
-				<file>../../../addons/ofxMSAPhysics/src/ofxMSAPhysics.h</file>
-			</folder>
-            
-			<folder name="addons/ofxMSAPhysics/src/Callbacks">			
-				<file>../../../addons/ofxMSAPhysics/src/Callbacks/ofxMSAParticleDrawer.h</file>
-				<file>../../../addons/ofxMSAPhysics/src/Callbacks/ofxMSAParticleUpdater.h</file>
-				<file>../../../addons/ofxMSAPhysics/src/Callbacks/ofxMSAPhysicsCallbacks.h</file>
-			</folder>
-
-			<folder name="addons/ofxMSAPhysics/src/Constraints">			
-				<file>../../../addons/ofxMSAPhysics/src/Constraints/ofxMSAAttraction.h</file>
-				<file>../../../addons/ofxMSAPhysics/src/Constraints/ofxMSACollision.h</file>
-				<file>../../../addons/ofxMSAPhysics/src/Constraints/ofxMSAConstraint.h</file>
-				<file>../../../addons/ofxMSAPhysics/src/Constraints/ofxMSAConstraintTypes.h</file>
-				<file>../../../addons/ofxMSAPhysics/src/Constraints/ofxMSASpring.h</file>
-			</folder>
-            
-			<folder name="addons/ofxMSAPhysics/src/Core">			
-				<file>../../../addons/ofxMSAPhysics/src/Core/binner.h</file>
-				<file>../../../addons/ofxMSAPhysics/src/Core/binner.cpp</file>
-				<file>../../../addons/ofxMSAPhysics/src/Core/ofxMSAParticle.h</file>
-				<file>../../../addons/ofxMSAPhysics/src/Core/ofxMSAParticle.cpp</file>
-				<file>../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysics.cpp</file>
-				<file>../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsParams.h</file>
-				<file>../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsUtils.h</file>
-				<file>../../../addons/ofxMSAPhysics/src/Core/ofxMSAPhysicsUtils.cpp</file>
-			</folder>      
-            
-			<folder name="addons/ofxMSAPhysics/src/serialization">			
-				<file>../../../addons/ofxMSAPhysics/src/serialization/ofxMSADataRecorder.h</file>
+			<folder name="addons/MSAPhysics/src">			
+				<file>../../../addons/MSAPhysics/src/MSAPhysics.h</file>
+				<file>../../../addons/MSAPhysics/src/MSAPhysics2D.h</file>
+				<file>../../../addons/MSAPhysics/src/MSAPhysics3D.h</file>
+				<file>../../../addons/MSAPhysics/src/MSAAttraction.h</file>
+				<file>../../../addons/MSAPhysics/src/MSAPhysicsCallbacks.h</file>
+				<file>../../../addons/MSAPhysics/src/MSAConstraint.h</file>
+				<file>../../../addons/MSAPhysics/src/MSADataRecorder.h</file>
+				<file>../../../addons/MSAPhysics/src/MSAPhysicsParams.h</file>
+				<file>../../../addons/MSAPhysics/src/MSAParticle.h</file>
+				<file>../../../addons/MSAPhysics/src/MSAParticleDrawer.h</file>
+				<file>../../../addons/MSAPhysics/src/MSAParticleUpdater.h</file>
+				<file>../../../addons/MSAPhysics/src/MSAPhysicsSector.h</file>
+				<file>../../../addons/MSAPhysics/src/MSASpring.h</file>
+				<file>../../../addons/MSAPhysics/src/MSAPhysicsWorld.h</file>
 			</folder>                        
 
 		</src>
 
 		<include>
-			<path>../../../addons/ofxMSAPhysics/src</path>
-			<path>../../../addons/ofxMSAPhysics/src/Callbacks</path>
-			<path>../../../addons/ofxMSAPhysics/src/Constraints</path>
-			<path>../../../addons/ofxMSAPhysics/src/Core</path>
-			<path>../../../addons/ofxMSAPhysics/src/serialization</path>
+			<path>../../../addons/MSAPhysics/src</path>
 		</include>
 		
 		<link>

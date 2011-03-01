@@ -33,10 +33,10 @@
 
 namespace MSA {
 	
-	inline void drawQuadAtCorner();
-	inline void drawQuadAtCenter();
+	 void drawQuadAtCorner();
+	 void drawQuadAtCenter();
 	
-	inline void drawTexture(GLuint texId, GLenum textureTarget = GL_TEXTURE_2D);
+	 void drawTexture(GLuint texId, GLenum textureTarget = GL_TEXTURE_2D);
 }
 
 

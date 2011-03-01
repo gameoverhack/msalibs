@@ -32,24 +32,26 @@
 #pragma once
 
 #include "ofxDirList.h"
-#include "ofxMSADataProtector.h"
+#include "MSADataProtector.h"
+#include "ofxMSAImage.h"
 
 namespace MSA {
 	
 	template <typename T> class DirManager {
 	public:
+		ofxDirList DIR;
+
 		void setup(string path, const char *ext = NULL, string* md5 = NULL) {
 			currentIndex = 0;
-			ofxDirList DIR;
 			if(ext) DIR.allowExt(ext);
 			int numFiles = DIR.listDir(path);
 			
 			ofLog(OF_LOG_VERBOSE, "DirManager::setup( " + path + " ) | " + ofToString(numFiles) + " files loaded");
 			for(int i = 0; i < numFiles; i++) {
 				if(md5) {
-					CheckFileMD5(DIR.getPath(i), md5[i], true);
+					checkFileMD5(DIR.getPath(i), md5[i], true);
 				} else {
-					CheckFileMD5(DIR.getPath(i), "", false);
+					checkFileMD5(DIR.getPath(i), "", false);
 				}
 				string filename = DIR.getPath(i);
 				ofLog(OF_LOG_VERBOSE, "   loading " + filename);
@@ -96,7 +98,7 @@ namespace MSA {
 			return getCurrent();
 		}
 		
-		int count() {
+		int size() {
 			return resources.size();
 		}
 		
@@ -108,7 +110,7 @@ namespace MSA {
 	
 	
 	//---------------------------
-	class ImageDirManager : public DirManager<ofImage> {
+	class ImageDirManager : public DirManager<Image> {
 	public:
 		void loadResource(string filename) {
 			resources.back().loadImage(filename);

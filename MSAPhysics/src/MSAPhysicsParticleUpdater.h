@@ -34,35 +34,36 @@
 #include "MSAObjCPointer.h"
 #include "MSAPhysicsParticle.h"
 
-
 namespace MSA {
 	
 	namespace Physics {
 		
-		/********************* Particle updater class *************************/
-		class ParticleUpdater : public ObjCPointer {
+		/********************* ParticleT updater class *************************/
+		template <typename T>
+		class ParticleUpdaterT : public ObjCPointer {
 		public:
 			bool ignoreFixedParticles;
 			
-			ParticleUpdater() {
-				setClassName("ParticleUpdater");
+			ParticleUpdaterT() {
+				setClassName("ParticleUpdaterT");
 				ignoreFixedParticles = true;
 			}
 			
-			virtual void update(Particle* p) = 0;
+			virtual void update(ParticleT<T>* p) = 0;
 		};
 		
 		
 		
-		/********************* Particle updateable class (for individual particles, or the whole physics class *************************/
+		/********************* ParticleT updateable class (for individual particles, or the whole physics class *************************/
 		/********************* To allow forcefields on individual particles, or the whole particle system  *************************/
-		class ParticleUpdatable {
+		template <typename T>
+		class ParticleUpdatableT {
 		public:
-			ParticleUpdatable() {}
+			ParticleUpdatableT() {}
 			
-			virtual ~ParticleUpdatable() {
-				for(vector<ParticleUpdater*>::iterator it = _updaters.begin(); it != _updaters.end(); it++) {
-					ParticleUpdater* updater = *it;
+			virtual ~ParticleUpdatableT() {
+				for(typename vector<ParticleUpdaterT<T>*>::iterator it = _updaters.begin(); it != _updaters.end(); it++) {
+					ParticleUpdaterT<T>* updater = *it;
 					if(updater) {
 						updater->release();
 						updater = NULL;
@@ -71,22 +72,22 @@ namespace MSA {
 				_updaters.clear();
 			}
 			
-			ParticleUpdatable* addUpdater(ParticleUpdater* updater) {
+			ParticleUpdatableT<T>* addUpdater(ParticleUpdaterT<T>* updater) {
 				_updaters.push_back(updater);
 				updater->retain();
 				return this;	// so you can carry on adding updater
 			}
 			
-			void applyUpdaters(Particle* particle) {
-				for(vector<ParticleUpdater*>::iterator it = _updaters.begin(); it != _updaters.end(); it++) {
-					ParticleUpdater* updater = *it;
+			void applyUpdaters(ParticleT<T>* particle) {
+				for(typename vector<ParticleUpdaterT<T>*>::iterator it = _updaters.begin(); it != _updaters.end(); it++) {
+					ParticleUpdaterT<T>* updater = *it;
 					if(!(updater->ignoreFixedParticles && particle->isFixed())) updater->update(particle);
 				}
 			}
 			
 			
 		protected:
-			vector<ParticleUpdater*> _updaters;
+			vector<ParticleUpdaterT<T>*> _updaters;
 		};
 		
 	}

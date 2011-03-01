@@ -177,6 +177,15 @@ class Vec2
 			return Vec2<T>::zero();
 	}
 
+	void rotate(T angle)
+	{
+		T cosa = math<T>::cos( angle );
+		T sina = math<T>::sin( angle );
+		T rx = x * cosa - y * sina;
+		y = x * sina + y * cosa;
+		x = rx;
+	}
+
 	T lengthSquared() const
 	{
 		return x * x + y * y;
@@ -458,20 +467,56 @@ public:
 			return cross( Vec3<T>::yAxis() );
 	}
 	
-	void rotate( T ax, T ay, T az ) 
+	void rotateX( T angle )
 	{
-		T a = cos( toRadians( ax ) );
-		T b = sin( toRadians( ax ) );
-		T c = cos( toRadians( ay ) );
-		T d = sin( toRadians( ay ) );
-		T e = cos( toRadians( az )  );
-		T f = sin( toRadians( az ) );
-		T nx = c*e*x - c*f*y + d*z;
-		T ny = ( a*f + b*d*e ) * x + (a*e - b*d*f) * y - b*c*z;
-		T nz = ( b*f - a*d*e ) * x + (a*d*f + b*e) * y + a*c*z;
-		x = nx; 
-		y = ny; 
-		z = nz;
+		T sina = math<T>::sin(angle);
+		T cosa = math<T>::cos(angle);
+		T ry = y * cosa - z * sina;
+		T rz = y * sina + z * cosa;
+		y = ry;
+		z = rz;
+	}
+
+	void rotateY( T angle )
+	{
+		T sina = math<T>::sin(angle);
+		T cosa = math<T>::cos(angle);
+		T rx = x * cosa - z * sina;
+		T rz = x * sina + z * cosa;
+		x = rx;
+		z = rz;
+	}
+
+	void rotateZ( T angle )
+	{
+		T sina = math<T>::sin(angle);
+		T cosa = math<T>::cos(angle);
+		T rx = x * cosa - y * sina;
+		T ry = x * sina + y * cosa;
+		x = rx;
+		y = ry;
+	}
+
+	void rotate( Vec3<T> axis, T angle )
+	{
+		T cosa = math<T>::cos(angle);
+		T sina = math<T>::sin(angle);
+
+		T rx = (cosa + (1 - cosa) * axis.x * axis.x) * x;
+		rx += ((1 - cosa) * axis.x * axis.y - axis.z * sina) * y;
+		rx += ((1 - cosa) * axis.x * axis.z + axis.y * sina) * z;
+
+		T ry = ((1 - cosa) * axis.x * axis.y + axis.z * sina) * x;
+		ry += (cosa + (1 - cosa) * axis.y * axis.y) * y;
+		ry += ((1 - cosa) * axis.y * axis.z - axis.x * sina) * z;
+
+		T rz = ((1 - cosa) * axis.x * axis.z - axis.y * sina) * x;
+		rz += ((1 - cosa) * axis.y * axis.z + axis.x * sina) * y;
+		rz += (cosa + (1 - cosa) * axis.z * axis.z) * z;
+
+		x = rx;
+		y = ry;
+		z = rz;
 	}
 
 	Vec3<T> lerp( T fact, const Vec3<T> &rhs ) const

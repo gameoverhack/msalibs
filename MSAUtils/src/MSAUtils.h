@@ -44,59 +44,70 @@ namespace MSA {
 	
 	void dumpFPS(float seconds);
 	
+	void hideCursor();
+	void showCursor();
+	
 	void setMouseCursor(bool forceOn = false);
 	
 	void createDir(string fullpath);
 	
+	void setDataPathToBundle();
 	
+	void restoreDataPath();
+	
+	string padWithZero(float num, float precision=0);
+	
+	string secondsToString(float secs);
+	
+	int showDialog(string message, string info, int style = 0);
 	
 	
 	/***************************************************************/
 	
-	struct Param {
-		float current;
-		float target;
-		float lerpSpeed;
-		
-		Param() {
-			lerpSpeed = 0.1;
-		}
-		
-		void setCurrent(float f) {
-			current = f;
-		}
-		
-		void setTarget(float f) {
-			target = f;
-		}
-		
-		void set(float f) {
-			current = target = f;
-		}
-		
-		void setSpeed(float f) {
-			lerpSpeed = f;
-		}
-		
-		void snapToTarget() {
-			current = target;
-		}
-		
-		void update(float thresh = 0) { //0.001f) {
-			float diff = target - current;
-			diff *= lerpSpeed;
-			if(thresh == 0) {
-				current += diff;
-			} else {
-				if(current!=0) {		// avoid divide by zero
-					if(fabs(diff/current) > thresh) current += diff;	// if change is bigger than % then lerp
-				} else {				// if current is zero
-					if(target !=0 && fabs(diff/target) > thresh) current += diff;	// if change is bigger than % then lerp
-				}
-			}
-		}
-		
-	};
+//	struct Parameter {
+//		float current;
+//		float target;
+//		float lerpSpeed;
+//		
+//		Parameter() {
+//			lerpSpeed = 0.1;
+//		}
+//		
+//		void setCurrent(float f) {
+//			current = f;
+//		}
+//		
+//		void setTarget(float f) {
+//			target = f;
+//		}
+//		
+//		void set(float f) {
+//			current = target = f;
+//		}
+//		
+//		void setSpeed(float f) {
+//			lerpSpeed = f;
+//		}
+//		
+//		void snapToTarget() {
+//			current = target;
+//		}
+//		
+//		void update(float thresh = 0) { //0.001f) {
+//			float diff = target - current;
+//			diff *= lerpSpeed;
+//			if(thresh == 0) {
+//				current += diff;
+//			} else {
+//				if(current!=0) {		// avoid divide by zero
+//					if(fabs(diff/current) > thresh) current += diff;	// if change is bigger than % then lerp
+//				} else {				// if current is zero
+//					if(target !=0 && fabs(diff/target) > thresh) current += diff;	// if change is bigger than % then lerp
+//				}
+//			}
+//		}
+//		
+//	};
 	
 }
 

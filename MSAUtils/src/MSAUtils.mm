@@ -30,7 +30,10 @@
  * ***********************************************************************/ 
 
 #include "MSAUtils.h"
+
+#ifdef MSA_TARGET_OSX
 #import <Cocoa/Cocoa.h>
+#endif
 
 namespace MSA {
 	
@@ -55,7 +58,7 @@ namespace MSA {
 	void drawFPS(int color) {
 		ofSetRectMode(OF_RECTMODE_CORNER);
 		ofFill();
-		ofSetColor(color);
+		ofSetHexColor(color);
 		string fpsStr = "FPS: "+ofToString(ofGetFrameRate(), 2);
 		ofDrawBitmapString(fpsStr, 20, ofGetHeight()-20);
 	}
@@ -90,13 +93,66 @@ namespace MSA {
 	}
 	
 	
+	void hideCursor() {
+		[NSCursor hide];
+	}
+	void showCursor() {
+		[NSCursor unhide];
+	}
+
+	
 	void setMouseCursor(bool forceOn) {
 		if(forceOn || ofGetWindowMode() == OF_WINDOW) ofShowCursor();
 		else ofHideCursor();
 	}
 	
+	
+	
+	static string savedDataPath;
+	
+	void setDataPathToBundle() {
+//		savedDataPath = ofToDataPath(".", false);
+//#ifdef MSA_TARGET_OSX
+//		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+//		string newDataPath = string([[[NSBundle mainBundle] resourcePath] UTF8String]) + "/";
+//		printf("newDataPath : %s\n", newDataPath.c_str());
+//		ofSetDataPathRoot( newDataPath );
+//		
+//		printf("testing : %s\n", ofToDataPath("myfile.bmp").c_str());
+//		
+//		[pool release];
+//#endif						   
+//		ofDisableDataPath();
+		
+	}
+	
+	void restoreDataPath() {
+//		ofEnableDataPath();
+//		if(savedDataPath.empty()) ofSetDataPathRoot(savedDataPath);
+	}
+
+	string padWithZero(float num, float precision) {
+		string str = ofToString(num, precision);
+		if(num<10) str = "0" + str;
+		return str;
+	}
+
+	
+	string secondsToString(float secs) {
+		int mins = floor(secs / 60);
+		int hours = floor(mins/24);
+
+		secs -= mins * 60;
+		mins %= 60;
+		hours %= 24;
+		
+		return padWithZero(hours) + ":" + padWithZero(mins) + ":" + padWithZero(secs, 2);
+	}
+
+	
 	// pass a string e.g. "output/images/capture/
 	void createDir(string fullpath) {
+#ifdef MSA_TARGET_OSX
 		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 		
 		NSString *nsPath = [NSString stringWithUTF8String:fullpath.c_str()];		// convert stl-string to NSString
@@ -128,9 +184,29 @@ namespace MSA {
 		
 		
 		[pool release];
+#endif		
 	}
 	
 	
+	int showDialog(string message, string info, int style) {
+		int ret;
+#ifdef MSA_TARGET_OSX
+
+		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+		NSAlert *alert = [[NSAlert alloc] init];
+//		[alert addButtonWithTitle:@"OK"];
+//		[alert addButtonWithTitle:@"Cancel"];
+		[alert setMessageText:[NSString stringWithUTF8String:message.c_str()]];
+		[alert setInformativeText:[NSString stringWithUTF8String:info.c_str()]];
+		[alert setAlertStyle:style];
+		
+		ret = [alert runModal];
+		ret -= NSAlertFirstButtonReturn;
+		[alert release];
+		[pool release];
+#endif		
+		return ret;
+	}
 	
 	
 	

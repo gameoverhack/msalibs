@@ -32,9 +32,9 @@ void msaFluidParticlesApp::setup() {
 #ifdef USE_GUI 
 	gui.addSlider("fluidCellsX", fluidCellsX, 20, 400);
 	gui.addButton("resizeFluid", resizeFluid);
-	gui.addSlider("fs.viscocity", fluidSolver.viscocity, 0.0, 0.01, 0.5); 
-	gui.addSlider("fs.colorDiffusion", fluidSolver.colorDiffusion, 0.0, 0.0003, 0.5); 
-	gui.addSlider("fs.fadeSpeed", fluidSolver.fadeSpeed, 0.0, 0.1, 0.5); 
+	gui.addSlider("fs.viscocity", fluidSolver.viscocity, 0.0, 0.01); 
+	gui.addSlider("fs.colorDiffusion", fluidSolver.colorDiffusion, 0.0, 0.0003); 
+	gui.addSlider("fs.fadeSpeed", fluidSolver.fadeSpeed, 0.0, 0.1); 
 	gui.addSlider("fs.solverIterations", fluidSolver.solverIterations, 1, 50); 
 	gui.addSlider("fs.deltaT", fluidSolver.deltaT, 0.1, 5);
 	gui.addComboBox("fd.drawMode", (int&)fluidDrawer.drawMode, kFluidDrawCount, (string*)FluidDrawerGl::drawOptionTitles);

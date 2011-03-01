@@ -71,7 +71,7 @@ public:
 	void killMe();						// if your object is a pointer, and you are done with it, call this
 
 
-	// extend ofxMSAInteractiveObject and override all of any of the following methods
+	// extend ofxMSAInteractiveObject and override all or any of the following methods
 	virtual void setup()	{}	// called when app starts
 	virtual void update()	{}	// called every frame to update object
     virtual void draw()		{}	// called every frame to draw object

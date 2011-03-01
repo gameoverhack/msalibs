@@ -32,13 +32,14 @@
 
 #include "MSADataProtector.h"
 #include "hashlibpp.h"
+#include "MSAUtils.h"
 
 namespace MSA {
 	
 	using namespace std;
 	
 	bool checkFileMD5(string filename, string checkAgainstHash, bool bExitOnFalse) {
-		printf("Checking file %s\n", filename.c_str());
+//		printf("Checking file %s\n", filename.c_str());
 		md5wrapper md5;
 		string path = dataPath(filename);
 		string currentHash = md5.getHashFromFile(path);
@@ -46,8 +47,9 @@ namespace MSA {
 		if(bExitOnFalse == false) {
 			printf("%s: %s\n", filename.c_str(), currentHash.c_str());		// use this to see what correct hash should be
 		} else if(!isCorrect) {
+			showDialog("**** DATA CORRUPT ****", "The data files have been tampered with, please contact support@msavisuals.com for help.", 2);
 			printf(" **** DATA CORRUPT **** ");
-		std:exit(1);
+			std:exit(0);
 		}
 		
 		return isCorrect;

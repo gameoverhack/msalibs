@@ -54,7 +54,6 @@ ofxSimpleGuiPage &ofxSimpleGuiPage::setXMLName(string s) {
 	return *this;
 }
 
-
 void ofxSimpleGuiPage::loadFromXML() {
 	ofLog(OF_LOG_VERBOSE, "ofxSimpleGuiPage::loadFromXML: " + xmlFilename);
 
@@ -134,7 +133,7 @@ void ofxSimpleGuiPage::draw(float x, float y, bool alignRight) {
 
 		if(control.hasTitle) {
 			ofNoFill();
-			ofSetColor(config->borderColor);
+			ofSetHexColor(config->borderColor);
 			glLineWidth(0.5f);
 			ofRect(controlX, controlY, control.width, control.height);
 		}
@@ -154,7 +153,7 @@ void ofxSimpleGuiPage::draw(float x, float y, bool alignRight) {
 		eventStealingControl->draw(stealingX, stealingY);
 		if(eventStealingControl->hasTitle) {
 			ofNoFill();
-			ofSetColor(config->borderColor);
+			ofSetHexColor(config->borderColor);
 			glLineWidth(0.5f);
 			ofRect(stealingX, stealingY, eventStealingControl->width, eventStealingControl->height);
 		}

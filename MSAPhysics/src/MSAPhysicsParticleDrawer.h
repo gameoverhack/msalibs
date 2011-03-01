@@ -39,14 +39,15 @@ namespace MSA {
 	
 	namespace Physics {
 		
-		/********************* Particle drawer class *************************/
-		class ParticleDrawer : public ObjCPointer  {
+		/********************* ParticleT drawer class *************************/
+		template <typename T>
+		class ParticleDrawerT : public ObjCPointer  {
 		public:
-			ParticleDrawer() {
-				setClassName("ParticleDrawer");
+			ParticleDrawerT() {
+				setClassName("ParticleDrawerT");
 			}
 			
-			virtual void draw(Particle* p) {
+			virtual void draw(ParticleT<T>* p) {
 //				glPushMatrix();
 //				glTranslatef(p->getX(), p->getY(), p->getZ());
 //				glutSolidSphere(10, 10, 10);
@@ -58,24 +59,25 @@ namespace MSA {
 		
 		
 		/********************* Base class for drawable class *************************/
-		class ParticleDrawable {
+		template <typename T>
+		class ParticleDrawableT {
 		public:
-			ParticleDrawable() {
+			ParticleDrawableT() {
 				_drawer = NULL;
 			}
 			
-			virtual ~ParticleDrawable() {
+			virtual ~ParticleDrawableT() {
 				if(_drawer) _drawer->release();
 			}
 			
 			
-			void draw(Particle* particle) {
+			void draw(ParticleT<T>* particle) {
 				if(_drawer) draw(particle);
 			}
 			
 			
 		protected:
-			ParticleDrawer *_drawer;
+			ParticleDrawerT<T> *_drawer;
 		};
 		
 	}

@@ -40,6 +40,7 @@
 namespace MSA {
 	
 	class FluidDrawerGl : public FluidDrawerBase {
+	public:	
 		float getWidth() {
 			return tex.getWidth();
 		}

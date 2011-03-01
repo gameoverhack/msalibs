@@ -27,10 +27,10 @@ public:
 		targetValue	= value;
 		oldValue	= targetValue;
 		controlType = "SliderBase";
-		
+
 		setIncrement(0);
 		setSmoothing(0);
-		
+
 		setup();
 	}
 
@@ -43,16 +43,16 @@ public:
 	void loadFromXML(ofxXmlSettings &XML) {
 		setValue((Type)XML.getValue(controlType + "_" + key + ":value", 0.0f));
 	}
-	
+
 	void setSmoothing(float smoothing) {
 		lerpSpeed	= 1.0f - smoothing * 0.9;		// so smoothing :1 still results in some motion!
 	}
-	
+
 	void setIncrement(Type increment) {
 		this->increment = increment;
 	}
-	
-	
+
+
 
 	void saveToXML(ofxXmlSettings &XML) {
 		XML.addTag(controlType + "_" + key);
@@ -73,20 +73,21 @@ public:
 		setTargetValue(f);
 		oldValue = *value =  targetValue;
 	}
-	
+
 	void setTargetValue(Type f) {
 		targetValue = ofClamp(f, min, max);
 	}
-	
+
 
 	void increase() {
-		if(increment == 0) setIncrement((max - min) * 0.01);
+
+		if(increment == 0) setIncrement((max - min) * 0.001);
 //		oldValue = *value;		// save oldValue (so the draw doesn't update target but uses it)
 		setTargetValue(*value + increment);
 	}
 
 	void decrease() {
-		if(increment == 0) setIncrement((max - min) * 0.01);
+		if(increment == 0) setIncrement((max - min) * 0.001);
 //		oldValue = *value;		// save oldValue (so the draw doesn't update target but uses it)
 		setTargetValue(*value - increment);
 	}
@@ -128,11 +129,11 @@ public:
 	void onKeyLeft() {
 		decrease();
 	}
-	
+
 	void onKeyUp() {
 		increase();
 	}
-	
+
 	void onKeyDown() {
 		decrease();
 	}
@@ -141,14 +142,14 @@ public:
 	//--------------------------------------------------------------------- update
 	void update() {
 		if(!enabled) return;
-		
+
 		if(oldValue != *value) {					// if value has changed programmatically by something else
 			oldValue = targetValue = *value;			// save the value in target and oldvalue
 		} else {									// otherwise lerp
 			*value += (Type)((targetValue - *value) * lerpSpeed);
 			oldValue = *value;							// and save oldvalue
 		}
-		
+
 		if(lock) {
 			updateSlider();
 		}

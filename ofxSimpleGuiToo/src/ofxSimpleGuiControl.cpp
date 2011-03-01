@@ -89,28 +89,28 @@ ofxSimpleGuiControl &ofxSimpleGuiControl::setKey(string newKey) {
 }
 
 ofxSimpleGuiControl &ofxSimpleGuiControl::setTextColor(bool clickable) {
-	if(isMouseOver() && clickable) ofSetColor(config->textOverColor);
-	else ofSetColor(config->textColor);
+	if(isMouseOver() && clickable) ofSetHexColor(config->textOverColor);
+	else ofSetHexColor(config->textColor);
 	return *this;
 }
 
 ofxSimpleGuiControl &ofxSimpleGuiControl::setTextBGColor(bool clickable) {
-	if(isMouseOver() && clickable) ofSetColor(config->textBGOverColor);
-	else ofSetColor(config->textBGColor);
+	if(isMouseOver() && clickable) ofSetHexColor(config->textBGOverColor);
+	else ofSetHexColor(config->textBGColor);
 	return *this;
 }
 
 ofxSimpleGuiControl &ofxSimpleGuiControl::setFullColor(bool forceActive) {
-	if(isMouseDown() || forceActive) ofSetColor(config->fullActiveColor);
-	else if(isMouseOver()) ofSetColor(config->fullOverColor);
-	else ofSetColor(config->fullColor);
+	if(isMouseDown() || forceActive) ofSetHexColor(config->fullActiveColor);
+	else if(isMouseOver()) ofSetHexColor(config->fullOverColor);
+	else ofSetHexColor(config->fullColor);
 	return *this;
 }
 
 ofxSimpleGuiControl &ofxSimpleGuiControl::setEmptyColor() {
-	ofSetColor(config->emptyColor);
-	//		if(isMouseOver()) ofSetColor(config->overColor.r, config->overColor.g, config->overColor.b);
-	//		if(focused && !isMouseOver()) ofSetColor(config->focusColor.r, config->focusColor.g, config->focusColor.b);
+	ofSetHexColor(config->emptyColor);
+	//		if(isMouseOver()) ofSetHexColor(config->overColor.r, config->overColor.g, config->overColor.b);
+	//		if(focused && !isMouseOver()) ofSetHexColor(config->focusColor.r, config->focusColor.g, config->focusColor.b);
 	return *this;
 }
 

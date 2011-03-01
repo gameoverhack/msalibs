@@ -4,6 +4,12 @@ TODO:
 - auto calculate bin size (keep track of largest particle, on physics::addParticle and particle::setSize)
 
 
+v3.1
+--------------------
+- moved to all template classes for 2D/3D (or more). so MSA::Physics::WorldT<T>. e.g. World2D, World3D.
+- enable() and disable() for particles, to not update and leave out of collision
+
+
 v3.0
 --------------------
 - move to centralized MSALibs (requires MSACore)
@@ -34,7 +40,7 @@ v2.1	07/04/2009
 
 v2.0.2a 09/03/09
 --------------------
-- updates to fix warnings and an error (uint) on PC
+- updates to fix warnings and an error (long) on PC
 - fixes to collision / bin checking
 
 

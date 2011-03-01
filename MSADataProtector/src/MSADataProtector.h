@@ -41,7 +41,7 @@
 
 namespace MSA {
 	
-	bool CheckFileMD5(string filename, string checkAgainstHash, bool bExitOnFalse = true);
+	bool checkFileMD5(string filename, string checkAgainstHash, bool bExitOnFalse = true);
 	
 }
 

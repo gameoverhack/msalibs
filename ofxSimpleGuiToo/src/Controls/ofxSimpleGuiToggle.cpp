@@ -20,7 +20,7 @@ void ofxSimpleGuiToggle::setup() {
 }
 
 void ofxSimpleGuiToggle::loadFromXML(ofxXmlSettings &XML) {
-	setValue(XML.getValue("controls:" + controlType + "_" + key + ":value", 0));
+	setValue(XML.getValue(controlType + "_" + key + ":value", 0));
 }
 
 void ofxSimpleGuiToggle::saveToXML(ofxXmlSettings &XML) {
@@ -41,7 +41,7 @@ void ofxSimpleGuiToggle::setValue(bool b) {
 }
 
 void ofxSimpleGuiToggle::toggle() {
-	(*value) = !(*value); 
+	(*value) = !(*value);
 }
 
 void ofxSimpleGuiToggle::onPress(int x, int y, int button) {
@@ -73,28 +73,28 @@ void ofxSimpleGuiToggle::update() {
 void ofxSimpleGuiToggle::draw(float x, float y) {
 //	enabled = true;
 	setPos(x, y);
-	
+
 	glPushMatrix();
 	glTranslatef(x, y, 0);
-	
+
 	ofEnableAlphaBlending();
 	ofFill();
 	setFullColor(*value);
 	ofRect(0, 0, height, height);
-	
+
 	if((*value)) {
 		setTextColor();
 		ofLine(0, 0, height, height);
 		ofLine(height, 0, 0, height);
 	}
-	
+
 	setTextBGColor();
 	ofRect(height, 0, width - height, height);
-	
+
 	setTextColor();
 	ofDrawBitmapString(name, height + 15, 15);
 	ofDisableAlphaBlending();
-	
+
 	glPopMatrix();
 }
 

@@ -33,49 +33,51 @@
 #pragma once
 
 #ifdef TARGET_OSX
-    #include <OpenCL/opencl.h>
+#include <OpenCL/opencl.h>
 #endif
 
 #ifdef TARGET_WIN32             // added by gameover (matt gingold)
-    #include "windows.h"
-    #include "assert.h"
-    #include <CL/cl.h>
-    #include <CL/cl_gl.h>
+#include "windows.h"
+#include "assert.h"
+#include <CL/cl.h>
+#include <CL/cl_gl.h>
 #endif
 
 #ifdef TARGET_LINUX
-    // what else? untested!
-    #include <CL/cl.h>
-    #include <CL/cl_gl.h>
+// what else? untested!
+#include <CL/cl.h>
+#include <CL/cl_gl.h>
 #endif
 
 #include "MSACore.h"
 
-namespace MSA {
+namespace MSA
+{
 
-	class OpenCL;
-	class OpenCLKernel;
+class OpenCL;
+class OpenCLKernel;
 
-	class OpenCLProgram {
-	public:
-		OpenCLProgram();
-		~OpenCLProgram();
+class OpenCLProgram
+{
+public:
+    OpenCLProgram();
+    ~OpenCLProgram();
 
-		void loadFromFile(string filename, bool isBinary = false);
-		void loadFromSource(string source);
+    void loadFromFile(string filename, bool isBinary = false);
+    void loadFromSource(string source);
 
-		OpenCLKernel* loadKernel(string kernelName);
+    OpenCLKernel* loadKernel(string kernelName);
 
-		void getBinary();
+    void getBinary();
 
-		cl_program& getCLProgram();
+    cl_program& getCLProgram();
 
-	protected:
-		OpenCL*		pOpenCL;
-		cl_program		clProgram;
+protected:
+    OpenCL*		pOpenCL;
+    cl_program		clProgram;
 
-		void			build();
+    void			build();
 
-	};
+};
 
 }

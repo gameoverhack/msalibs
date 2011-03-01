@@ -8,7 +8,7 @@
 class ofxSimpleGuiSliderFloat : public ofxSimpleGuiSliderBase<float> {
 	
 public:
-	ofxSimpleGuiSliderFloat(string name, float &value, float min, float max, float smoothing = 0) : ofxSimpleGuiSliderBase<float>(name, value, min, max, smoothing) {
+	ofxSimpleGuiSliderFloat(string name, float &value, float min, float max) : ofxSimpleGuiSliderBase<float>(name, value, min, max) {
 		controlType = "SliderFloat";
 	}
 };

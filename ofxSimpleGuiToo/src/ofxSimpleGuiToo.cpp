@@ -64,7 +64,7 @@ void ofxSimpleGuiToo::setup() {
 	setAlignRight(false);
 	setDraw(false);
 	setPage(1);
-	
+
 	ofAddListener(ofEvents.keyPressed, this, &ofxSimpleGuiToo::keyPressed);
 }
 
@@ -140,7 +140,6 @@ void ofxSimpleGuiToo::loadFromXML() {
 	}
 
 	setPage(1);
-//	setDraw(doDraw);
 }
 
 
@@ -176,11 +175,11 @@ void ofxSimpleGuiToo::drawFocus(float x, float y) {
 
 void ofxSimpleGuiToo::draw() {
 	if(!doDraw) return;
-	
+
 	ofPushStyle();
-	
+
 	glDisable(GL_DEPTH_TEST);
-	
+
 	ofSetLineWidth(3);
 
 	glDisableClientState(GL_COLOR_ARRAY);
@@ -190,10 +189,29 @@ void ofxSimpleGuiToo::draw() {
 	if(alignRight) ofLine(ofGetWidth() - headerPage->width, headerPage->height, headerPage->width, headerPage->height);
 	else ofLine(0, headerPage->height, headerPage->width, headerPage->height);
 	pages[currentPageIndex]->draw(0.0f, headerPage->height, alignRight);
-	
+
 	ofPopStyle();
 }
 
+void ofxSimpleGuiToo::draw(float x, float y) {
+	if(!doDraw) return;
+
+	ofPushStyle();
+
+	glDisable(GL_DEPTH_TEST);
+
+	ofSetLineWidth(3);
+
+	glDisableClientState(GL_COLOR_ARRAY);
+
+	headerPage->draw(x, y, alignRight);		// this is the header
+	ofSetColor(config->borderColor);
+	if(alignRight) ofLine(x + ofGetWidth() - headerPage->width, y + headerPage->height, x + headerPage->width, y + headerPage->height);
+	else ofLine(x, y + headerPage->height, x + headerPage->width, y + headerPage->height);
+	pages[currentPageIndex]->draw(x, y + headerPage->height, alignRight);
+
+	ofPopStyle();
+}
 
 void ofxSimpleGuiToo::nextPage() {
 	setPage(currentPageIndex + 1);
@@ -218,7 +236,7 @@ void ofxSimpleGuiToo::setPage(int i) {
 	currentPageIndex = i;
 	if(currentPageIndex >= pages.size()) currentPageIndex = 1;
 	else if(currentPageIndex < 1) currentPageIndex = pages.size()-1;
-	
+
 	if(titleButton) titleButton->setName(ofToString(currentPageIndex) + ": " + pages[currentPageIndex]->name);
 }
 
@@ -312,9 +330,9 @@ ofxSimpleGuiSliderInt &ofxSimpleGuiToo::addSlider(string name, int &value, int m
 	return pages[currentPageIndex]->addSlider(name, value, min, max);
 }
 
-ofxSimpleGuiSliderFloat &ofxSimpleGuiToo::addSlider(string name, float &value, float min, float max, float smoothing) {
+ofxSimpleGuiSliderFloat &ofxSimpleGuiToo::addSlider(string name, float &value, float min, float max) {
 	if(!config) setup();
-	return pages[currentPageIndex]->addSlider(name, value, min, max, smoothing);
+	return pages[currentPageIndex]->addSlider(name, value, min, max);
 }
 
 ofxSimpleGuiSlider2d &ofxSimpleGuiToo::addSlider2d(string name, ofPoint& value, float xmin, float xmax, float ymin, float ymax) {
@@ -400,12 +418,12 @@ void ofxSimpleGuiToo::keyPressed(ofKeyEventArgs &e) {
 			}
 		}
 	}
-	
+
 	if(doDraw) {
 		headerPage->keyPressed(e);
 		pages[currentPageIndex]->keyPressed(e);
 	}
-	
+
 }
 
 void ofxSimpleGuiToo::keyReleased(ofKeyEventArgs &e) {

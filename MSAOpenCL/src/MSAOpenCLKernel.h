@@ -38,75 +38,78 @@
 #pragma once
 
 #ifdef TARGET_OSX
-    #include <OpenCL/opencl.h>
+#include <OpenCL/opencl.h>
 #endif
 
 #ifdef TARGET_WIN32             // added by gameover (matt gingold)
-    #include "windows.h"
-    #include "assert.h"
-    #include <CL/cl.h>
-    #include <CL/cl_gl.h>
+#include "windows.h"
+#include "assert.h"
+#include <CL/cl.h>
+#include <CL/cl_gl.h>
 #endif
 
 #ifdef TARGET_LINUX
-    // what else? untested!
-    #include <CL/cl.h>
-    #include <CL/cl_gl.h>
+// what else? untested!
+#include <CL/cl.h>
+#include <CL/cl_gl.h>
 #endif
 
 #include "MSACore.h"
 #include "MSAOpenCLMemoryObject.h"
 
 
-namespace MSA {
-	class OpenCL;
+namespace MSA
+{
+class OpenCL;
 
-	class OpenCLKernel {
-		friend class OpenCLProgram;
+class OpenCLKernel
+{
+    friend class OpenCLProgram;
 
-	public:
+public:
 
-		~OpenCLKernel();
+    ~OpenCLKernel();
 
-		// assign buffer to arguments
-		//	void setArg(int argNumber, cl_mem clMem);
-		//	void setArg(int argNumber, float f);
-		//	void setArg(int argNumber, int i);
+    // assign buffer to arguments
+    //	void setArg(int argNumber, cl_mem clMem);
+    //	void setArg(int argNumber, float f);
+    //	void setArg(int argNumber, int i);
 
-		template<class T>
-		void setArg(int argNumber, T &arg){
-			//		ofLog(OF_LOG_VERBOSE, "OpenCLKernel::setArg " + name + ": " + ofToString(argNumber));
+    template<class T>
+    void setArg(int argNumber, T &arg)
+    {
+        //		ofLog(OF_LOG_VERBOSE, "OpenCLKernel::setArg " + name + ": " + ofToString(argNumber));
 
-			assert(clKernel);
+        assert(clKernel);
 
-			cl_int err  = clSetKernelArg(clKernel, argNumber, sizeof(T), &arg);
-			assert(err != CL_INVALID_KERNEL);
-			assert(err != CL_INVALID_ARG_INDEX);
-			assert(err != CL_INVALID_ARG_VALUE);
-			assert(err != CL_INVALID_MEM_OBJECT);
-			assert(err != CL_INVALID_SAMPLER);
-			assert(err != CL_INVALID_ARG_SIZE);
-			assert(err == CL_SUCCESS);
-		}
+        cl_int err  = clSetKernelArg(clKernel, argNumber, sizeof(T), &arg);
+        assert(err != CL_INVALID_KERNEL);
+        assert(err != CL_INVALID_ARG_INDEX);
+        assert(err != CL_INVALID_ARG_VALUE);
+        assert(err != CL_INVALID_MEM_OBJECT);
+        assert(err != CL_INVALID_SAMPLER);
+        assert(err != CL_INVALID_ARG_SIZE);
+        assert(err == CL_SUCCESS);
+    }
 
-		// run the kernel
-		// globalSize and localSize should be int arrays with same number of dimensions as numDimensions
-		// leave localSize blank to let OpenCL determine optimum
-		void	run(int numDimensions, size_t *globalSize, size_t *localSize = NULL);
+    // run the kernel
+    // globalSize and localSize should be int arrays with same number of dimensions as numDimensions
+    // leave localSize blank to let OpenCL determine optimum
+    void	run(int numDimensions, size_t *globalSize, size_t *localSize = NULL);
 
-		// some wrappers for above to create the size arrays on the run
-		void	run1D(size_t globalSize, size_t localSize = 0);
-		void	run2D(size_t globalSizeX, size_t globalSizeY, size_t localSizeX = 0, size_t localSizeY = 0);
-		void	run3D(size_t globalSizeX, size_t globalSizeY, size_t globalSizeZ, size_t localSizeX = 0, size_t localSizeY = 0, size_t localSizeZ = 0);
+    // some wrappers for above to create the size arrays on the run
+    void	run1D(size_t globalSize, size_t localSize = 0);
+    void	run2D(size_t globalSizeX, size_t globalSizeY, size_t localSizeX = 0, size_t localSizeY = 0);
+    void	run3D(size_t globalSizeX, size_t globalSizeY, size_t globalSizeZ, size_t localSizeX = 0, size_t localSizeY = 0, size_t localSizeZ = 0);
 
-		cl_kernel& getCLKernel();
-		string getName();
+    cl_kernel& getCLKernel();
+    string getName();
 
-	protected:
-		string			name;
-		OpenCL*		pOpenCL;
-		cl_kernel		clKernel;
+protected:
+    string			name;
+    OpenCL*		pOpenCL;
+    cl_kernel		clKernel;
 
-		OpenCLKernel(OpenCL *pOpenCL, cl_kernel clKernel, string name);
-	};
+    OpenCLKernel(OpenCL *pOpenCL, cl_kernel clKernel, string name);
+};
 }

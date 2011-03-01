@@ -4,7 +4,7 @@
 
 
 
-bool	myBool1;
+bool	myBool1Animate;
 bool	myBool2;
 bool	myBool3;
 bool	myBool4;
@@ -53,6 +53,7 @@ ofPoint	v[300];
 //--------------------------------------------------------------
 void testApp::setup(){	 
 	ofBackground(0, 0, 0);
+	ofSetVerticalSync(true);
 	
 	// for demonstrating adding any drawable object (that extends ofBaseDraw);
 	vidGrabber.initGrabber(320, 240);	
@@ -62,9 +63,9 @@ void testApp::setup(){
 	
 	// 'gui' is a global variable declared in ofxSimpleGuiToo.h
 	gui.addTitle("A group");
-	gui.addSlider("myFloat1", myFloat1, 0.0, 1); 
-	gui.addSlider("myInt1", myInt1, 5, 10); 
-	gui.addToggle("myBool1", myBool1);
+	gui.addToggle("myBool1 Animate", myBool1Animate);
+	gui.addSlider("myFloat1: noise", myFloat1, 0.0, 1); 
+	gui.addSlider("myInt1", myInt1, 100, 200); 
 	gui.addComboBox("box1", box1, 12, NULL);
 	gui.addButton("Randomize Background", randomizeButton);
 	gui.addColorPicker("BG Color", &aColor.r);
@@ -72,7 +73,7 @@ void testApp::setup(){
 	
 	// start a new group
 	gui.addTitle("Another group");
-	gui.addSlider("myFloat2", myFloat2, 0.0, 1);
+	gui.addSlider("myFloat2", myFloat2, 0.0, 1).setSmoothing(0.5);
 	gui.addSlider("myInt2", myInt2, 3, 8);
 	gui.addToggle("myBool2", myBool2);	
 	string titleArray[] = {"Lame", "Alright", "Better", "Best"};
@@ -83,10 +84,10 @@ void testApp::setup(){
 	gui.addTitle("Yes one more group").setNewColumn(true);
 	gui.addToggle("myBool4", myBool4);	
 	gui.addToggle("myBool3", myBool3);	
-	gui.addSlider("myFloat3", myFloat3, 0.0, 1);
-	gui.addSlider("myFloat4", myFloat4, 0.0, 20);
+	gui.addSlider("myFloat3", myFloat3, 0.0, 1).setSmoothing(0.8);
+	gui.addSlider("myFloat4", myFloat4, 0.0, 20).setSmoothing(1);
 	gui.addSlider("myInt6", myInt6, 0, 10);
-	gui.addSlider("myInt4", myInt4, 10, 20);
+	gui.addSlider("myInt4", myInt4, 320, 1280);
 	gui.addContent("Camera feed", vidGrabber);
 	gui.addContent("Inverted", videoTexture);
 	
@@ -96,9 +97,9 @@ void testApp::setup(){
 	gui.addSlider("myInt7", myInt7, 0, 100);
 	gui.addSlider("myInt8", myInt8, 10, 50);
 	gui.addSlider("myInt3", myInt3, 0, 100);
-	gui.addSlider("myFloat7", myFloat7, 0.0, 1);
-	gui.addSlider("myFloat8", myFloat8, 0.0, 0.1);
-	gui.addSlider("myInt9", myInt9, 0, 10); 
+	gui.addSlider("myFloat7", myFloat7, 0.0, 1).setSmoothing(0.0);		// default
+	gui.addSlider("myFloat8", myFloat8, 0.0, 0.1).setSmoothing(0.5);
+	gui.addSlider("myInt9", myInt9, 0, 10).setSmoothing(0.9); 
 	
 	gui.addTitle("Final group?");
 	gui.addToggle("myBool5", myBool5);	
@@ -120,11 +121,15 @@ void testApp::setup(){
 	
 	gui.loadFromXML();
 	
+	printf("myint : %i\n", myInt1);
+	
 	gui.show();
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
+	if(myBool1Animate) myFloat1 = ofNoise(ofGetElapsedTimef());
+	
 	if(randomizeButton) {
 		randomizeButton = false;
 		aColor.r = ofRandomuf();

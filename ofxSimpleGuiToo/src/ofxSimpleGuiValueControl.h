@@ -1,12 +1,12 @@
 /***********************************************************************
-
+ 
  Copyright (c) 2008, 2009, 2010, Memo Akten, www.memo.tv
  *** The Mega Super Awesome Visuals Company ***
  * All rights reserved.
-
+ 
  based on Todd Vanderlin's ofxSimpleGui API
  http://toddvanderlin.com/
-
+ 
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -33,40 +33,26 @@
  *
  * ***********************************************************************/
 
+#pragma once
 
-#include "ofxSimpleGuiConfig.h"
+#include "ofxSimpleGuiControl.h"
 
-ofxSimpleGuiConfig defaultSimpleGuiConfig;
-
-
-ofxSimpleGuiConfig::ofxSimpleGuiConfig() {
-
-	sliderHeight		= 10;
-	sliderTextHeight	= 20;
-	titleHeight			= sliderHeight + sliderTextHeight;
-	toggleHeight		= titleHeight;
-	buttonHeight		= titleHeight;
-	slider2DTextHeight	= titleHeight * 1.5;
-	comboBoxHeight		= titleHeight+15;	//15
-	comboBoxTextHeight	= 20;
-
-
-	padding.set			(titleHeight/2, 8);
-	offset.set			(titleHeight/2, titleHeight/2);
-	slider2DSize.set	(titleHeight * 4, titleHeight * 4);
-
-	gridSize.x			= 200 + padding.x;
-	gridSize.y			= toggleHeight + padding.y;
-
-	textColor			= 0x888888;
-	textOverColor		= 0xFFFFFF;
-	textBGColor			= 0x000000;
-	textBGOverColor		= 0x222222;
-
-	fullColor			= 0xaaaaaa;
-	fullOverColor		= 0xffffff;
-	fullActiveColor		= 0x881818;
-	emptyColor			= 0x333333;
-
-	borderColor			= 0x333333;
-}
+template <typename T>
+class ofxSimpleGuiValueControl : public ofxSimpleGuiControl {
+public:
+	T	*value;
+	T	oldValue;
+	
+	ofxSimpleGuiValueControl(string name, T &value) : ofxSimpleGuiControl(name), value(&value) {}
+	
+	virtual bool changed() {
+		if(*value != oldValue) {
+			oldValue = *value;
+			return true;
+		}
+		return false;
+	}
+	
+//	void update() {
+//	}
+};

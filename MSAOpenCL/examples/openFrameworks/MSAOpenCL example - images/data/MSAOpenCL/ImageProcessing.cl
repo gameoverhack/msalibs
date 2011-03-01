@@ -36,7 +36,7 @@ __kernel void msa_boxblur(read_only image2d_t srcImage, write_only image2d_t dst
 	int2 dx		= (int2)(offset, 0);
 	int2 dy		= (int2)(0, offset);
 	
-	sampler_t smp = CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;		// gameover: maybe should be kept as an argument??
+	sampler_t smp = CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
 
 	float4 color1 = read_imagef(srcImage, smp, coords);
 	float4 color2 = read_imagef(srcImage, smp, coords + dx);
@@ -55,12 +55,9 @@ __kernel void msa_boxblur(read_only image2d_t srcImage, write_only image2d_t dst
 __kernel void msa_flipx(read_only image2d_t srcImage, write_only image2d_t dstImage) {                                                                                            
 	int i = get_global_id(0);
 	int j = get_global_id(1);
-	
-	sampler_t smp = CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
-	
 	int2 coords1 = (int2)(i, j);
 	int2 coords2 = (int2)(get_image_width(srcImage) - i - 1.0f, j);
-	float4 color = read_imagef(srcImage, smp, coords1);
+	float4 color = read_imagef(srcImage, CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST, coords1);
 	write_imagef(dstImage, coords2, color);
 }  
 
@@ -69,24 +66,16 @@ __kernel void msa_flipx(read_only image2d_t srcImage, write_only image2d_t dstIm
 __kernel void msa_flipy(read_only image2d_t srcImage, write_only image2d_t dstImage) {                                                                                            
 	int i = get_global_id(0);
 	int j = get_global_id(1);
-	
-	sampler_t smp = CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
-	
 	int2 coords1 = (int2)(i, j);
 	int2 coords2 = (int2)(i, get_image_height(srcImage) - j - 1.0f);
-	float4 color = read_imagef(srcImage, smp, coords1);
+	float4 color = read_imagef(srcImage, CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST, coords1);
 	write_imagef(dstImage, coords2, color);
 }  
 
 //--------------------------------------------------------------
 __kernel void msa_greyscale(read_only image2d_t srcImage, write_only image2d_t dstImage) {                                                                                            
-	int i = get_global_id(0);
-	int j = get_global_id(1);
-	
-	sampler_t smp = CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
-	
-	int2 coords = (int2)(i, j);
-	float4 color = read_imagef(srcImage, smp, coords);
+	int2 coords = (int2)(get_global_id(0), get_global_id(1));
+	float4 color = read_imagef(srcImage, CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST, coords);
 	float luminance = 0.3f * color.x + 0.59 * color.y + 0.11 * color.z;
 	color = (float4)(luminance, luminance, luminance, 1.0f);
 	write_imagef(dstImage, coords, color);                                     
@@ -94,31 +83,17 @@ __kernel void msa_greyscale(read_only image2d_t srcImage, write_only image2d_t d
 
 //--------------------------------------------------------------
 __kernel void msa_invert(read_only image2d_t srcImage, write_only image2d_t dstImage) {                                                                                            
-	int i = get_global_id(0);
-	int j = get_global_id(1);
-	
-	sampler_t smp = CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
-	
-	int2 coords = (int2)(i, j);
-	float4 color = read_imagef(srcImage, smp, coords);
+	int2 coords = (int2)(get_global_id(0), get_global_id(1));
+	float4 color = read_imagef(srcImage, CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST, coords);
 	color = (float4)(1.0f, 1.0f, 1.0f, 1.0f) - color;
 	write_imagef(dstImage, coords, color);
 }  
 
 
 //--------------------------------------------------------------
-__kernel void msa_threshold(read_only image2d_t srcImage, write_only image2d_t dstImage, const float thresholdLevel) {                                                                                            
-	int i = get_global_id(0);
-	int j = get_global_id(1);
-	
-	sampler_t smp = CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
-	
-	int2 coords = (int2)(i, j);
-	float4 color = read_imagef(srcImage, smp, coords);
-	color.x = color.x < thresholdLevel ? 0.0f : 1.0f;
-	color.y = color.y < thresholdLevel ? 0.0f : 1.0f;
-	color.z = color.z < thresholdLevel ? 0.0f : 1.0f;
-	write_imagef(dstImage, coords, color);   
-}  
-
+__kernel void msa_threshold(read_only image2d_t srcImage, write_only image2d_t dstImage, const float thresholdLevel) {
+	int2 coords = (int2)(get_global_id(0), get_global_id(1));
+	float4 color	= read_imagef(srcImage, CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST, coords);
+	write_imagei(dstImage, coords, isgreaterequal(color, thresholdLevel));   
+}
 

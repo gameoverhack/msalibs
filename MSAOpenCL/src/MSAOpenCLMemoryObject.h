@@ -37,43 +37,46 @@
 #pragma once
 
 #ifdef TARGET_OSX
-    #include <OpenCL/opencl.h>
+#include <OpenCL/opencl.h>
 #endif
 
 #ifdef TARGET_WIN32             // added by gameover (matt gingold)
-    #include "windows.h"
-    #include "assert.h"
-    #include <CL/cl.h>
-    #include <CL/cl_gl.h>
+#include "windows.h"
+#include "assert.h"
+#include <CL/cl.h>
+#include <CL/cl_gl.h>
 #endif
 
 #ifdef TARGET_LINUX
-    // what else? untested!
-    #include <CL/cl.h>
-    #include <CL/cl_gl.h>
+// what else? untested!
+#include <CL/cl.h>
+#include <CL/cl_gl.h>
 #endif
 
-namespace MSA {
-	class OpenCL;
+namespace MSA
+{
+class OpenCL;
 
-	class OpenCLMemoryObject {
+class OpenCLMemoryObject
+{
 
-	public:
-		virtual ~OpenCLMemoryObject();
+public:
+    virtual ~OpenCLMemoryObject();
 
-		cl_mem	&getCLMem();
+    cl_mem	&getCLMem();
 
-		operator cl_mem&() {
-			return getCLMem();
-		}
+    operator cl_mem&()
+    {
+        return getCLMem();
+    }
 
 
 
-	protected:
-		OpenCLMemoryObject();
-		cl_mem		clMemObject;
-		OpenCL*		pOpenCL;
+protected:
+    OpenCLMemoryObject();
+    cl_mem		clMemObject;
+    OpenCL*		pOpenCL;
 
-		void memoryObjectInit();
-	};
+    void memoryObjectInit();
+};
 }

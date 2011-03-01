@@ -6,13 +6,13 @@
 class ofxSimpleGuiColorPicker : public ofxSimpleGuiControl {
 public:
 	
-	float		*values;
+	float		*value;
 	float		min, max;
 	
 	float		barwidth[4];
 	float		pct[4];
 	
-	ofxSimpleGuiColorPicker(string name, float *values, float max = 1);
+	ofxSimpleGuiColorPicker(string name, float *value, float max = 1);
 	void setup();
 	void loadFromXML(ofxXmlSettings &XML);
 	void saveToXML(ofxXmlSettings &XML);

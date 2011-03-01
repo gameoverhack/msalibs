@@ -1,5 +1,15 @@
 ofxSimpleGuiToo changelog
 
+v1.3
+--------------------
+- page::saveToXML() pushed the <controls> tag so control::saveToXML() didn't need to check that tag, 
+  whereas page::loadFromXML() didn't push the <controls> tag so control::loadFromXML() did.
+  Wasn't consistent so now all controls can assume that we are already inside the <controls> tag.
+- fixed keyboard support (any control which the mouse is hovering over, now receives the events:
+     keyPressed(int key), keyReleased(int key), onKeyUp(), onKeyDown(), onKeyLeft(), onKeyRight(), onKeyEnter()
+  
+  
+
 v1.2
 --------------------
 - lots of thing, can't remember. whoops.

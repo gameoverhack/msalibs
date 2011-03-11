@@ -196,7 +196,7 @@ void ofxSimpleGuiToo::draw() {
 void ofxSimpleGuiToo::draw(float x, float y) {
 	if(!doDraw) return;
 
-	ofPushStyle();
+	//ofPushStyle(); // this is causing errors in my draw
 
 	glDisable(GL_DEPTH_TEST);
 
@@ -210,7 +210,7 @@ void ofxSimpleGuiToo::draw(float x, float y) {
 	else ofLine(x, y + headerPage->height, x + headerPage->width, y + headerPage->height);
 	pages[currentPageIndex]->draw(x, y + headerPage->height, alignRight);
 
-	ofPopStyle();
+	// ofPopStyle(); // this is causing errors in my draw
 }
 
 void ofxSimpleGuiToo::nextPage() {

@@ -42,13 +42,13 @@ ofxSimpleGuiConfig defaultSimpleGuiConfig;
 ofxSimpleGuiConfig::ofxSimpleGuiConfig() {
 
 	sliderHeight		= 10;
-	sliderTextHeight	= 20;
+	sliderTextHeight	= 12;
 	titleHeight			= sliderHeight + sliderTextHeight;
 	toggleHeight		= titleHeight;
 	buttonHeight		= titleHeight;
 	slider2DTextHeight	= titleHeight * 1.5;
 	comboBoxHeight		= titleHeight+15;	//15
-	comboBoxTextHeight	= 20;
+	comboBoxTextHeight	= 12;
 
 
 	padding.set			(titleHeight/2, 8);

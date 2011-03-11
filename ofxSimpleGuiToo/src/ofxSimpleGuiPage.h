@@ -1,12 +1,12 @@
 /***********************************************************************
- 
+
  Copyright (c) 2008, 2009, 2010, Memo Akten, www.memo.tv
  *** The Mega Super Awesome Visuals Company ***
  * All rights reserved.
- 
+
  based on Todd Vanderlin's ofxSimpleGui API
  http://toddvanderlin.com/
- 
+
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -42,14 +42,14 @@ class ofxSimpleGuiPage : public ofxSimpleGuiControl {
 public:
 	ofxSimpleGuiPage(string name);
 	~ofxSimpleGuiPage();
-	
+
 	void						draw(float x, float y, bool alignRight);
-	
+
 	ofxSimpleGuiPage&			setXMLName(string xmlFilename);
 	void						loadFromXML();
-	void						saveToXML();	
-	
-	
+	void						saveToXML();
+
+
 	ofxSimpleGuiControl			&addControl(ofxSimpleGuiControl& control);
 	ofxSimpleGuiButton			&addButton(string name, bool &value);
 	ofxSimpleGuiContent			&addContent(string name, ofBaseDraws &content, float fixwidth = -1);
@@ -63,30 +63,30 @@ public:
 	ofxSimpleGuiToggle			&addToggle(string name, bool &value);
 	ofxSimpleGuiColorPicker		&addColorPicker(string name, float *values);
 	ofxSimpleGuiComboBox		&addComboBox(string name, int &choice_out, int numChoices, string* choiceTitles=NULL);
-	
+
 	void SetEventStealingControl(ofxSimpleGuiControl &control);
 	void ReleaseEventStealingControl();
-	
+
 	//	void setup(ofEventArgs &e);
 	void update(ofEventArgs &e);
 	//  void draw(ofEventArgs &e);
 	//	void exit(ofEventArgs &e);
-	
+
 	void mouseMoved(ofMouseEventArgs &e);
 	void mousePressed(ofMouseEventArgs &e);
 	void mouseDragged(ofMouseEventArgs &e);
 	void mouseReleased(ofMouseEventArgs &e);
-	
+
 	void keyPressed(ofKeyEventArgs &e);
 	void keyReleased(ofKeyEventArgs &e);
-	
-	
+
+
 	vector <ofxSimpleGuiControl*>&	getControls();
-	
-	
+
+
 protected:
 	vector <ofxSimpleGuiControl*>	controls;
-	
+
 	//some controls can take over focus (e.g. combo box,) which means events should only be passed to them
 	ofxSimpleGuiControl*			eventStealingControl;
 	float getNextY(float y);
